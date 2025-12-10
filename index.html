@@ -1,20 +1,91 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurullah Kartal - Yakında Açılıyor</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurullah Kartal - Web Sitesi Yayında</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        /* Bot Yönetim Paneli için gerekli CSS'ler */
+        .bot-container { max-width: 600px; margin: 50px auto; background-color: #161b22; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
+        .bot-container h1 { color: #58a6ff; text-align: center; }
+        .bot-container label { display: block; margin-bottom: 8px; font-weight: bold; }
+        .bot-container input[type="text"] { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #30363d; border-radius: 6px; background-color: #0d1117; color: #c9d1d9; box-sizing: border-box; }
+        .bot-container button { background-color: #238636; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 16px; transition: background-color 0.3s; }
+        .bot-container button:hover { background-color: #2ea043; }
+        #sonuc { margin-top: 20px; padding: 15px; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; }
+        .success { background-color: #1f3622; border-left: 5px solid #238636; }
+        .error { background-color: #63080b; border-left: 5px solid #d73a49; }
+        .warning { background-color: #3b3100; border-left: 5px solid #d29922; }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>NURULLAH KARTAL</h1>
-        <h2>WEB SİTESİ YAKINDA AÇILIYOR</h2>
-        <p>Projelerim, yazılarım ve daha fazlası için beklemede kalın.</p>
-        <div class="social">
-            <a href="https://github.com/nurullahkartal" target="_blank">GitHub'da Takip Et</a>
-        </div>
+<body style="background-color: #0d1117; color: #c9d1d9;"> 
+    
+        <div class="container">
+        <h1>NURULLAH KARTAL</h1>
+        <h2>WEB SİTESİ YAKINDA AÇILIYOR</h2>
+        <p>Projelerim, yazılarım ve daha fazlası için beklemede kalın.</p>
+        <div class="social">
+            <a href="https://github.com/nurullahkartal" target="_blank">GitHub'da Takip Et</a>
+        </div>
+    </div>
+    <hr style="border-top: 1px solid #30363d; width: 80%; margin: 50px auto;">
+
+    <div class="bot-container">
+        <h1>🤖 Bot Yönetim Paneli</h1>
+        <p class="warning">⚠️ NOT: Bu panel, botunuz yerel bilgisayarınızda (ngrok ile) çalışırken API'ye komut gönderir.</p>
+
+        <label for="konu">Analiz Edilecek Konu (Wikipedia Başlığı):</label>
+        <input type="text" id="konu" placeholder="Örn: Türkiye ekonomisi">
+        
+        <button onclick="analizBaslat()">Analiz Başlat & Instagram'a Yükle</button>
+        
+        <div id="sonuc">Sonuçlar burada görünecek...</div>
     </div>
+    <script>
+        // Ngrok'tan aldığınız kalıcı HTTPS adresi buraya yapıştırılmıştır.
+        const API_BASE_URL = 'https://nonadeptly-nonfilamentous-campbell.ngrok-free.dev'; 
+
+        const API_URL = API_BASE_URL + '/api/analiz';
+    
+        async function analizBaslat() {
+            const konu = document.getElementById('konu').value.trim();
+            const sonucDiv = document.getElementById('sonuc');
+            
+            if (!konu) {
+                sonucDiv.className = 'error';
+                sonucDiv.innerHTML = 'Lütfen bir konu girin.';
+                return;
+            }
+    
+            sonucDiv.className = 'warning';
+            sonucDiv.innerHTML = `⏳ '${konu}' için analiz başlatılıyor... (Bot konsolunu kontrol edin)`;
+    
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ konu: konu })
+                });
+    
+                const data = await response.json();
+    
+                if (response.ok) {
+                    sonucDiv.className = 'success';
+                    sonucDiv.innerHTML = `✅ BAŞARILI: ${data.message}\nMedia ID: ${data.media_id}`;
+                } else {
+                    sonucDiv.className = 'error';
+                    sonucDiv.innerHTML = `❌ HATA: ${data.message}\nDurum Kodu: ${response.status}`;
+                }
+    
+            } catch (error) {
+                sonucDiv.className = 'error';
+                sonucDiv.innerHTML = `🚨 KRİTİK BAĞLANTI HATASI: Botunuz çalışmıyor veya ngrok tüneli kapalı.\nDetay: ${error.message}`;
+            }
+        }
+    </script>
 </body>
 </html>
