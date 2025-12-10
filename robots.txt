@@ -1,4 +1,0 @@
-# robots.txt
-User-agent: *
-Allow: /
-Sitemap: http://www.nurullahkartal.com.tr/sitemap.xml
