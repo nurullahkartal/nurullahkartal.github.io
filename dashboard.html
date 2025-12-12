@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | NKartal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="logo" style="margin-bottom: 30px; padding-left:10px;">NK<span class="highlight">PANEL</span></div>
+            <a href="#" class="active"><i class="fas fa-home"></i> Genel Bakış</a>
+            <a href="api-docs.html"><i class="fas fa-code"></i> API Erişimi</a>
+            <a href="#"><i class="fas fa-robot"></i> Botlarım</a>
+            <a href="index.html" style="margin-top:auto; color:#ff4d4d;"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+        </aside>
+
+        <main class="dash-content">
+            <h2>Hoş Geldin, Nurullah 👋</h2>
+            <div class="grid-container" style="margin-top:20px;">
+                <div class="glass-card">
+                    <h3 style="margin:0; color:var(--primary);">12</h3>
+                    <p style="margin:0; color:#aaa; font-size:0.9rem;">Aktif Botlar</p>
+                </div>
+                <div class="glass-card">
+                    <h3 style="margin:0; color:var(--accent);">%99.9</h3>
+                    <p style="margin:0; color:#aaa; font-size:0.9rem;">Uptime</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top:30px;">Son İşlemler</h3>
+            <div class="glass-card">
+                <p style="font-family:monospace; color:#aaa;">[14:02] API İsteği: /v1/status (200 OK)</p>
+                <p style="font-family:monospace; color:#aaa;">[13:55] Bot "SocialBot" yeniden başlatıldı.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

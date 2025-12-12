@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim | Nurullah Kartal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <nav class="glass-nav">
+        <div class="logo">NK<span class="highlight">ARTAL</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="hakkimda.html">Hakkımda</a></li>
+            <li><a href="projeler.html">Projeler</a></li>
+            <li><a href="iletisim.html" class="active btn-glow" style="color:#000;">İletişim</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <h1>Bize <span class="highlight">Ulaşın</span></h1>
+        <p>Projenizi anlatın, kodlayalım.</p>
+    </div>
+
+    <div class="container">
+        <div class="grid-container" style="grid-template-columns: 1fr 1fr;">
+            <div class="glass-card">
+                <h3>İletişim Kanalları</h3>
+                <div style="margin-top:20px;">
+                    <p><i class="fas fa-envelope" style="color:var(--primary); margin-right:10px;"></i> <a href="mailto:nurullahkartalai@gmail.com" style="color:#fff;">nurullahkartalai@gmail.com</a></p>
+                    <p><i class="fas fa-map-marker-alt" style="color:var(--primary); margin-right:10px;"></i> Gaziantep, Türkiye</p>
+                    <p><i class="fas fa-clock" style="color:var(--primary); margin-right:10px;"></i> Pzt - Cum: 09:00 - 18:00</p>
+                </div>
+            </div>
+
+            <div class="glass-card" style="display:flex; flex-direction:column; height:400px;">
+                <div style="padding-bottom:10px; border-bottom:1px solid var(--border);">
+                    <span style="color:#00ff88;">●</span> NKartal AI Asistan
+                </div>
+                <div id="chat-box-page" style="flex:1; overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:10px;">
+                    <div class="msg bot">Merhaba! Size nasıl yardımcı olabilirim?</div>
+                </div>
+                <div style="padding-top:10px; display:flex; gap:5px;">
+                    <input type="text" id="page-chat-input" placeholder="Mesaj yazın..." style="flex:1; background:#222; border:none; padding:10px; color:#fff; border-radius:5px;">
+                    <button onclick="sendPageMessage()" style="background:var(--primary); border:none; color:#fff; padding:0 15px; border-radius:5px;">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Sadece bu sayfa için ufak ek script
+        function sendPageMessage() {
+            const input = document.getElementById("page-chat-input");
+            const box = document.getElementById("chat-box-page");
+            const text = input.value;
+            if(!text) return;
+            box.innerHTML += `<div class="msg user" style="background:var(--primary); align-self:flex-end;">${text}</div>`;
+            input.value = "";
+            setTimeout(()=>{
+                box.innerHTML += `<div class="msg bot" style="background:#222; align-self:flex-start;">Talebiniz alınmıştır. Mail üzerinden dönüş yapılacaktır.</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

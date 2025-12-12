@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>API Dokümantasyonu | NKartal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="logo" style="margin-bottom: 30px; padding-left:10px;">NK<span class="highlight">DEV</span></div>
+            <a href="dashboard.html"><i class="fas fa-arrow-left"></i> Panele Dön</a>
+            <a href="#" class="active"><i class="fas fa-book"></i> Dokümantasyon</a>
+            <a href="#"><i class="fas fa-shield-alt"></i> Güvenlik</a>
+        </aside>
+
+        <main class="dash-content">
+            <div style="background: rgba(255, 0, 0, 0.1); border: 1px solid red; padding: 15px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="margin: 0; color: #ff4d4d;"><i class="fas fa-lock"></i> Yetkili Erişim Gereklidir</h3>
+                <p style="margin: 5px 0 0 0; color: #aaa; font-size: 0.9rem;">
+                    Bu API uç noktaları (endpoints) sadece kurumsal müşterilerimiz içindir. Aşağıdaki kodlar örnektir. Gerçek bağlantı için lütfen bizimle iletişime geçerek <strong>API SECRET KEY</strong> talep ediniz.
+                </p>
+            </div>
+
+            <h1>API Entegrasyonu v2.0</h1>
+            <p style="color:#aaa;">Botlarımızı kendi sistemlerinize entegre etmek için aşağıdaki yapıyı kullanabilirsiniz.</p>
+
+            <h3 style="margin-top: 30px;">Python ile Bağlantı Örneği</h3>
+            <div class="code-block">
+import requests
+
+# UYARI: Size verilen özel anahtarı buraya girin.
+API_KEY = "NK_MUSTERI_OZEL_ANAHTARI_BURAYA"
+BASE_URL = "https://api.nurullahkartal.com.tr/v1"
+
+def bot_durumu():
+    headers = { "Authorization": f"Bearer {API_KEY}" }
+    response = requests.get(f"{BASE_URL}/status", headers=headers)
+    
+    if response.status_code == 200:
+        print("Sistem Aktif:", response.json())
+    else:
+        print("Yetkisiz Erişim!")
+
+bot_durumu()
+            </div>
+
+            <h3 style="margin-top: 30px;">Hata Kodları</h3>
+            <div class="glass-card">
+                <p><strong style="color:green;">200 OK</strong>: İşlem başarılı.</p>
+                <p><strong style="color:red;">401 Unauthorized</strong>: Geçersiz veya eksik API anahtarı.</p>
+                <p><strong style="color:orange;">429 Too Many Requests</strong>: İstek limiti aşıldı.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

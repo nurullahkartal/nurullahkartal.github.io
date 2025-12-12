@@ -1,19 +1,48 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NKartal AI Bot</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nurullah Kartal | AI & Yazılım Platformu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="chat-container">
-        <div id="chat-box" class="chat-box"></div>
-        <div class="input-area">
-            <input id="user-input" type="text" placeholder="Mesajını yaz..." />
-            <button onclick="sendMessage()">Gönder</button>
+    <canvas id="neural-canvas"></canvas>
+
+    <nav class="glass-nav">
+        <div class="logo">NK<span class="highlight">ARTAL</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Ana Sayfa</a></li>
+            <li><a href="hakkimda.html">Hakkımda</a></li>
+            <li><a href="projeler.html">Projeler</a></li>
+            <li><a href="api-docs.html">API</a></li>
+            <li><a href="portal-giris.html" class="portal-btn"><i class="fas fa-lock"></i> Portal</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <span style="border:1px solid #00ff88; color:#00ff88; padding:5px 10px; border-radius:15px; font-size:0.8rem;">🚀 v5.0 Sistem Aktif</span>
+            <h1>Geleceği <br><span class="gradient-text">Bugünden Kodluyoruz</span></h1>
+            <p style="color:#aaa; max-width:600px; margin:20px auto;">Lojistik operasyonlarınızı, sosyal medya süreçlerinizi ve veri analizinizi otonom yapay zeka sistemlerine devredin.</p>
+            <div class="hero-btns">
+                <a href="portal-giris.html" class="btn-glow">Portala Giriş</a>
+                <a href="projeler.html" class="btn-outline">Çözümleri İncele</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="chat-widget-btn" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header"><span>NKartal Asistan</span> <span onclick="toggleChat()" style="cursor:pointer;">&times;</span></div>
+        <div id="chat-body" class="chat-body"><div class="msg bot">Merhaba! Size nasıl yardımcı olabilirim?</div></div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-field" placeholder="Mesaj yazın..." onkeypress="if(event.key==='Enter') sendMessage()">
+            <button onclick="sendMessage()">➤</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
