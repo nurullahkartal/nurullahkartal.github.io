@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python ile Telegram Bot Yapımı | NKartal Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <nav class="glass-nav">
+        <div class="logo">NK<span class="highlight">ARTAL</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="blog.html" class="active">Blog</a></li>
+            <li><a href="portal-giris.html" class="portal-btn">Portal</a></li>
+        </ul>
+    </nav>
+
+    <div class="container" style="max-width: 800px;"> <a href="blog.html" style="color:#aaa; font-size:0.9rem;">&larr; Makalelere Dön</a>
+        
+        <h1 style="font-size: 2.5rem; margin-top: 10px;">Python ile 10 Dakikada Telegram Botu Nasıl Kodlanır?</h1>
+        <div style="display:flex; gap:15px; color:#666; font-size:0.9rem; margin-bottom:30px;">
+            <span><i class="far fa-user"></i> Nurullah Kartal</span>
+            <span><i class="far fa-calendar"></i> 12 Aralık 2025</span>
+        </div>
+
+        <div class="glass-card" style="padding: 40px; line-height: 1.8;">
+            <p>Telegram botları, işletmelerin müşteri ilişkilerini otomatize etmesi veya kişisel projelerinizde bildirimler almanız için harika araçlardır. Bu rehberde, Python ve <code>telebot</code> kütüphanesini kullanarak basit bir "Merhaba Dünya" botu yapacağız.</p>
+
+            <h3 style="color:#fff; margin-top:30px;">1. BotFather ile Bot Oluşturma</h3>
+            <p>İlk adım olarak Telegram uygulamasını açın ve arama çubuğuna <strong>@BotFather</strong> yazın. Başlat dedikten sonra şu komutu gönderin:</p>
+            <div class="code-block">/newbot</div>
+            <p>BotFather size botunuzun adını ve kullanıcı adını soracak. İşlem bittiğinde size uzun bir <strong>API TOKEN</strong> verecek. Bunu saklayın.</p>
+
+            <h3 style="color:#fff; margin-top:30px;">2. Gerekli Kütüphanenin Kurulumu</h3>
+            <p>Bilgisayarınızın terminalini (CMD) açın ve şu komutu yazın:</p>
+            <div class="code-block">pip install pyTelegramBotAPI</div>
+
+            <h3 style="color:#fff; margin-top:30px;">3. Python Kodlarını Yazalım</h3>
+            <p>Şimdi favori kod editörünüzü (VS Code) açın ve <code>bot.py</code> adında bir dosya oluşturup şu kodları yapıştırın:</p>
+
+            <div class="code-block">
+import telebot
+
+# BotFather'dan aldığınız tokeni buraya yapıştırın
+API_TOKEN = 'BURAYA_TOKEN_GELECEK'
+
+bot = telebot.TeleBot(API_TOKEN)
+
+# /start komutuna cevap ver
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "Merhaba! Ben NKartal tarafından kodlandım.")
+
+# Mesajları dinlemeye başla
+print("Bot çalışıyor...")
+bot.infinity_polling()
+            </div>
+
+            <h3 style="color:#fff; margin-top:30px;">Sonuç</h3>
+            <p>Terminalden <code>python bot.py</code> komutunu çalıştırın. Botunuz artık aktif! Telegram'dan botunuza mesaj attığınızda size cevap verecektir.</p>
+            
+            <hr style="border:0; border-top:1px solid #333; margin:40px 0;">
+            
+            <p style="font-style:italic; color:#aaa;">Daha gelişmiş bot projeleri ve kurumsal otomasyon çözümleri için <a href="iletisim.html" style="color:var(--primary);">iletişime geçebilirsiniz.</a></p>
+        </div>
+
+    </div>
+
+    <footer style="text-align:center; padding:20px; color:#666;">&copy; 2025 Nurullah Kartal.</footer>
+    <script src="script.js"></script>
+</body>
+</html>
