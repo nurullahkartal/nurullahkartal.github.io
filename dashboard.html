@@ -11,19 +11,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        // document.referrer, kullanıcının geldiği URL'yi verir.
-        // Eğer boşsa veya giriş sayfasını içermiyorsa, kullanıcıyı geri atarız.
-        const referrer = document.referrer;
+        // Oturum kontrolü
+        const accessGranted = sessionStorage.getItem('nk_access_granted');
         
-        // Eğer geldiği sayfa portal-giris.html DEĞİLSE VEYA referrer BOŞ ise (direkt giriş)
-        if (!referrer || !referrer.includes('portal-giris.html')) {
-            // Kullanıcıyı hemen giriş sayfasına geri yönlendir
+        if (accessGranted !== 'true') {
             window.location.replace('portal-giris.html');
         }
-        
-        // NOT: Bu yöntem tarayıcı ayarları veya bazı güvenlik yazılımları tarafından atlanabilir,
-        // ancak basit ve etkili bir ön yüz (frontend) güvenlik adımıdır.
-        // Gerçek bir uygulamada bu kontrol sunucu (backend) tarafında yapılır.
     </script>
     
     <style>
@@ -41,6 +34,7 @@
             margin-top: 50px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px; /* Log alanı için boşluk */
         }
 
         .welcome-card h1 {
@@ -85,6 +79,39 @@
             font-weight: bold;
             color: #fff;
         }
+
+        /* --- YENİ LOG STİLLERİ --- */
+        .log-section {
+            margin-top: 50px;
+        }
+        .log-section h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #222;
+            padding-bottom: 5px;
+        }
+        .log-container {
+            background-color: #000;
+            color: #00ff88; /* Matrix yeşili terminal metni */
+            border: 1px solid #00552d;
+            height: 400px;
+            overflow-y: scroll;
+            padding: 15px;
+            font-family: 'Consolas', 'Monospace', monospace;
+            font-size: 0.9rem;
+            border-radius: 6px;
+        }
+        .log-entry {
+            white-space: pre-wrap; /* Satır sonlarını koru */
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+        /* Log Seviyeleri */
+        .log-info { color: #00ff88; }
+        .log-warning { color: #ffeb3b; }
+        .log-error { color: #ff0000; font-weight: bold; }
+
     </style>
 </head>
 <body>
@@ -96,15 +123,15 @@
             <span>NK<span class="highlight">ARTAL</span></span>
         </a>
         <div class="nav-links" id="nav-menu">
-            <a href="dashboard.html" class="active-link"><i class="fas fa-chart-line"></i> Dashboard</a>
-            <a href="index.html" class="portal-btn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+            <a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="#" onclick="logout()" class="portal-btn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
         </div>
         <button class="menu-toggle" aria-label="Menü" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </button>
     </nav>
 
-    <div class="dashboard-container">
+    <main class="dashboard-container">
         <div class="welcome-card">
             <h1>Hoş Geldiniz, Yönetici!</h1>
             <p>Sistem genelindeki kritik verilerinize buradan ulaşabilirsiniz. Portalınıza en son 14 Aralık 2025 tarihinde erişim sağlandı.</p>
@@ -133,12 +160,68 @@
             </div>
         </div>
 
+        <div class="log-section">
+            <h2><i class="fas fa-terminal"></i> Gerçek Zamanlı Sistem Logları</h2>
+            <div id="log-monitor" class="log-container">
+                <div class="log-entry log-info">Sistem Başlatılıyor... Lütfen Bekleyiniz.</div>
+            </div>
+        </div>
+
         <div style="margin-top: 50px; text-align: center; color: #555;">
             <p><i class="fas fa-lock"></i> Tüm veriler şifrelenmiş kanallar üzerinden aktarılmaktadır.</p>
         </div>
-    </div>
+    </main>
 
     <script src="script.js"></script>
     <script src="tracker.js"></script>
+    
+    <script>
+        // --- LOGOUT FONKSİYONU ---
+        function logout() {
+            sessionStorage.removeItem('nk_access_granted');
+            window.location.href = 'index.html';
+        }
+
+        // --- DİNAMİK LOG ÜRETİMİ ---
+        const logMonitor = document.getElementById('log-monitor');
+        const logMessages = [
+            { level: 'INFO', text: 'Kernel Initializing. System check successful.' },
+            { level: 'INFO', text: 'Telemetry connection established. Port 443.' },
+            { level: 'INFO', text: 'Database connection pool activated. Max threads: 64.' },
+            { level: 'WARNING', text: 'Low memory usage detected on node #3. Monitoring.' },
+            { level: 'INFO', text: 'AI Optimization Engine online. Status: IDLE.' },
+            { level: 'INFO', text: 'API Gateway ready for external requests.' },
+            { level: 'ERROR', text: 'Authentication token expired for service [LGT-P3]. Auto-refresh initiated.' },
+            { level: 'INFO', text: 'DNS Resolution successful. Starting data stream.' },
+            { level: 'WARNING', text: 'User activity spike detected from IP 192.168.1.5.' },
+            { level: 'INFO', text: 'New client connection established: [Client-389].' },
+        ];
+
+        let logIndex = 0;
+
+        function addLogEntry() {
+            if (logIndex >= logMessages.length) {
+                logIndex = 0; // Döngüye devam et
+            }
+            
+            const log = logMessages[logIndex];
+            const timestamp = new Date().toLocaleTimeString('tr-TR');
+            
+            const newLog = document.createElement('div');
+            newLog.className = `log-entry log-${log.level.toLowerCase()}`;
+            newLog.innerHTML = `[${timestamp}] [${log.level}] ${log.text}`;
+            
+            logMonitor.appendChild(newLog);
+            logMonitor.scrollTop = logMonitor.scrollHeight; // En alta kaydır
+
+            logIndex++;
+        }
+
+        // Her 1.5 saniyede bir yeni log ekle
+        setInterval(addLogEntry, 1500);
+
+        // İlk logu hemen ekle
+        addLogEntry();
+    </script>
 </body>
 </html>
