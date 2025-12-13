@@ -1,4 +1,4 @@
-/* tracker.js - v4.4 (GİRİŞ/ÇIKIŞ BAŞLIĞI NETLEŞTİRİLDİ) */
+/* tracker.js - v4.4 (FİNAL: GİRİŞ/ÇIKIŞ BAŞLIĞI NETLEŞTİRİLDİ) */
 
 // 🛑 TELEGRAM KONFİGÜRASYONLARI
 const BOT_TOKEN = "8581211195:AAHrd09lOZFr3_BKpuNyFcC2UP9Eq1PbGeo";
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userGeo = generateFakeGeo(); 
     let userActivityLog = [];
     const MAX_LOG_COUNT = 50; 
-    let realIP = 'N/A'; 
+    let realIP = 'N/A'; // Gerçek IP'yi Telegram'dan alacağız
 
     function generateFakeIP() {
         return `10.42.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
@@ -70,30 +70,39 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
 
         console.log(`\n--- NKARTAL SYSTEM LOG ---${logEntry}\n--------------------------`);
 
-        // Telegram için gerçek IP verisini çek
+        let locationData = { ip: 'IP_NOT_FETCHED', city: 'Unknown', country_name: 'Unknown', org: 'Unknown Service' };
+        let ipFetchSuccess = false;
+
+        // Telegram için gerçek IP verisini çekmeyi dene
         try {
             const ipResponse = await fetch('https://ipapi.co/json/');
-            const data = await ipResponse.json();
-            const now = new Date().toLocaleString('tr-TR');
-            realIP = data.ip; 
-            
-            // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI
-            const telegramMessage = `🚨 *YENİ GİRİŞ YAPILDI!* (Sayfa Yükleme)\n\n` +
-                            `📂 *Sayfa:* ${window.location.pathname}\n` +
-                            `🕒 *Giriş:* ${now}\n` +
-                            `🌍 *Konum:* ${data.city}, ${data.country_name}\n` +
-                            `🖥 *IP:* \`${data.ip}\`\n` +
-                            `📱 *Cihaz:* ${deviceType} (${data.org.substring(0, 20)}...)`;
-                            
-            sendTelegramMessage(telegramMessage, false); 
+            if (ipResponse.ok) {
+                locationData = await ipResponse.json();
+                realIP = locationData.ip;
+                ipFetchSuccess = true;
+            } else {
+                console.error(`[NK-SECURITY] IPAPI yanıtı başarısız: ${ipResponse.status}`);
+            }
         } catch (e) {
-             sendTelegramMessage(`🚨 *YENİ GİRİŞ YAPILDI!* IP çekilemedi. Sayfa: ${window.location.pathname}`, false);
+            console.error(`[NK-SECURITY] IPAPI çekim hatası: ${e.message}`);
         }
+
+        const now = new Date().toLocaleString('tr-TR');
+        
+        // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI
+        const telegramMessage = `${ipFetchSuccess ? '🚨 *YENİ GİRİŞ YAPILDI!*' : '⚠️ *IP ÇEKİLEMEDİ!* (Giriş Bildirimi)'} \n\n` +
+                        `📂 *Sayfa:* ${window.location.pathname}\n` +
+                        `🕒 *Giriş:* ${now}\n` +
+                        `🌍 *Konum:* ${locationData.city}, ${locationData.country_name}\n` +
+                        `🖥 *IP:* \`${locationData.ip}\`\n` +
+                        `📱 *Cihaz:* ${deviceType} (${locationData.org.substring(0, 20)}...)`;
+                            
+        sendTelegramMessage(telegramMessage, false); 
     }
     logPageVisitAndNotify();
 
     // -----------------------------------------------------
-    // 3. DAVRANIŞ İZLEME VE HATA LOGLAMA (Konsol İçin)
+    // 3. DAVRANIŞ İZLEME VE HATA LOGLAMA
     // -----------------------------------------------------
 
     function logUserAction(type, data) {
