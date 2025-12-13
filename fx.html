@@ -3,18 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NURULLAH HOLDING RAPORU (MANUEL)</title>
+    <title>GÜVENLİ GİRİŞ</title>
     <style>
         body {
             background-color: #0d1117;
             color: #c9d1d9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* --- KİLİT EKRANI STİLLERİ --- */
+        #lockScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .lock-box {
+            text-align: center;
+            width: 80%;
+            max-width: 300px;
+        }
+        .lock-icon { font-size: 50px; margin-bottom: 20px; }
+        .pass-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #111;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 5px; 
+        }
+        .btn-unlock {
+            width: 100%;
+            padding: 12px;
+            background: #238636;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- ANA UYGULAMA STİLLERİ (Başlangıçta Gizli) --- */
+        #mainApp {
+            display: none; /* Şifre girilene kadar gizli */
+            width: 100%;
             padding: 20px;
-            font-size: 14px;
             display: flex;
             justify-content: center;
         }
+
         .container {
             width: 100%;
             max-width: 450px;
@@ -23,6 +77,7 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+            margin: 0 auto; 
         }
         h2 {
             text-align: center;
@@ -30,10 +85,8 @@
             border-bottom: 1px solid #30363d;
             padding-bottom: 15px;
             margin-top: 0;
-            letter-spacing: 1px;
         }
         
-        /* Giriş Alanı Tasarımı */
         .input-area {
             text-align: center;
             margin-bottom: 20px;
@@ -54,19 +107,16 @@
             width: 70%;
             border-radius: 6px;
             outline: none;
-            transition: 0.3s;
         }
         .kur-input:focus { border-color: #58a6ff; }
         
-        /* Tablo Tasarımı */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { padding: 10px; text-align: left; border-bottom: 1px solid #30363d; }
-        th { color: #8b949e; font-size: 11px; text-transform: uppercase; }
+        th { color: #8b949e; font-size: 11px; }
         td { font-weight: 500; font-size: 15px; }
         .text-right { text-align: right; }
         .highlight { color: #fff; font-weight: bold; }
         
-        /* Sonuç Kutusu */
         .result-box {
             margin-top: 25px;
             padding: 20px;
@@ -74,7 +124,7 @@
             text-align: center;
             font-weight: bold;
             font-size: 18px;
-            display: none; /* Başlangıçta gizli */
+            display: none;
             animation: fadeIn 0.5s;
         }
         .profit { background: rgba(46, 160, 67, 0.15); color: #3fb950; border: 1px solid #2ea043; }
@@ -83,7 +133,7 @@
         .btn {
             width: 100%;
             padding: 15px;
-            background: #238636;
+            background: #1f6feb;
             color: white;
             border: none;
             border-radius: 6px;
@@ -91,112 +141,114 @@
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
-            transition: 0.2s;
         }
-        .btn:hover { background: #2ea043; }
 
-        .info-pill {
-            font-size: 10px;
-            background: #30363d;
-            padding: 2px 8px;
-            border-radius: 10px;
-            color: #aaa;
-            margin-left: 5px;
-        }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>FİNANSAL DURUM RAPORU</h2>
-    
-    <div class="input-area">
-        <span class="input-label">GÜNCEL SATIŞ KURU (HALEP/SYP)</span>
-        <input type="number" id="manualKur" class="kur-input" placeholder="Örn: 12500">
+    <div id="lockScreen">
+        <div class="lock-box">
+            <div class="lock-icon">🔒</div>
+            <h3 style="color:#888; font-weight:normal;">NURULLAH FX</h3>
+            <input type="password" id="passwordInput" class="pass-input" placeholder="****">
+            <button class="btn-unlock" onclick="checkPass()">GİRİŞ YAP</button>
+            <p id="errorMsg" style="color:red; display:none; margin-top:10px;">Hatalı Şifre!</p>
+        </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>VARLIK KALEMİ</th>
-                <th class="text-right">DEĞER</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Eldeki Nakit</td>
-                <td class="text-right highlight">214.000.000 SYP</td>
-            </tr>
+    <div id="mainApp" style="display:none;"> 
+        <div class="container">
+            <h2>VARLIK RAPORU</h2>
             
-            <tr style="background:#21262d;">
-                <td colspan="2" style="text-align:center; font-size:11px; color:#8b949e; padding:5px;">BAŞA BAŞ NOKTASI (MALİYET)</td>
-            </tr>
-            <tr>
-                <td>Toplam Giriş Maliyeti</td>
-                <td class="text-right" style="color:#e3b341;">16.990 $</td>
-            </tr>
+            <div class="input-area">
+                <span class="input-label">GÜNCEL SATIŞ KURU (HALEP)</span>
+                <input type="number" id="manualKur" class="kur-input" placeholder="Örn: 12500">
+            </div>
 
-            <tr>
-                <td>Mevcut Dolar Karşılığı</td>
-                <td class="text-right" id="mevcutUsd" style="color:#58a6ff;">--- $</td>
-            </tr>
-        </tbody>
-    </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>VARLIK KALEMİ</th>
+                        <th class="text-right">DEĞER</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Eldeki Nakit</td>
+                        <td class="text-right highlight">214.000.000 SYP</td>
+                    </tr>
+                    
+                    <tr style="background:#21262d;">
+                        <td colspan="2" style="text-align:center; font-size:11px; color:#8b949e; padding:5px;">BAŞA BAŞ NOKTASI (MALİYET)</td>
+                    </tr>
+                    <tr>
+                        <td>Toplam Maliyet</td>
+                        <td class="text-right" style="color:#e3b341;">16.990 $</td>
+                    </tr>
 
-    <div id="sonucKutusu" class="result-box">
-        ---
+                    <tr>
+                        <td>Mevcut Dolar</td>
+                        <td class="text-right" id="mevcutUsd" style="color:#58a6ff;">--- $</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="sonucKutusu" class="result-box">---</div>
+
+            <button class="btn" onclick="hesapla()">HESAPLA</button>
+        </div>
     </div>
 
-    <button class="btn" onclick="hesapla()">HESAPLA VE RAPORLA</button>
-</div>
+    <script>
+        // --- GÜVENLİK AYARLARI ---
+        const DOGRU_SIFRE = "47"; // ŞİFRE GÜNCELLENDİ
 
-<script>
-    function hesapla() {
-        // --- SABİT VERİLER ---
-        const ELDEKI_SYP = 214000000;
-        const GIRIS_MALIYETI = 16990; // (Eski 6500 USD + 9125 EUR'nun o günkü USD karşılığı)
+        function checkPass() {
+            let girilen = document.getElementById("passwordInput").value;
+            let lockScreen = document.getElementById("lockScreen");
+            let mainApp = document.getElementById("mainApp");
+            let errorMsg = document.getElementById("errorMsg");
 
-        // 1. Kullanıcının Girdiği Kuru Al
-        let kurInput = document.getElementById('manualKur').value;
-        let kur = parseFloat(kurInput);
-
-        // Hata Kontrolü
-        if (!kur || kur <= 0) {
-            alert("Lütfen geçerli bir kur giriniz!");
-            return;
+            if(girilen === DOGRU_SIFRE) {
+                // Şifre doğruysa:
+                lockScreen.style.display = "none"; // Kilidi kaldır
+                mainApp.style.display = "flex";    // Uygulamayı göster
+            } else {
+                // Şifre yanlışsa:
+                errorMsg.style.display = "block";
+                document.getElementById("passwordInput").value = ""; // Kutuyu temizle
+            }
         }
 
-        // 2. Mevcut Paranın Dolar Karşılığını Hesapla
-        let mevcutUsd = ELDEKI_SYP / kur;
+        // --- HESAPLAMA MOTORU ---
+        function hesapla() {
+            const ELDEKI_SYP = 214000000;
+            const GIRIS_MALIYETI = 16990;
 
-        // Ekrana Yazdır (Mevcut Dolar)
-        document.getElementById('mevcutUsd').innerText = mevcutUsd.toLocaleString('en-US', {maximumFractionDigits: 0}) + " $";
+            let kurInput = document.getElementById('manualKur').value;
+            let kur = parseFloat(kurInput);
 
-        // 3. Kar/Zarar Hesapla
-        let fark = mevcutUsd - GIRIS_MALIYETI;
-        let kutu = document.getElementById('sonucKutusu');
-        
-        kutu.style.display = 'block'; // Kutuyu görünür yap
+            if (!kur || kur <= 0) { alert("Kur giriniz!"); return; }
 
-        if(fark >= 0) {
-            // KÂR DURUMU
-            kutu.className = "result-box profit";
-            kutu.innerHTML = `
-                DURUM: KÂRDASIN <br>
-                <span style="font-size:24px">+${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>
-            `;
-        } else {
-            // ZARAR DURUMU
-            kutu.className = "result-box loss";
-            kutu.innerHTML = `
-                DURUM: ZARAR/ERİME <br>
-                <span style="font-size:24px">${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>
-            `;
+            let mevcutUsd = ELDEKI_SYP / kur;
+            document.getElementById('mevcutUsd').innerText = mevcutUsd.toLocaleString('en-US', {maximumFractionDigits: 0}) + " $";
+
+            let fark = mevcutUsd - GIRIS_MALIYETI;
+            let kutu = document.getElementById('sonucKutusu');
+            
+            kutu.style.display = 'block';
+
+            if(fark >= 0) {
+                kutu.className = "result-box profit";
+                kutu.innerHTML = `DURUM: KÂR <br><span style="font-size:24px">+${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>`;
+            } else {
+                kutu.className = "result-box loss";
+                kutu.innerHTML = `DURUM: ZARAR <br><span style="font-size:24px">${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>`;
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 </html>
