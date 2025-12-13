@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeler | Nurullah Kartal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23007bff%22/><text y=%22.9em%22 x=%2250%25%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2270%22 fill=%22%23ffffff%22>NK</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -11,54 +12,64 @@
     <canvas id="neural-canvas"></canvas>
 
     <nav class="glass-nav">
-        <div class="logo">NK<span class="highlight">ARTAL</span></div>
+        <a href="index.html" class="logo">NK<span class="highlight">ARTAL</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="hakkimda.html">Hakkımda</a></li>
-            <li><a href="projeler.html" class="active">Projeler</a></li>
-            <li><a href="api-docs.html">API</a></li>
-            <li><a href="portal-giris.html" class="portal-btn">Portal</a></li>
+            <li><a href="projeler.html" class="active">Çözümler</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
+        <a href="portal-giris.html" class="portal-btn"><i class="fas fa-lock"></i> Portal</a>
     </nav>
 
     <div class="page-header">
         <h1>Geliştirdiğimiz <span class="highlight">Çözümler</span></h1>
-        <p>Sektörel sorunlara modern yazılım yaklaşımları.</p>
+        <p style="color:#aaa;">Sektörel sorunlara modern yazılım yaklaşımları.</p>
     </div>
 
     <div class="container">
         <div class="grid-container">
             
             <div class="glass-card">
-                <i class="fab fa-telegram-plane" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
-                <h3>Smart Social Bot</h3>
-                <p>Sosyal medya yönetimini otonom hale getirin. İçerik bulma, üretme ve paylaşma süreçlerini %100 otomatikleştirir.</p>
-                <a href="iletisim.html" class="btn-outline" style="padding:5px 15px; font-size:0.8rem; margin-top:10px; display:inline-block;">Teklif İste</a>
+                <div>
+                    <i class="fab fa-telegram-plane" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
+                    <h3>Smart Social Bot</h3>
+                    <p>Sosyal medya yönetimini otonom hale getirin. İçerik bulma, üretme ve paylaşma süreçlerini %100 otomatikleştirir.</p>
+                </div>
+                <a href="iletisim.html" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem;">Teklif İste</a>
             </div>
 
             <div class="glass-card">
-                <i class="fas fa-truck-loading" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
-                <h3>Lojistik ERP Sistemi</h3>
-                <p>Takkelioğlu Yumurta lojistik deneyimiyle geliştirildi. Araç rotalama, depo stok takibi ve cari hesap yönetimini tek panelde birleştirir.</p>
-                <a href="iletisim.html" class="btn-outline" style="padding:5px 15px; font-size:0.8rem; margin-top:10px; display:inline-block;">Detaylar</a>
+                <div>
+                    <i class="fas fa-truck-loading" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
+                    <h3>Lojistik ERP Sistemi</h3>
+                    <p>Araç rotalama, depo stok takibi ve cari hesap yönetimini tek panelde birleştiren kurumsal çözüm.</p>
+                </div>
+                <a href="iletisim.html" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem;">Detaylar</a>
             </div>
 
             <div class="glass-card">
-                <i class="fas fa-map-marked-alt" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
-                <h3>Türkiye Veri Haritası</h3>
-                <p>Açık Veri projesi. TÜİK verilerini il bazlı ısı haritalarına dönüştüren görselleştirme altyapısı.</p>
+                <div>
+                    <i class="fas fa-map-marked-alt" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
+                    <h3>Türkiye Veri Haritası</h3>
+                    <p>Açık Veri projesi. TÜİK verilerini il bazlı ısı haritalarına dönüştüren görselleştirme altyapısı.</p>
+                </div>
+                <a href="#" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem; opacity:0.5;">İncele</a>
             </div>
 
             <div class="glass-card">
-                <i class="fas fa-shield-alt" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
-                <h3>APK & Root Güvenliği</h3>
-                <p>Android uygulamaları için güvenlik açığı taraması ve sistem yetki analizi yapan siber güvenlik araçları.</p>
+                <div>
+                    <i class="fas fa-shield-alt" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
+                    <h3>APK & Root Güvenliği</h3>
+                    <p>Android uygulamaları için güvenlik açığı taraması ve sistem yetki analizi yapan siber güvenlik araçları.</p>
+                </div>
+                <a href="#" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem; opacity:0.5;">Yakında</a>
             </div>
 
         </div>
     </div>
 
-    <footer style="text-align:center; padding:20px; color:#666;">&copy; 2025 Nurullah Kartal.</footer>
+    <footer style="text-align:center; padding:30px; color:#666; font-size:0.9rem;">&copy; 2025 Nurullah Kartal.</footer>
     <script src="script.js"></script>
 </body>
 </html>
