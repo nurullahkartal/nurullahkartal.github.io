@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog & Makaleler | NKartal</title>
+    <title>Blog | Nurullah Kartal</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23007bff%22/><text y=%22.9em%22 x=%2250%25%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2270%22 fill=%22%23ffffff%22>NK</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -11,56 +12,55 @@
     <canvas id="neural-canvas"></canvas>
 
     <nav class="glass-nav">
-        <div class="logo">NK<span class="highlight">ARTAL</span></div>
+        <a href="index.html" class="logo">NK<span class="highlight">ARTAL</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="projeler.html">Projeler</a></li>
+            <li><a href="hakkimda.html">Hakkımda</a></li>
+            <li><a href="projeler.html">Çözümler</a></li>
             <li><a href="blog.html" class="active">Blog</a></li>
-            <li><a href="portal-giris.html" class="portal-btn">Portal</a></li>
         </ul>
+        <a href="portal-giris.html" class="portal-btn"><i class="fas fa-lock"></i> Portal</a>
     </nav>
 
     <div class="page-header">
         <h1>Teknoloji <span class="highlight">Günlüğü</span></h1>
-        <p>Yapay zeka, otomasyon ve yazılım dünyasından teknik notlar.</p>
+        <p style="color:#aaa;">Yapay zeka, otomasyon ve yazılım dünyasından teknik notlar.</p>
     </div>
 
     <div class="container">
         <div class="grid-container">
             
             <div class="glass-card">
-                <span style="background:var(--primary); color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">YENİ</span>
-                <h3 style="margin-top:10px;">Python ile Telegram Botu Nasıl Yapılır?</h3>
-                <p style="font-size:0.9rem; color:#aaa;">Telegram API kullanarak 10 dakikada kendi asistan botunuzu nasıl kodlayacağınızı adım adım anlatıyoruz.</p>
-                <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-size:0.8rem; color:#666;"><i class="far fa-clock"></i> 5 dk okuma</span>
-                    <a href="blog-detay-1.html" class="btn-outline" style="padding:5px 15px; font-size:0.8rem;">Oku &rarr;</a>
+                <div>
+                    <span style="background:#007bff; color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">YENİ</span>
+                    <h3 style="margin-top:10px;">Telegram Botu Nasıl Yapılır?</h3>
+                    <p>Telegram API kullanarak 10 dakikada kendi asistan botunuzu nasıl kodlayacağınızı adım adım anlatıyoruz.</p>
                 </div>
+                <a href="blog-detay-1.html" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem;">Oku &rarr;</a>
             </div>
 
             <div class="glass-card">
-                <h3 style="margin-top:10px;">Büyük Veri ve Lojistik</h3>
-                <p style="font-size:0.9rem; color:#aaa;">Tedarik zincirinde veri analizinin önemi ve Python Pandas kütüphanesi ile rota optimizasyonu örnekleri.</p>
-                <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-size:0.8rem; color:#666;"><i class="far fa-clock"></i> 8 dk okuma</span>
-                    <a href="#" class="btn-outline" style="padding:5px 15px; font-size:0.8rem; opacity:0.5;">Yakında</a>
+                <div>
+                    <span style="background:#00ff88; color:#000; padding:2px 8px; border-radius:4px; font-size:0.7rem;">LOJİSTİK</span>
+                    <h3 style="margin-top:10px;">Lojistikte Büyük Veri</h3>
+                    <p>Tedarik zincirinde Python Pandas kütüphanesi ile rota optimizasyonu ve yakıt analizi örnekleri.</p>
                 </div>
+                <a href="blog-detay-2.html" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem;">Oku &rarr;</a>
             </div>
 
             <div class="glass-card">
-    <span style="background:var(--accent); color:#000; padding:2px 8px; border-radius:4px; font-size:0.7rem;">LOJİSTİK</span>
-    <h3 style="margin-top:10px;">Lojistikte Büyük Veri ve Python</h3>
-    <p style="font-size:0.9rem; color:#aaa;">Tedarik zincirinde Python Pandas ile rota optimizasyonu.</p>
-    <div style="margin-top:15px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.8rem; color:#666;"><i class="far fa-clock"></i> 8 dk okuma</span>
-        <a href="blog-detay-2.html" class="btn-outline" style="padding:5px 15px; font-size:0.8rem;">Oku &rarr;</a>
-    </div>
- </div>
+                <div>
+                    <span style="background:#ff4d4d; color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">GÜVENLİK</span>
+                    <h3 style="margin-top:10px;">Siber Güvenlik: APK Analizi</h3>
+                    <p>Mobil uygulamalarda tersine mühendislik ve güvenlik açıklarını tespit etme yöntemleri.</p>
+                </div>
+                <a href="#" class="btn-outline" style="text-align:center; padding:10px; font-size:0.9rem; opacity:0.5;">Yakında</a>
+            </div>
 
         </div>
     </div>
 
-    <footer style="text-align:center; padding:20px; color:#666;">&copy; 2025 Nurullah Kartal.</footer>
+    <footer style="text-align:center; padding:30px; color:#666; font-size:0.9rem;">&copy; 2025 Nurullah Kartal.</footer>
     <script src="script.js"></script>
 </body>
 </html>
