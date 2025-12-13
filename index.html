@@ -12,40 +12,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <style>
-        :root { --primary: #00ff88; --dark-bg: #050505; --text: #e0e0e0; }
-        body, html { margin: 0; padding: 0; background-color: var(--dark-bg); color: var(--text); font-family: sans-serif; overflow-x: hidden; width: 100%; }
-        a { text-decoration: none; color: inherit; }
-        
-        /* Navbar Hızlı Yükleme */
-        .glass-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(0,0,0,0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .logo { font-weight: 800; font-size: 1.4rem; color: #fff; display: flex; align-items: center; }
-        .highlight { color: var(--primary); }
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { font-size: 0.95rem; font-weight: 500; color: #e0e0e0; }
-        .portal-btn { border: 1px solid var(--primary); color: var(--primary) !important; padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
-        
-        /* Hero Bölümü Hızlı Yükleme */
-        .hero-section { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; background: radial-gradient(circle, rgba(0,255,136,0.03) 0%, transparent 70%); }
-        .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: #fff; }
-        .gradient-text { color: var(--primary); }
-        
-        /* Gizli SEO Başlığı */
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-        
-        /* Mobil Ayarları */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-content h1 { font-size: 2rem; }
-            .glass-nav { padding: 15px 15px; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 
-    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
@@ -64,8 +35,8 @@
     <main>
         <section class="hero-section">
             <div class="hero-content">
-                <h1 style="margin-bottom: 20px;">İşletmeniz İçin <br><span class="gradient-text">Akıllı Dijital Dönüşüm</span></h1>
-                <p style="color:#aaa; max-width:700px; margin:0 auto 30px auto; font-size: 1.1rem;">
+                <h1 style="min-height: 120px; margin-bottom: 20px;">İşletmeniz İçin <br><span class="gradient-text">Akıllı Dijital Dönüşüm</span></h1>
+                <p style="color:#aaa; max-width:700px; margin:0 auto 30px auto; font-size: 1.1rem; min-height: 60px;">
                     Karmaşık lojistik operasyonlarını ve veri analiz süreçlerini Yapay Zeka ile yönetin.
                 </p>
                 <div class="hero-btns">
@@ -98,21 +69,27 @@
         <section class="features-section">
             <div class="container">
                 <div style="text-align:center; margin-bottom:30px;">
-                    <h2 style="font-size:2rem; color:#fff;">Neden <span class="highlight">NKartal?</span></h2>
+                    <h2 style="font-size:2rem; color:#fff; min-height: 40px;">Neden <span class="highlight">NKartal?</span></h2>
                 </div>
                 <div class="grid-container">
                     <div class="feature-box">
-                        <i class="fas fa-brain" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <div style="height: 50px; margin-bottom: 15px;">
+                            <i class="fas fa-brain" style="font-size: 2rem; color: var(--primary);"></i>
+                        </div>
                         <h3>Yapay Zeka</h3>
                         <p style="color:#aaa;">Verileri öğrenen algoritmalar.</p>
                     </div>
                     <div class="feature-box">
-                        <i class="fas fa-shipping-fast" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <div style="height: 50px; margin-bottom: 15px;">
+                            <i class="fas fa-shipping-fast" style="font-size: 2rem; color: var(--primary);"></i>
+                        </div>
                         <h3>Lojistik ERP</h3>
                         <p style="color:#aaa;">Stok ve rota optimizasyonu.</p>
                     </div>
                     <div class="feature-box">
-                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <div style="height: 50px; margin-bottom: 15px;">
+                            <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary);"></i>
+                        </div>
                         <h3>Siber Güvenlik</h3>
                         <p style="color:#aaa;">Uçtan uca şifreli altyapılar.</p>
                     </div>
