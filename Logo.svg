@@ -1,26 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <defs>
-        <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#00a555;stop-opacity:1" />
-        </linearGradient>
-        <filter id="glow">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+        <linearGradient id="CorporateGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#008040;stop-opacity:1" /> <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" /> </linearGradient>
+        <filter id="subtleGlow">
+            <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
             <feMerge>
                 <feMergeNode in="coloredBlur"/>
                 <feMergeNode in="SourceGraphic"/>
             </feMerge>
         </filter>
     </defs>
-
-    <g filter="url(#glow)">
+    
+    <path d="M50 5 L85 20 V65 C85 80 50 95 50 95 C50 95 15 80 15 65 V20 Z" fill="#050505" stroke="url(#CorporateGreen)" stroke-width="3" filter="url(#subtleGlow)"/>
+    
+    <g transform="translate(10, -5)">
+        <path d="M30 30 L30 75 L40 75 L40 45 L50 45 L50 75 L60 75 L60 30 Z" fill="#008040"/>
         
-        <path d="M15 85 L15 15 L45 15 L45 85 L35 85 L35 30 L25 30 L25 85 Z" fill="white"/>
-        
-        <path d="M55 85 L55 15 L85 15 L85 30 L70 30 L70 50 L85 50 L85 65 L70 65 L70 85 Z" fill="url(#primaryGradient)" transform="translate(-5, 0)"/> 
-        
-        <path d="M50 55 L70 55 L70 70 L50 70 Z" fill="white"/> 
+        <path d="M65 30 L65 75 L75 75 L75 55 L90 55 L90 30 L75 30 Z" fill="#fff"/>
     </g>
     
-    <polygon points="75 15, 85 15, 80 5" fill="#00ff88" filter="url(#glow)"/>
+    <polygon points="45 10, 55 10, 50 5" fill="#00ff88"/>
 </svg>
