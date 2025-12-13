@@ -1,4 +1,4 @@
-/* script.js - v2.2 (Final: Chatbot ve Portal Giriş Mantığı. Şifreler: 1 ve 47) */
+/* script.js - v2.3 (Final: Chatbot ve DB Kontrollü Portal Giriş Mantığı) */
 
 // --- 1. NEURAL CANVAS SETUP (Arka Plan Efekti) ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -168,8 +168,8 @@ function sendMessage() {
 }
 
 
-// --- 3. PORTAL GİRİŞ MANTIĞI (YÖNLENDİRME DAHİL) ---
-function checkLogin() {
+// --- 3. PORTAL GİRİŞ MANTIĞI (DB Kontrollü YÖNLENDİRME) ---
+async function checkLogin() { // 🛑 ASYNC YAPILDI
     const codeInput = document.getElementById('access-code');
     const feedback = document.getElementById('login-feedback');
     
@@ -177,12 +177,29 @@ function checkLogin() {
     
     const code = codeInput.value;
     
-    // GÜNCEL GÜVENLİK KODLARI KONTROLÜ (1 ve 47)
-    if (code === '1' || code === '47') {
+    // 🛑 VERİTABANI KONTROLÜ BAŞLANGICI
+    let isAllowed = false;
+    
+    try {
+        // Firebase.js'ten getDocument fonksiyonu ile şifreler çekilir
+        const accessDoc = await getDocument('settings', 'access'); 
+
+        if (accessDoc && accessDoc.allowed_passwords.includes(code)) {
+            isAllowed = true;
+        }
+    } catch (error) {
+        console.error("Veritabanı bağlantı hatası:", error);
+        feedback.style.color = 'red';
+        feedback.innerHTML = '<i class="fas fa-times-circle"></i> Sistem Erişilemez! (DB Hatası)';
+        return; 
+    }
+    
+    // GÜVENLİK KODU KONTROLÜ
+    if (isAllowed) {
         feedback.style.color = '#00ff88';
-        feedback.innerHTML = '<i class="fas fa-check-circle"></i> Erişim Başarılı! Yönlendiriliyorsunuz...';
+        feedback.innerHTML = '<i class="fas fa-check-circle"></i> Erişim Başarılı! Veritabanı Onayı Alındı. Yönlendiriliyorsunuz...';
         
-        // CRITICAL: Oturumu Başlat (Dashboard güvenliği için)
+        // KRİTİK ADIM: Oturumu başlat
         sessionStorage.setItem('nk_access_granted', 'true');
         
         // BAŞARILI YÖNLENDİRME
@@ -192,7 +209,7 @@ function checkLogin() {
         
     } else {
         feedback.style.color = 'red';
-        feedback.innerHTML = '<i class="fas fa-times-circle"></i> Hatalı Erişim Kodu!';
+        feedback.innerHTML = '<i class="fas fa-times-circle"></i> Hatalı Erişim Kodu! (DB Reddi)';
         
         setTimeout(() => {
              feedback.innerHTML = '';
