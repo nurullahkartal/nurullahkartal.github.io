@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NURULLAH HOLDING RAPORU (MANUEL)</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.6);
+        }
+        h2 {
+            text-align: center;
+            color: #58a6ff;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 15px;
+            margin-top: 0;
+            letter-spacing: 1px;
+        }
+        
+        /* Giriş Alanı Tasarımı */
+        .input-area {
+            text-align: center;
+            margin-bottom: 20px;
+            background: #0d1117;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+        }
+        .input-label { font-size: 12px; color: #8b949e; display: block; margin-bottom: 8px; }
+        .kur-input {
+            background: #161b22;
+            border: 2px solid #30363d;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            width: 70%;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .kur-input:focus { border-color: #58a6ff; }
+        
+        /* Tablo Tasarımı */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #30363d; }
+        th { color: #8b949e; font-size: 11px; text-transform: uppercase; }
+        td { font-weight: 500; font-size: 15px; }
+        .text-right { text-align: right; }
+        .highlight { color: #fff; font-weight: bold; }
+        
+        /* Sonuç Kutusu */
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            display: none; /* Başlangıçta gizli */
+            animation: fadeIn 0.5s;
+        }
+        .profit { background: rgba(46, 160, 67, 0.15); color: #3fb950; border: 1px solid #2ea043; }
+        .loss { background: rgba(248, 81, 73, 0.15); color: #f85149; border: 1px solid #da3633; }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn:hover { background: #2ea043; }
+
+        .info-pill {
+            font-size: 10px;
+            background: #30363d;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #aaa;
+            margin-left: 5px;
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>FİNANSAL DURUM RAPORU</h2>
+    
+    <div class="input-area">
+        <span class="input-label">GÜNCEL SATIŞ KURU (HALEP/SYP)</span>
+        <input type="number" id="manualKur" class="kur-input" placeholder="Örn: 12500">
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>VARLIK KALEMİ</th>
+                <th class="text-right">DEĞER</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Eldeki Nakit</td>
+                <td class="text-right highlight">214.000.000 SYP</td>
+            </tr>
+            
+            <tr style="background:#21262d;">
+                <td colspan="2" style="text-align:center; font-size:11px; color:#8b949e; padding:5px;">BAŞA BAŞ NOKTASI (MALİYET)</td>
+            </tr>
+            <tr>
+                <td>Toplam Giriş Maliyeti</td>
+                <td class="text-right" style="color:#e3b341;">16.990 $</td>
+            </tr>
+
+            <tr>
+                <td>Mevcut Dolar Karşılığı</td>
+                <td class="text-right" id="mevcutUsd" style="color:#58a6ff;">--- $</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="sonucKutusu" class="result-box">
+        ---
+    </div>
+
+    <button class="btn" onclick="hesapla()">HESAPLA VE RAPORLA</button>
+</div>
+
+<script>
+    function hesapla() {
+        // --- SABİT VERİLER ---
+        const ELDEKI_SYP = 214000000;
+        const GIRIS_MALIYETI = 16990; // (Eski 6500 USD + 9125 EUR'nun o günkü USD karşılığı)
+
+        // 1. Kullanıcının Girdiği Kuru Al
+        let kurInput = document.getElementById('manualKur').value;
+        let kur = parseFloat(kurInput);
+
+        // Hata Kontrolü
+        if (!kur || kur <= 0) {
+            alert("Lütfen geçerli bir kur giriniz!");
+            return;
+        }
+
+        // 2. Mevcut Paranın Dolar Karşılığını Hesapla
+        let mevcutUsd = ELDEKI_SYP / kur;
+
+        // Ekrana Yazdır (Mevcut Dolar)
+        document.getElementById('mevcutUsd').innerText = mevcutUsd.toLocaleString('en-US', {maximumFractionDigits: 0}) + " $";
+
+        // 3. Kar/Zarar Hesapla
+        let fark = mevcutUsd - GIRIS_MALIYETI;
+        let kutu = document.getElementById('sonucKutusu');
+        
+        kutu.style.display = 'block'; // Kutuyu görünür yap
+
+        if(fark >= 0) {
+            // KÂR DURUMU
+            kutu.className = "result-box profit";
+            kutu.innerHTML = `
+                DURUM: KÂRDASIN <br>
+                <span style="font-size:24px">+${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>
+            `;
+        } else {
+            // ZARAR DURUMU
+            kutu.className = "result-box loss";
+            kutu.innerHTML = `
+                DURUM: ZARAR/ERİME <br>
+                <span style="font-size:24px">${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>
+            `;
+        }
+    }
+</script>
+
+</body>
+</html>
