@@ -2,251 +2,376 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GÜVENLİ GİRİŞ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KARTAL YATIRIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --card-glass: rgba(30, 41, 59, 0.7);
+            --gold: #fbbf24;       
+            --gold-glow: rgba(251, 191, 36, 0.3);
+            --text-main: #ffffff;
+            --text-sec: #94a3b8;
+            --green: #10b981;
+            --red: #ef4444;
+        }
+
         body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #000000 100%);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- KİLİT EKRANI STİLLERİ --- */
-        #lockScreen {
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 300px; height: 300px; background: var(--gold); }
+        .orb-2 { bottom: -10%; right: -10%; width: 250px; height: 250px; background: #3b82f6; }
+
+        /* --- LOGİN EKRANI --- */
+        #loginScreen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            z-index: 9999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 14, 23, 0.98);
+            z-index: 999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-        }
-        .lock-box {
-            text-align: center;
-            width: 80%;
-            max-width: 300px;
-        }
-        .lock-icon { font-size: 50px; margin-bottom: 20px; }
-        .pass-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            text-align: center;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #111;
-            color: #fff;
-            margin-bottom: 15px;
-            letter-spacing: 5px; 
-        }
-        .btn-unlock {
-            width: 100%;
-            padding: 12px;
-            background: #238636;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* --- ANA UYGULAMA STİLLERİ (Başlangıçta Gizli) --- */
-        #mainApp {
-            display: none; /* Şifre girilene kadar gizli */
-            width: 100%;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 25px rgba(0,0,0,0.6);
-            margin: 0 auto; 
-        }
-        h2 {
-            text-align: center;
-            color: #58a6ff;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 15px;
-            margin-top: 0;
+            transition: opacity 0.5s;
         }
         
-        .input-area {
+        .logo-box {
+            border: 2px solid var(--gold);
+            padding: 20px 40px;
+            border-radius: 0 20px 0 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 30px var(--gold-glow);
             text-align: center;
-            margin-bottom: 20px;
-            background: #0d1117;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #30363d;
         }
-        .input-label { font-size: 12px; color: #8b949e; display: block; margin-bottom: 8px; }
-        .kur-input {
-            background: #161b22;
-            border: 2px solid #30363d;
-            color: #fff;
+        .app-name { font-size: 28px; font-weight: 800; letter-spacing: 2px; color: var(--gold); }
+        .app-sub { font-size: 12px; text-transform: uppercase; color: var(--text-sec); letter-spacing: 4px; margin-top: 5px;}
+
+        .pass-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            color: white;
             font-size: 24px;
-            font-weight: bold;
             text-align: center;
-            padding: 10px;
-            width: 70%;
-            border-radius: 6px;
+            width: 200px;
+            padding: 15px;
+            letter-spacing: 5px;
+            outline: none;
+            transition: 0.3s;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .pass-input:focus { 
+            border-color: var(--gold); 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .btn-login {
+            background: linear-gradient(90deg, #d97706, #fbbf24);
+            border: none;
+            padding: 15px 60px;
+            border-radius: 30px;
+            color: #000;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+            transition: transform 0.2s;
+        }
+        .btn-login:active { transform: scale(0.95); }
+
+        /* --- ANA EKRAN --- */
+        #dashboard {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .user-greet { font-size: 14px; color: var(--text-sec); margin-bottom: 2px; }
+        .user-name { font-size: 24px; font-weight: 800; color: white; letter-spacing: 1px; }
+        
+        .right-header { text-align: right; }
+        .brand-badge { background: rgba(251, 191, 36, 0.2); color: var(--gold); padding: 4px 8px; border-radius: 6px; font-size: 10px; font-weight: 800; border: 1px solid rgba(251, 191, 36, 0.3); display: inline-block; margin-bottom: 5px; }
+        
+        /* SAAT STİLİ */
+        .live-clock {
+            font-family: 'Courier New', Courier, monospace; /* Dijital saat fontu */
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .main-card {
+            background: linear-gradient(160deg, #1e293b, #0f172a);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+            transform: rotate(30deg);
+        }
+
+        .asset-title { font-size: 12px; color: var(--text-sec); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .asset-val { font-size: 34px; font-weight: 800; color: white; margin: 0; }
+        .asset-curr { font-size: 16px; color: var(--gold); font-weight: 600; }
+
+        .control-panel {
+            background: var(--card-glass);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group { position: relative; margin-bottom: 20px; }
+        .input-label { position: absolute; top: -10px; left: 15px; background: #161f2e; padding: 0 10px; font-size: 10px; color: var(--gold); font-weight: 700; }
+        .input-field {
+            width: 100%;
+            background: transparent;
+            border: 2px solid #334155;
+            padding: 15px;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            box-sizing: border-box;
             outline: none;
         }
-        .kur-input:focus { border-color: #58a6ff; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #30363d; }
-        th { color: #8b949e; font-size: 11px; }
-        td { font-weight: 500; font-size: 15px; }
-        .text-right { text-align: right; }
-        .highlight { color: #fff; font-weight: bold; }
-        
-        .result-box {
-            margin-top: 25px;
+        .input-field:focus { border-color: var(--gold); }
+
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+        .lbl { color: var(--text-sec); }
+        .val { font-weight: 600; }
+
+        .btn-calc {
+            width: 100%;
+            padding: 16px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-calc:active { transform: scale(0.98); background: #e2e8f0; }
+
+        #resultCard {
+            margin-top: 20px;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 16px;
             text-align: center;
-            font-weight: bold;
-            font-size: 18px;
             display: none;
             animation: fadeIn 0.5s;
         }
-        .profit { background: rgba(46, 160, 67, 0.15); color: #3fb950; border: 1px solid #2ea043; }
-        .loss { background: rgba(248, 81, 73, 0.15); color: #f85149; border: 1px solid #da3633; }
+        .res-title { font-size: 12px; opacity: 0.8; letter-spacing: 1px; font-weight: 600; margin-bottom: 5px; }
+        .res-amount { font-size: 36px; font-weight: 800; }
 
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: #1f6feb;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-        }
+        .profit-style { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .loss-style { background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.3); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .footer { margin-top: 40px; text-align: center; opacity: 0.5; font-size: 10px; letter-spacing: 1px; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div id="lockScreen">
-        <div class="lock-box">
-            <div class="lock-icon">🔒</div>
-            <h3 style="color:#888; font-weight:normal;">NURULLAH FX</h3>
-            <input type="password" id="passwordInput" class="pass-input" placeholder="****">
-            <button class="btn-unlock" onclick="checkPass()">GİRİŞ YAP</button>
-            <p id="errorMsg" style="color:red; display:none; margin-top:10px;">Hatalı Şifre!</p>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div id="loginScreen">
+        <div class="logo-box">
+            <div class="app-name">KARTAL</div>
+            <div class="app-sub">FİNANS YÖNETİMİ</div>
         </div>
+        <input type="tel" id="passwordInput" class="pass-input" placeholder="ŞİFRE" maxlength="4">
+        <button class="btn-login" onclick="checkPass()">GİRİŞ YAP</button>
+        <p id="errorMsg" style="color:var(--red); display:none; margin-top:15px; font-size:12px;">Hatalı Şifre</p>
     </div>
 
-    <div id="mainApp" style="display:none;"> 
-        <div class="container">
-            <h2>VARLIK RAPORU</h2>
-            
-            <div class="input-area">
-                <span class="input-label">GÜNCEL SATIŞ KURU (HALEP)</span>
-                <input type="number" id="manualKur" class="kur-input" placeholder="Örn: 12500">
+    <div id="dashboard">
+        <div class="header">
+            <div>
+                <div class="user-greet" id="greetingTime">Hoşgeldin,</div>
+                <div class="user-name">PATRON</div>
+            </div>
+            <div class="right-header">
+                <div class="brand-badge">HOLDING</div>
+                <div id="liveClock" class="live-clock">--:--:--</div>
+            </div>
+        </div>
+
+        <div class="main-card">
+            <div class="asset-title">TOPLAM NAKİT VARLIK</div>
+            <div class="asset-val" id="totalAssetDisplay">0</div>
+            <div class="asset-curr">SYP</div>
+        </div>
+
+        <div class="control-panel">
+            <div class="input-group">
+                <span class="input-label">GÜNCEL KUR (SATIŞ)</span>
+                <input type="number" id="manualKur" class="input-field" placeholder="Örn: 12250">
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>VARLIK KALEMİ</th>
-                        <th class="text-right">DEĞER</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Eldeki Nakit</td>
-                        <td class="text-right highlight">214.000.000 SYP</td>
-                    </tr>
-                    
-                    <tr style="background:#21262d;">
-                        <td colspan="2" style="text-align:center; font-size:11px; color:#8b949e; padding:5px;">BAŞA BAŞ NOKTASI (MALİYET)</td>
-                    </tr>
-                    <tr>
-                        <td>Toplam Maliyet</td>
-                        <td class="text-right" style="color:#e3b341;">16.990 $</td>
-                    </tr>
+            <div class="info-row">
+                <span class="lbl">Maliyet (Başabaş):</span>
+                <span class="val" style="color:#fbbf24;" id="costDisplay">0 $</span>
+            </div>
+            <div class="info-row">
+                <span class="lbl">Mevcut Değer:</span>
+                <span class="val" id="usdText">--- $</span>
+            </div>
 
-                    <tr>
-                        <td>Mevcut Dolar</td>
-                        <td class="text-right" id="mevcutUsd" style="color:#58a6ff;">--- $</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div id="sonucKutusu" class="result-box">---</div>
-
-            <button class="btn" onclick="hesapla()">HESAPLA</button>
+            <button class="btn-calc" onclick="hesapla()">DURUMU ANALİZ ET</button>
         </div>
+
+        <div id="resultCard"></div>
+
+        <div class="footer">DEVELOPED BY NURULLAH KARTAL</div>
     </div>
 
     <script>
-        // --- GÜVENLİK AYARLARI ---
-        const DOGRU_SIFRE = "47"; // ŞİFRE GÜNCELLENDİ
+        const DOGRU_SIFRE = "47";
+        const ELDEKI_SYP_VAL = 214000000;
+        const GIRIS_MALIYETI_VAL = 16990;
 
         function checkPass() {
             let girilen = document.getElementById("passwordInput").value;
-            let lockScreen = document.getElementById("lockScreen");
-            let mainApp = document.getElementById("mainApp");
-            let errorMsg = document.getElementById("errorMsg");
-
             if(girilen === DOGRU_SIFRE) {
-                // Şifre doğruysa:
-                lockScreen.style.display = "none"; // Kilidi kaldır
-                mainApp.style.display = "flex";    // Uygulamayı göster
+                document.getElementById("loginScreen").style.opacity = "0";
+                
+                // Selamlama ayarla
+                const hour = new Date().getHours();
+                let greet = "Hoşgeldin,";
+                if(hour < 12) greet = "Hayırlı Sabahlar,";
+                else if(hour < 18) greet = "Hayırlı Günler,";
+                else greet = "Hayırlı Akşamlar,";
+                document.getElementById("greetingTime").innerText = greet;
+
+                setTimeout(() => {
+                    document.getElementById("loginScreen").style.display = "none";
+                    document.getElementById("dashboard").style.display = "block";
+                    
+                    // Saati Başlat
+                    startClock();
+
+                    // Rakam Animasyonları
+                    animateValue("totalAssetDisplay", 0, ELDEKI_SYP_VAL, 2000, "");
+                    animateValue("costDisplay", 0, GIRIS_MALIYETI_VAL, 1500, " $");
+                }, 500);
             } else {
-                // Şifre yanlışsa:
-                errorMsg.style.display = "block";
-                document.getElementById("passwordInput").value = ""; // Kutuyu temizle
+                let err = document.getElementById("errorMsg");
+                err.style.display = "block";
+                err.innerText = "Şifre Yanlış!";
+                document.getElementById("passwordInput").value = "";
             }
         }
 
-        // --- HESAPLAMA MOTORU ---
+        // CANLI SAAT FONKSİYONU
+        function startClock() {
+            // İlk açılışta hemen göster
+            updateTime();
+            // Her saniye güncelle
+            setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('tr-TR');
+            document.getElementById('liveClock').innerText = timeString;
+        }
+
         function hesapla() {
-            const ELDEKI_SYP = 214000000;
-            const GIRIS_MALIYETI = 16990;
+            let kur = parseFloat(document.getElementById('manualKur').value);
+            if (!kur || kur <= 0) { alert("Lütfen geçerli bir kur girin."); return; }
 
-            let kurInput = document.getElementById('manualKur').value;
-            let kur = parseFloat(kurInput);
+            document.getElementById('manualKur').blur();
 
-            if (!kur || kur <= 0) { alert("Kur giriniz!"); return; }
+            let mevcutUsd = Math.floor(ELDEKI_SYP_VAL / kur);
+            let fark = mevcutUsd - GIRIS_MALIYETI_VAL;
 
-            let mevcutUsd = ELDEKI_SYP / kur;
-            document.getElementById('mevcutUsd').innerText = mevcutUsd.toLocaleString('en-US', {maximumFractionDigits: 0}) + " $";
+            animateValue("usdText", 0, mevcutUsd, 1000, " $");
 
-            let fark = mevcutUsd - GIRIS_MALIYETI;
-            let kutu = document.getElementById('sonucKutusu');
-            
-            kutu.style.display = 'block';
+            let card = document.getElementById("resultCard");
+            card.style.display = "block";
 
-            if(fark >= 0) {
-                kutu.className = "result-box profit";
-                kutu.innerHTML = `DURUM: KÂR <br><span style="font-size:24px">+${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>`;
+            if (fark >= 0) {
+                card.className = "profit-style";
+                card.innerHTML = `
+                    <div class="res-title">NET KÂR</div>
+                    <div class="res-amount" id="resAmount">0</div>
+                    <div style="font-size:12px; margin-top:5px;">İşler yolunda Patron.</div>
+                `;
+                animateValue("resAmount", 0, fark, 1200, " $", "+");
             } else {
-                kutu.className = "result-box loss";
-                kutu.innerHTML = `DURUM: ZARAR <br><span style="font-size:24px">${fark.toLocaleString('en-US', {maximumFractionDigits: 0})} $</span>`;
+                card.className = "loss-style";
+                card.innerHTML = `
+                    <div class="res-title">ANLIK ERİME</div>
+                    <div class="res-amount" id="resAmount">0</div>
+                    <div style="font-size:12px; margin-top:5px;">Kurun düşmesi lazım.</div>
+                `;
+                animateValue("resAmount", 0, Math.abs(fark), 1200, " $", "-");
             }
+        }
+
+        function animateValue(id, start, end, duration, suffix, prefix = "") {
+            let obj = document.getElementById(id);
+            if(!obj) return;
+            
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const currentVal = Math.floor(easeProgress * (end - start) + start);
+                
+                obj.innerHTML = prefix + currentVal.toLocaleString('en-US') + suffix;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    obj.innerHTML = prefix + end.toLocaleString('en-US') + suffix;
+                }
+            };
+            window.requestAnimationFrame(step);
         }
     </script>
 
