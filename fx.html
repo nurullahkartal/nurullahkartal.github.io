@@ -296,10 +296,10 @@
 
         <div class="control-panel">
             <div style="text-align:center; margin-bottom: 20px;">
-                <span id="liveRateStatus" style="font-size:10px; font-weight:700; color:var(--text-sec); letter-spacing:1px;">KUR BİLGİSİ YÜKLENİYOR...</span>
+                <span id="liveRateStatus" style="font-size:10px; font-weight:700; color:var(--text-sec); letter-spacing:1px;">Lütfen güncel SYP/USD kurunu manuel girin.</span>
             </div>
             <div class="input-group">
-                <span class="input-label">GÜNCEL KUR (SATIŞ)</span>
+                <span class="input-label">GÜNCEL KUR (SYP/USD)</span>
                 <input type="number" id="manualKur" class="input-field" placeholder="Örn: 12250">
             </div>
 
@@ -315,7 +315,7 @@
             <button class="btn-calc" onclick="hesapla()">DURUMU ANALİZ ET</button>
             
             <button id="tlCalcButton" onclick="showTLCalc()">
-                <i class="fas fa-turkish-lira-sign"></i> TL Karşılığını Hesapla
+                <i class="fas fa-turkish-lira-sign"></i> NET KÂR / ZARAR TL Karşılığı
             </button>
 
         </div>
@@ -332,7 +332,7 @@
 
             <div class="input-group">
                 <span class="input-label">USD/TRY GÜNCEL KUR</span>
-                <input type="number" id="tlKurInput" class="input-field" placeholder="Örn: 30.50">
+                <input type="number" id="tlKurInput" class="input-field" placeholder="Yükleniyor...">
             </div>
 
             <button class="btn-calc" style="background:#10b981; color:white;" onclick="hesaplaTL()">TL Karşılığını Gör</button>
@@ -348,49 +348,39 @@
         const ELDEKI_SYP_VAL = 214000000;
         const GIRIS_MALIYETI_VAL = 16990;
         
-        let mevcutUsdDegeri = 0; // Toplam Varlık Değeri (USD)
-        let netProfitOrLossUsd = 0; // 🛑 NET KÂR/ZARAR MİKTARI (USD) - YENİ DEĞİŞKEN
+        let mevcutUsdDegeri = 0; 
+        let netProfitOrLossUsd = 0; // NET KÂR/ZARAR MİKTARI (USD)
 
-        // --- CANLI KUR ÇEKME FONKSİYONU ---
+        // --- CANLI KUR ÇEKME API ENDPOINT'İ ---
         const API_ENDPOINT = "https://api.exchangerate-api.com/v4/latest/USD"; 
         
-        async function getLiveExchangeRate() {
-            const manualKurInput = document.getElementById('manualKur');
-            manualKurInput.placeholder = "Yükleniyor...";
-            manualKurInput.disabled = true;
-
+        
+        async function fetchTryRate() {
+            const tlKurInput = document.getElementById('tlKurInput');
+            tlKurInput.placeholder = "Yükleniyor...";
+            tlKurInput.disabled = true;
+            
             try {
-                // Not: SYP (Suriye Lirası) popüler API'lerde desteklenmediği için,
-                // simülasyon amacıyla 1 USD karşılığı güncel bir yüksek değer kullanacağız.
                 const response = await fetch(API_ENDPOINT);
                 if (!response.ok) throw new Error("API erişimi başarısız.");
-
                 const data = await response.json();
                 
-                // TRY kurunun yüksek bir katını SYP olarak simüle ediyoruz.
-                const sypRate = data.rates['TRY'] ? Math.floor(data.rates['TRY'] * 500) : 14500; 
-
+                const tryRate = data.rates['TRY'] || 30.0; // TRY kuru bulunamazsa 30 varsay
                 
-                manualKurInput.value = sypRate;
-                manualKurInput.placeholder = `Canlı Kur: ${sypRate}`;
+                tlKurInput.value = tryRate.toFixed(4); // 4 ondalıklı göster
                 
-                document.getElementById('liveRateStatus').innerText = 'PİYASA KURUYLA GÜNCELLENDİ';
-                document.getElementById('liveRateStatus').style.color = 'var(--green)';
+                tlKurInput.disabled = false;
+                tlKurInput.placeholder = `Canlı Kur: ${tryRate.toFixed(4)}`;
 
             } catch (error) {
-                console.error("[API_ERROR] Canlı kur çekilemedi. Manuel giriş kullanılıyor.", error);
+                console.error("[API_ERROR] USD/TRY kuru çekilemedi. Manuel giriş zorunlu.", error);
                 
-                // Hata durumunda manuel varsayılan bir değer kullan
-                const defaultRate = 12500; 
-                manualKurInput.value = defaultRate;
-                manualKurInput.placeholder = `Varsayılan Kur: ${defaultRate}`;
-                document.getElementById('liveRateStatus').innerText = 'BAĞLANTI HATASI! Manuel Kur Kullanılıyor';
-                document.getElementById('liveRateStatus').style.color = 'var(--red)';
-            } finally {
-                manualKurInput.disabled = false;
+                const defaultRate = 30.00;
+                tlKurInput.value = defaultRate;
+                tlKurInput.placeholder = `Varsayılan Kur: ${defaultRate}`;
+                tlKurInput.disabled = false;
             }
         }
-        // --- /CANLI KUR ÇEKME FONKSİYONU ---
 
 
         function checkPass() {
@@ -411,7 +401,7 @@
                     document.getElementById("dashboard").style.display = "block";
                     
                     startClock();
-                    getLiveExchangeRate(); // 🛑 Canlı kuru çek ve doldur
+                    // getLiveExchangeRate kaldırıldı. SYP/USD Manuel kalacak.
 
                     // Rakam Animasyonları
                     animateValue("totalAssetDisplay", 0, ELDEKI_SYP_VAL, 2000, "");
@@ -443,7 +433,7 @@
             document.getElementById("tlCalcButton").style.display = "none";
             document.getElementById("usdText").innerText = "--- $";
             mevcutUsdDegeri = 0;
-            netProfitOrLossUsd = 0; // 🛑 Resetlendi
+            netProfitOrLossUsd = 0; 
 
             let kur = parseFloat(document.getElementById('manualKur').value);
             if (!kur || kur <= 0) { 
@@ -481,11 +471,10 @@
                 animateValue("resAmount", 0, Math.abs(fark), 1200, " $", "-");
             }
             
-            // TL buton metni güncellendi
+            // TL butonu görünür yapılır
             setTimeout(() => {
                  const tlButton = document.getElementById("tlCalcButton");
                  if (tlButton) {
-                     tlButton.innerHTML = `<i class="fas fa-turkish-lira-sign"></i> NET KÂR / ZARAR TL Karşılığı`;
                      tlButton.style.display = "block";
                  }
             }, 2000); 
@@ -493,12 +482,14 @@
 
         // --- TL HESAPLAMA MODAL FONKSİYONLARI ---
         
-        function showTLCalc() {
+        async function showTLCalc() {
             const modal = document.getElementById("tlKurModal");
+            
+            await fetchTryRate(); // 🛑 Modal açılmadan önce USD/TRY kurunu çek
+
             modal.style.display = "flex";
             setTimeout(() => { modal.classList.add('active'); }, 10);
             document.getElementById("tlResult").innerText = "0.00 ₺"; 
-            document.getElementById("tlKurInput").value = ""; 
         }
 
         function hideTLCalc(event) {
@@ -519,23 +510,22 @@
                 return; 
             }
             
-            // 🛑 netProfitOrLossUsd değişkeni kullanılıyor
             if (netProfitOrLossUsd === 0) {
-                 document.getElementById("tlResult").innerText = "Önce Durumu Analiz Edin!";
-                 document.getElementById("tlResult").style.color = "var(--red)"; 
+                 document.getElementById("tlResult").innerText = "Kâr/Zarar 0 $";
+                 document.getElementById("tlResult").style.color = "var(--text-sec)"; 
                  return;
             }
 
             // Kâr/Zarar işaretini belirle
-            let prefix = netProfitOrLossUsd >= 0 ? "+" : "";
+            let prefix = netProfitOrLossUsd >= 0 ? "+" : "-";
             let resultColor = netProfitOrLossUsd >= 0 ? "var(--green)" : "var(--red)";
-
+            
             // Mutlak değer üzerinden TL karşılığını hesapla
             let tlKarsiligi = Math.floor(Math.abs(netProfitOrLossUsd) * tlKur);
             
             // Sonucu animasyonla göster
             document.getElementById("tlResult").style.color = resultColor;
-            animateValue("tlResult", 0, tlKarsiligi, 1500, " ₺", prefix); // Prefix'i buraya ekledik
+            animateValue("tlResult", 0, tlKarsiligi, 1500, " ₺", prefix); 
         }
 
         // RAKAM ANİMASYON FONKSİYONU
