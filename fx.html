@@ -340,11 +340,11 @@
 
 
     <script>
-        // --- SABİT FİNANSAL DEĞERLER (Değiştirilmedi) ---
+        // --- SABİT FİNANSAL DEĞERLER ---
         const DOGRU_SIFRE = "47";
         const ELDEKI_SYP_VAL = 214000000;
         const GIRIS_MALIYETI_VAL = 16990;
-        let mevcutUsdDegeri = 0; // Hesaplanan USD değerini TL hesaplaması için tutar
+        let mevcutUsdDegeri = 0;
 
         function checkPass() {
             let girilen = document.getElementById("passwordInput").value;
@@ -431,9 +431,12 @@
                 animateValue("resAmount", 0, Math.abs(fark), 1200, " $", "-");
             }
             
-            // 🛑 YENİ ÖZELLİK: 2 saniye sonra TL hesaplama butonunu göster
+            // 🛑 2 saniye sonra TL hesaplama butonunu göster
             setTimeout(() => {
-                 document.getElementById("tlCalcButton").style.display = "block";
+                 const tlButton = document.getElementById("tlCalcButton");
+                 if (tlButton) {
+                     tlButton.style.display = "block";
+                 }
             }, 2000); 
         }
 
@@ -461,21 +464,21 @@
             
             if (!tlKur || tlKur <= 0) { 
                 document.getElementById("tlResult").innerText = "Geçersiz Kur!";
-                document.getElementById("tlResult").style.color = var(--red);
+                document.getElementById("tlResult").style.color = "var(--red)"; 
                 return; 
             }
             
             // Hesapla fonksiyonundan gelen mevcut USD değerini kullan
             if (mevcutUsdDegeri === 0) {
                  document.getElementById("tlResult").innerText = "Önce Durumu Analiz Edin!";
-                 document.getElementById("tlResult").style.color = var(--red);
+                 document.getElementById("tlResult").style.color = "var(--red)"; 
                  return;
             }
 
             let tlKarsiligi = Math.floor(mevcutUsdDegeri * tlKur);
             
             // Sonucu animasyonla göster
-            document.getElementById("tlResult").style.color = var(--green);
+            document.getElementById("tlResult").style.color = "var(--green)";
             animateValue("tlResult", 0, tlKarsiligi, 1500, " ₺", "");
         }
 
