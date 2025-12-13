@@ -2,39 +2,81 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard | NKartal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKartal | Yönetim Paneli</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="dashboard-layout">
+    <div class="dashboard-container">
         <aside class="sidebar">
-            <div class="logo" style="margin-bottom: 30px; padding-left:10px;">NK<span class="highlight">PANEL</span></div>
-            <a href="#" class="active"><i class="fas fa-home"></i> Genel Bakış</a>
-            <a href="api-docs.html"><i class="fas fa-code"></i> API Erişimi</a>
-            <a href="#"><i class="fas fa-robot"></i> Botlarım</a>
-            <a href="index.html" style="margin-top:auto; color:#ff4d4d;"><i class="fas fa-sign-out-alt"></i> Çıkış</a>
+            <h2>NK<span class="highlight">PANEL</span> v5.1</h2>
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Genel Bakış</a></li>
+                <li><a href="#"><i class="fas fa-robot"></i> Bot Yönetimi</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> Müşteriler</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> API İstekleri</a></li>
+                <li><a href="#"><i class="fas fa-wallet"></i> AdSense Gelir</a></li>
+                <li style="margin-top: 50px;"><a href="index.html" style="color:red;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
+            </ul>
         </aside>
 
-        <main class="dash-content">
-            <h2>Hoş Geldin, Nurullah 👋</h2>
-            <div class="grid-container" style="margin-top:20px;">
-                <div class="glass-card">
-                    <h3 style="margin:0; color:var(--primary);">12</h3>
-                    <p style="margin:0; color:#aaa; font-size:0.9rem;">Aktif Botlar</p>
-                </div>
-                <div class="glass-card">
-                    <h3 style="margin:0; color:var(--accent);">%99.9</h3>
-                    <p style="margin:0; color:#aaa; font-size:0.9rem;">Uptime</p>
-                </div>
-            </div>
+        <main class="main-content">
+            <h1 style="margin-bottom: 20px;">Sistem Durumu: <span style="color:var(--primary);">ONLİNE</span></h1>
             
-            <h3 style="margin-top:30px;">Son İşlemler</h3>
-            <div class="glass-card">
-                <p style="font-family:monospace; color:#aaa;">[14:02] API İsteği: /v1/status (200 OK)</p>
-                <p style="font-family:monospace; color:#aaa;">[13:55] Bot "SocialBot" yeniden başlatıldı.</p>
+            <div class="card-grid">
+                <div class="dash-card">
+                    <span style="color:#888;">Toplam Ziyaretçi</span>
+                    <div class="dash-number">14,205</div>
+                    <div style="font-size:0.8rem; color:var(--primary);">▲ %12 Artış</div>
+                </div>
+                <div class="dash-card">
+                    <span style="color:#888;">Aktif Botlar</span>
+                    <div class="dash-number">8</div>
+                    <div style="font-size:0.8rem; color:orange;">● 2 Bakımda</div>
+                </div>
+                <div class="dash-card">
+                    <span style="color:#888;">Sunucu CPU</span>
+                    <div class="dash-number">%4.2</div>
+                    <div style="font-size:0.8rem; color:var(--primary);">✔ Stabil</div>
+                </div>
+                <div class="dash-card">
+                    <span style="color:#888;">Tahmini Gelir</span>
+                    <div class="dash-number">₺ 1,850</div>
+                    <div style="font-size:0.8rem; color:#888;">Bu Ay</div>
+                </div>
             </div>
+
+            <h3 style="margin-bottom: 10px;">Canlı Sistem Logları</h3>
+            <div class="terminal-window" id="terminal">
+                <div>> Sistem başlatıldı... [OK]</div>
+                <div>> Veritabanı bağlantısı kuruldu (PostgreSQL)... [OK]</div>
+                <div>> Güvenlik duvarı aktif... [OK]</div>
+            </div>
+
         </main>
     </div>
+
+    <script>
+        // Terminale otomatik yazı yazdıran kod
+        const terminal = document.getElementById('terminal');
+        const logs = [
+            "Kullanıcı girişi algılandı IP: 192.168.1.1",
+            "API İsteği: GET /users/list - 20ms",
+            "Bot #3 (Instagram) yeni veri çekti...",
+            "AdSense reklam gösterimi doğrulandı.",
+            "Yedekleme başlatılıyor... %20",
+            "Sistem güncellemesi kontrol ediliyor..."
+        ];
+        
+        let i = 0;
+        setInterval(() => {
+            const line = document.createElement('div');
+            line.innerHTML = `> ${logs[Math.floor(Math.random() * logs.length)]} <span style="color:#555; font-size:0.8rem;">${new Date().toLocaleTimeString()}</span>`;
+            terminal.appendChild(line);
+            terminal.scrollTop = terminal.scrollHeight;
+            if(terminal.children.length > 15) terminal.removeChild(terminal.firstChild);
+        }, 2000);
+    </script>
 </body>
 </html>
