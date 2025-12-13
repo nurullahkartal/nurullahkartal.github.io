@@ -9,79 +9,93 @@
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23007bff%22/><text y=%22.9em%22 x=%2250%25%22 text-anchor=%22middle%22 font-family=%22Arial, sans-serif%22 font-weight=%22bold%22 font-size=%2270%22 fill=%22%23ffffff%22>NK</text></svg>">
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
 
     <nav class="glass-nav">
         <a href="index.html" class="logo">NK<span class="highlight">ARTAL</span></a>
-        
         <ul class="nav-links">
             <li><a href="index.html" class="active">Ana Sayfa</a></li>
             <li><a href="hakkimda.html">Hakkımda</a></li>
             <li><a href="projeler.html">Çözümler</a></li>
             <li><a href="blog.html">Blog</a></li>
         </ul>
-
         <a href="portal-giris.html" class="portal-btn"><i class="fas fa-lock"></i> Portal</a>
     </nav>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 style="margin-bottom: 20px;">İşletmeniz İçin <br><span class="gradient-text">Akıllı Dijital Dönüşüm</span></h1>
-            <p style="color:#aaa; max-width:700px; margin:0 auto 30px auto; font-size: 1.1rem;">
-                Karmaşık lojistik operasyonlarını ve veri analiz süreçlerini Yapay Zeka ile yönetin.
-            </p>
-            <div class="hero-btns">
-                <a href="projeler.html" class="btn-glow">Projelerimizi İnceleyin</a>
-                <a href="iletisim.html" class="btn-outline">İletişime Geçin</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-section">
-        <div class="stat-box">
-            <span class="stat-number">+15</span>
-            <span class="stat-label">Tamamlanan Proje</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">%100</span>
-            <span class="stat-label">Müşteri Memnuniyeti</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">7/24</span>
-            <span class="stat-label">Bot Çalışma Süresi</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">+10K</span>
-            <span class="stat-label">Satır Kod</span>
-        </div>
-    </section>
-
-    <section class="features-section">
-        <div class="container">
-            <div class="grid-container">
-                <div class="feature-box">
-                    <i class="fas fa-brain" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
-                    <h3>Yapay Zeka</h3>
-                    <p style="color:#aaa;">Verileri öğrenen algoritmalar.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-shipping-fast" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
-                    <h3>Lojistik ERP</h3>
-                    <p style="color:#aaa;">Stok ve rota optimizasyonu.</p>
-                </div>
-                <div class="feature-box">
-                    <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
-                    <h3>Siber Güvenlik</h3>
-                    <p style="color:#aaa;">Uçtan uca şifreli altyapılar.</p>
+    <main>
+        
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 style="margin-bottom: 20px;">İşletmeniz İçin <br><span class="gradient-text">Akıllı Dijital Dönüşüm</span></h1>
+                <p style="color:#aaa; max-width:700px; margin:0 auto 30px auto; font-size: 1.1rem;">
+                    Karmaşık lojistik operasyonlarını ve veri analiz süreçlerini Yapay Zeka ile yönetin.
+                </p>
+                <div class="hero-btns">
+                    <a href="projeler.html" class="btn-glow">Projelerimizi İnceleyin</a>
+                    <a href="iletisim.html" class="btn-outline">İletişime Geçin</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="stats-section">
+            <h2 style="display:none;">İstatistikler</h2>
+            
+            <div class="stat-box">
+                <span class="stat-number">+15</span>
+                <span class="stat-label">Tamamlanan Proje</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">%100</span>
+                <span class="stat-label">Müşteri Memnuniyeti</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">7/24</span>
+                <span class="stat-label">Bot Çalışma Süresi</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-number">+10K</span>
+                <span class="stat-label">Satır Kod</span>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="page-header" style="border:none; padding:0; margin-bottom:40px;">
+                    <h2>Hizmetlerimiz ve <span class="highlight">Teknolojilerimiz</span></h2>
+                </div>
+
+                <div class="grid-container">
+                    <div class="feature-box">
+                        <i class="fas fa-brain" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h3>Yapay Zeka</h3>
+                        <p style="color:#aaa;">Verileri öğrenen algoritmalar.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-shipping-fast" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h3>Lojistik ERP</h3>
+                        <p style="color:#aaa;">Stok ve rota optimizasyonu.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h3>Siber Güvenlik</h3>
+                        <p style="color:#aaa;">Uçtan uca şifreli altyapılar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <div class="chat-widget-btn" onclick="toggleChat()"><i class="fas fa-comment-dots"></i></div>
     <div id="chat-window" class="chat-window">
