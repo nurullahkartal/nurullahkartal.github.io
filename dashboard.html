@@ -3,81 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NKartal | Yönetim Paneli</title>
+    <title>Dashboard | NKartal Yönetim Portalı</title>
+    
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <div class="dashboard-container">
-        <aside class="sidebar">
-            <h2>NK<span class="highlight">PANEL</span> v5.1</h2>
-            <ul>
-                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Genel Bakış</a></li>
-                <li><a href="#"><i class="fas fa-robot"></i> Bot Yönetimi</a></li>
-                <li><a href="#"><i class="fas fa-users"></i> Müşteriler</a></li>
-                <li><a href="#"><i class="fas fa-code"></i> API İstekleri</a></li>
-                <li><a href="#"><i class="fas fa-wallet"></i> AdSense Gelir</a></li>
-                <li style="margin-top: 50px;"><a href="index.html" style="color:red;"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a></li>
-            </ul>
-        </aside>
-
-        <main class="main-content">
-            <h1 style="margin-bottom: 20px;">Sistem Durumu: <span style="color:var(--primary);">ONLİNE</span></h1>
-            
-            <div class="card-grid">
-                <div class="dash-card">
-                    <span style="color:#888;">Toplam Ziyaretçi</span>
-                    <div class="dash-number">14,205</div>
-                    <div style="font-size:0.8rem; color:var(--primary);">▲ %12 Artış</div>
-                </div>
-                <div class="dash-card">
-                    <span style="color:#888;">Aktif Botlar</span>
-                    <div class="dash-number">8</div>
-                    <div style="font-size:0.8rem; color:orange;">● 2 Bakımda</div>
-                </div>
-                <div class="dash-card">
-                    <span style="color:#888;">Sunucu CPU</span>
-                    <div class="dash-number">%4.2</div>
-                    <div style="font-size:0.8rem; color:var(--primary);">✔ Stabil</div>
-                </div>
-                <div class="dash-card">
-                    <span style="color:#888;">Tahmini Gelir</span>
-                    <div class="dash-number">₺ 1,850</div>
-                    <div style="font-size:0.8rem; color:#888;">Bu Ay</div>
-                </div>
-            </div>
-
-            <h3 style="margin-bottom: 10px;">Canlı Sistem Logları</h3>
-            <div class="terminal-window" id="terminal">
-                <div>> Sistem başlatıldı... [OK]</div>
-                <div>> Veritabanı bağlantısı kuruldu (PostgreSQL)... [OK]</div>
-                <div>> Güvenlik duvarı aktif... [OK]</div>
-            </div>
-
-        </main>
-    </div>
 
     <script>
-        // Terminale otomatik yazı yazdıran kod
-        const terminal = document.getElementById('terminal');
-        const logs = [
-            "Kullanıcı girişi algılandı IP: 192.168.1.1",
-            "API İsteği: GET /users/list - 20ms",
-            "Bot #3 (Instagram) yeni veri çekti...",
-            "AdSense reklam gösterimi doğrulandı.",
-            "Yedekleme başlatılıyor... %20",
-            "Sistem güncellemesi kontrol ediliyor..."
-        ];
+        // document.referrer, kullanıcının geldiği URL'yi verir.
+        // Eğer boşsa veya giriş sayfasını içermiyorsa, kullanıcıyı geri atarız.
+        const referrer = document.referrer;
         
-        let i = 0;
-        setInterval(() => {
-            const line = document.createElement('div');
-            line.innerHTML = `> ${logs[Math.floor(Math.random() * logs.length)]} <span style="color:#555; font-size:0.8rem;">${new Date().toLocaleTimeString()}</span>`;
-            terminal.appendChild(line);
-            terminal.scrollTop = terminal.scrollHeight;
-            if(terminal.children.length > 15) terminal.removeChild(terminal.firstChild);
-        }, 2000);
+        // Eğer geldiği sayfa portal-giris.html DEĞİLSE VEYA referrer BOŞ ise (direkt giriş)
+        if (!referrer || !referrer.includes('portal-giris.html')) {
+            // Kullanıcıyı hemen giriş sayfasına geri yönlendir
+            window.location.replace('portal-giris.html');
+        }
+        
+        // NOT: Bu yöntem tarayıcı ayarları veya bazı güvenlik yazılımları tarafından atlanabilir,
+        // ancak basit ve etkili bir ön yüz (frontend) güvenlik adımıdır.
+        // Gerçek bir uygulamada bu kontrol sunucu (backend) tarafında yapılır.
     </script>
-    script src="tracker.js"></script>
+    
+    <style>
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: #fff;
+        }
+
+        .welcome-card {
+            background: #1a1a1a;
+            border-left: 5px solid var(--primary);
+            padding: 30px;
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .welcome-card h1 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .data-card {
+            background: #0d0d0d;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .data-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .data-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .data-card p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">
+            <img src="logo.svg" alt="Nurullah Kartal Logo">
+            <span>NK<span class="highlight">ARTAL</span></span>
+        </a>
+        <div class="nav-links" id="nav-menu">
+            <a href="dashboard.html" class="active-link"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="index.html" class="portal-btn"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a>
+        </div>
+        <button class="menu-toggle" aria-label="Menü" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="welcome-card">
+            <h1>Hoş Geldiniz, Yönetici!</h1>
+            <p>Sistem genelindeki kritik verilerinize buradan ulaşabilirsiniz. Portalınıza en son 14 Aralık 2025 tarihinde erişim sağlandı.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="data-card">
+                <i class="fas fa-users"></i>
+                <h3>Aktif Kullanıcı</h3>
+                <p>1,245</p>
+            </div>
+            <div class="data-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Devam Eden Proje</h3>
+                <p>23</p>
+            </div>
+            <div class="data-card">
+                <i class="fas fa-dollar-sign"></i>
+                <h3>Bu Ayki Gelir</h3>
+                <p>₺875,000</p>
+            </div>
+            <div class="data-card">
+                <i class="fas fa-bug"></i>
+                <h3>Kritik Hata (Bug)</h3>
+                <p style="color:red;">0</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; text-align: center; color: #555;">
+            <p><i class="fas fa-lock"></i> Tüm veriler şifrelenmiş kanallar üzerinden aktarılmaktadır.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="tracker.js"></script>
 </body>
 </html>
