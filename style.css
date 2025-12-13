@@ -1,61 +1,122 @@
-/* style.css - V6.0 MASTER MOBİL & SİYAH TEMA */
+/* style.css - V6.1 FİNAL MOBİL & SEO OPTİMİZASYONU */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
 
-/* --- TEMEL SIFIRLAMA --- */
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-html, body {
-    width: 100%; max-width: 100vw; overflow-x: hidden;
-    background-color: #050505; color: #e0e0e0;
-    font-family: 'Inter', sans-serif; line-height: 1.6;
+/* --- 1. TEMEL SIFIRLAMA & AYARLAR --- */
+* {
+    box-sizing: border-box; /* Kutuların taşmasını engeller */
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+    --primary: #00ff88;      /* Matrix Yeşili */
+    --dark-bg: #050505;      /* Simsiyah */
+    --glass: rgba(20, 20, 20, 0.95);
+    --border: rgba(255, 255, 255, 0.1);
+    --text: #e0e0e0;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; /* TELEFONDA SAĞA-SOLA KAYMAYI KESİN ENGELLER */
+    background-color: var(--dark-bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+/* Arka Plan Efekti */
 #neural-canvas {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
     opacity: 0.3; pointer-events: none;
 }
 
-a { text-decoration: none; color: #e0e0e0; transition: 0.3s; }
-a:hover { color: #00ff88; }
+a { text-decoration: none; color: var(--text); transition: 0.3s; }
+a:hover { color: var(--primary); }
 ul { list-style: none; }
 
-/* --- NAVBAR (MENÜ) --- */
+/* --- 2. NAVBAR (MENÜ) --- */
 .glass-nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 20px;
-    background: rgba(0, 0, 0, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass);
+    border-bottom: 1px solid var(--border);
     position: sticky; top: 0; z-index: 1000;
+    backdrop-filter: blur(10px);
 }
-.logo { font-weight: 800; font-size: 1.4rem; color: #fff; display: flex; align-items: center; }
-.highlight { color: #00ff88; }
+
+.logo { 
+    font-weight: 800; font-size: 1.4rem; color: #fff; 
+    display: flex; align-items: center; 
+}
+.highlight { color: var(--primary); }
 
 .nav-links { display: flex; gap: 25px; }
 .nav-links a { font-size: 0.95rem; font-weight: 500; }
-.nav-links a.active { color: #00ff88; }
+.nav-links a.active { color: var(--primary); }
 
 .portal-btn {
-    border: 1px solid #00ff88; color: #00ff88 !important;
+    border: 1px solid var(--primary); color: var(--primary) !important;
     padding: 8px 15px; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
 }
-.portal-btn:hover { background: #00ff88; color: #000 !important; }
+.portal-btn:hover { background: var(--primary); color: #000 !important; }
 
-/* --- ORTAK ALANLAR --- */
+/* --- 3. ORTAK ALANLAR --- */
 .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+
+/* SEO İçin Gizli Başlık Sınıfı (Erişilebilirlik Hatasını Çözer) */
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
 .page-header { text-align: center; padding: 40px 20px; border-bottom: 1px solid #222; margin-bottom: 30px; }
 .page-header h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
 
-/* GRID SİSTEMİ (Projeler & Blog İçin) */
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-.glass-card {
-    background: #0a0a0a; padding: 30px; border: 1px solid #222;
-    border-radius: 10px; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+/* --- 4. ANA SAYFA ELEMENTLERİ --- */
+.hero-section {
+    min-height: 80vh; 
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 40px 20px;
+    background: radial-gradient(circle, rgba(0,255,136,0.03) 0%, transparent 70%);
 }
-.glass-card:hover { border-color: #00ff88; transform: translateY(-5px); }
-.glass-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; }
-.glass-card p { color: #aaa; font-size: 0.95rem; margin-bottom: 20px; }
+.hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: #fff; }
+.gradient-text { color: var(--primary); }
 
-/* --- FORM & İLETİŞİM --- */
+/* Butonlar */
+.hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; }
+.btn-glow {
+    background: var(--primary); color: #000; padding: 15px 30px; border-radius: 8px;
+    font-weight: bold; cursor: pointer; display: inline-block;
+}
+.btn-outline {
+    background: transparent; border: 1px solid #555; color: #fff;
+    padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-block;
+}
+
+/* İstatistikler */
+.stats-section {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
+    padding: 50px 20px; background: #080808; border-top: 1px solid #222;
+}
+.stat-box { text-align: center; }
+.stat-number { font-size: 2.5rem; color: var(--primary); font-weight: bold; }
+
+/* --- 5. KARTLAR & GRID (Projeler/Blog) --- */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+.glass-card, .feature-box {
+    background: #0a0a0a; padding: 30px; border: 1px solid #222;
+    border-radius: 10px; transition: 0.3s;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.glass-card:hover, .feature-box:hover { border-color: var(--primary); transform: translateY(-5px); }
+.glass-card h3, .feature-box h3 { color: #fff; margin-bottom: 10px; font-size: 1.2rem; margin-top: 10px; }
+.glass-card p, .feature-box p { color: #aaa; font-size: 0.95rem; margin-bottom: 20px; }
+
+/* --- 6. FORMLAR & TABLOLAR --- */
 .contact-form { max-width: 600px; margin: 0 auto; background: #0a0a0a; padding: 30px; border-radius: 10px; border: 1px solid #222; }
 .form-group { margin-bottom: 20px; }
 .form-group label { display: block; margin-bottom: 8px; color: #fff; }
@@ -63,67 +124,58 @@ ul { list-style: none; }
     width: 100%; padding: 12px; background: #111; border: 1px solid #333;
     color: #fff; border-radius: 5px; outline: none; font-family: inherit;
 }
-.form-group input:focus, .form-group textarea:focus { border-color: #00ff88; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
 .btn-submit {
-    width: 100%; padding: 15px; background: #00ff88; color: #000; border: none;
+    width: 100%; padding: 15px; background: var(--primary); color: #000; border: none;
     font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1rem;
 }
 
-/* --- API TABLOLARI (MOBİL UYUMLU) --- */
-.table-wrapper { overflow-x: auto; margin-bottom: 20px; border: 1px solid #222; border-radius: 8px; }
-table { width: 100%; border-collapse: collapse; min-width: 600px; /* Mobilde tabloyu sıkıştırmaz, kaydırır */ }
-th, td { padding: 15px; text-align: left; border-bottom: 1px solid #222; }
-th { background: #111; color: #00ff88; }
-td { background: #080808; color: #ccc; }
-.code-block {
-    background: #111; padding: 15px; border-radius: 5px; border: 1px solid #333;
-    font-family: monospace; color: #00ff88; overflow-x: auto; font-size: 0.9rem;
+/* --- 7. CHAT WIDGET & DASHBOARD --- */
+.chat-widget-btn {
+    position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px;
+    background: #000; border: 1px solid var(--primary); color: var(--primary);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 24px; z-index: 9999;
 }
-
-/* --- ANA SAYFA ELEMENTLERİ --- */
-.hero-section { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; }
-.hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: #fff; }
-.gradient-text { color: #00ff88; }
-.hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-.btn-glow, .btn-outline { padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; display: inline-block; }
-.btn-glow { background: #00ff88; color: #000; }
-.btn-outline { background: transparent; border: 1px solid #555; color: #fff; }
-.stats-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; padding: 50px 20px; background: #080808; border-top: 1px solid #222; }
-.stat-box { text-align: center; }
-.stat-number { font-size: 2.5rem; color: #00ff88; font-weight: bold; }
-
-/* --- CHATBOT --- */
-.chat-widget-btn { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #000; border: 1px solid #00ff88; color: #00ff88; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; z-index: 9999; }
-.chat-window { position: fixed; bottom: 85px; right: 20px; width: 90%; max-width: 350px; height: 400px; background: #000; border: 1px solid #333; display: none; flex-direction: column; z-index: 9999; }
+.chat-window {
+    position: fixed; bottom: 85px; right: 20px; width: 90%; max-width: 350px; height: 400px;
+    background: #000; border: 1px solid #333; display: none; flex-direction: column; z-index: 9999;
+}
 .chat-header { background: #111; padding: 15px; color: #fff; display: flex; justify-content: space-between; }
 .chat-body { flex: 1; padding: 15px; overflow-y: auto; color: #ddd; }
 .chat-input input { width: 100%; padding: 15px; background: #000; border: none; color: #fff; border-top: 1px solid #333; }
 
-/* === MASTER MOBİL UYUMLULUK (RESPONSIVE) === */
+/* Dashboard Yan Menü */
+.dashboard-container { display: flex; min-height: 100vh; }
+.sidebar { width: 250px; background: #080808; border-right: 1px solid #222; padding: 20px; }
+.main-content { flex: 1; padding: 30px; background: #000; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+.dash-card { background: #111; padding: 20px; border-radius: 10px; border: 1px solid #222; }
+
+/* =======================================================
+   8. MOBİL UYUMLULUK KURALLARI (RESPONSIVE) - KRİTİK BÖLÜM
+   ======================================================= */
 @media (max-width: 768px) {
-    /* 1. Navbar: Linkler gizli, Logo ve Portal açık */
+    /* Navbar: Linkleri Gizle, Padding Azalt */
     .nav-links { display: none; }
     .glass-nav { padding: 15px 15px; }
 
-    /* 2. Başlıklar: Mobilde küçülür */
+    /* Başlıklar: Telefonta Küçült */
     .hero-content h1 { font-size: 2rem; }
     .page-header h1 { font-size: 1.8rem; }
 
-    /* 3. Butonlar: Alt alta */
+    /* Butonlar: Alt Alta Diz (Taşmayı Önler) */
     .hero-btns { flex-direction: column; align-items: center; width: 100%; }
-    .btn-glow, .btn-outline, .btn-submit { width: 100%; text-align: center; }
+    .btn-glow, .btn-outline { width: 100%; text-align: center; }
 
-    /* 4. İstatistikler: 2'li düzen */
+    /* İstatistikler: 2'li Yan Yana */
     .stats-section { gap: 20px; padding: 30px 10px; }
     .stat-box { width: 45%; }
     .stat-number { font-size: 1.8rem; }
 
-    /* 5. Kartlar ve Grid */
-    .container { padding: 20px 15px; }
-    .grid-container { grid-template-columns: 1fr; } /* Tek sütun */
-    
-    /* 6. Dashboard */
+    /* Dashboard: Tek Sütun */
     .dashboard-container { flex-direction: column; }
     .sidebar { width: 100%; border-right: none; border-bottom: 1px solid #222; overflow-x: auto; display: flex; gap: 15px; padding: 15px; }
     .sidebar li { white-space: nowrap; }
+    .main-content { padding: 15px; }
 }
