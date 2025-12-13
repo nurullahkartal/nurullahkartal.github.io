@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
-        // Oturum kontrolü
+        // Oturum kontrolü: Başarılı giriş yapılmadıysa geri at
         const accessGranted = sessionStorage.getItem('nk_access_granted');
         
         if (accessGranted !== 'true') {
@@ -34,7 +34,7 @@
             margin-top: 50px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            margin-bottom: 30px; /* Log alanı için boşluk */
+            margin-bottom: 30px;
         }
 
         .welcome-card h1 {
@@ -93,7 +93,7 @@
         }
         .log-container {
             background-color: #000;
-            color: #00ff88; /* Matrix yeşili terminal metni */
+            color: #00ff88; 
             border: 1px solid #00552d;
             height: 400px;
             overflow-y: scroll;
@@ -103,11 +103,10 @@
             border-radius: 6px;
         }
         .log-entry {
-            white-space: pre-wrap; /* Satır sonlarını koru */
+            white-space: pre-wrap;
             margin-bottom: 5px;
             line-height: 1.4;
         }
-        /* Log Seviyeleri */
         .log-info { color: #00ff88; }
         .log-warning { color: #ffeb3b; }
         .log-error { color: #ff0000; font-weight: bold; }
@@ -201,7 +200,7 @@
 
         function addLogEntry() {
             if (logIndex >= logMessages.length) {
-                logIndex = 0; // Döngüye devam et
+                logIndex = 0;
             }
             
             const log = logMessages[logIndex];
@@ -212,15 +211,13 @@
             newLog.innerHTML = `[${timestamp}] [${log.level}] ${log.text}`;
             
             logMonitor.appendChild(newLog);
-            logMonitor.scrollTop = logMonitor.scrollHeight; // En alta kaydır
+            logMonitor.scrollTop = logMonitor.scrollHeight; 
 
             logIndex++;
         }
 
-        // Her 1.5 saniyede bir yeni log ekle
         setInterval(addLogEntry, 1500);
 
-        // İlk logu hemen ekle
         addLogEntry();
     </script>
 </body>
