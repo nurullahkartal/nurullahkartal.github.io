@@ -1,4 +1,4 @@
-/* script.js - v2.1 (Chatbot ve Portal Giriş Yönlendirme Mantığı) */
+/* script.js - v2.2 (Yeni Şifreler: 1 ve 47) */
 
 // --- 1. NEURAL CANVAS SETUP (Arka Plan Efekti) ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -184,8 +184,8 @@ function checkLogin() {
     
     const code = codeInput.value;
     
-    // Güvenlik Kodu Kontrolü (ÖRNEK KODLAR)
-    if (code === '1453' || code === 'admin' || code === 'nkportal') {
+    // YENİ GÜVENLİK KODLARI KONTROLÜ
+    if (code === '1' || code === '47') {
         feedback.style.color = '#00ff88';
         feedback.innerHTML = '<i class="fas fa-check-circle"></i> Erişim Başarılı! Yönlendiriliyorsunuz...';
         
