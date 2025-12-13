@@ -1,4 +1,4 @@
-/* NKartal Akıllı Script v5.1 */
+/* script.js - v2.0 UI Logic */
 
 // --- CHATBOT MANTIĞI ---
 function toggleChat() {
@@ -7,8 +7,8 @@ function toggleChat() {
         chatWindow.style.display = 'none';
     } else {
         chatWindow.style.display = 'flex';
-        // Eğer ilk kez açılıyorsa menüyü göster
         const body = document.getElementById('chat-body');
+        // Eğer sohbet boşsa seçenekleri göster
         if(body.children.length < 2) {
             showOptions();
         }
@@ -18,16 +18,13 @@ function toggleChat() {
 function showOptions() {
     const chatBody = document.getElementById('chat-body');
     const optionsDiv = document.createElement('div');
-    optionsDiv.className = 'chat-options';
     optionsDiv.style.padding = '10px';
     
-    // Hazır Butonlar
     optionsDiv.innerHTML = `
-        <div style="color:#888; font-size:0.8rem; margin-bottom:5px;">Size nasıl yardımcı olabilirim?</div>
-        <button onclick="botReply('projeler')">🚀 Projeleriniz neler?</button>
-        <button onclick="botReply('fiyat')">💰 Fiyat teklifi al</button>
-        <button onclick="botReply('iletisim')">📞 İletişim bilgileri</button>
-        <button onclick="botReply('portal')">🔐 Portala nasıl girerim?</button>
+        <div style="color:#888; font-size:0.8rem; margin-bottom:5px;">Hızlı Menü:</div>
+        <button onclick="botReply('projeler')" style="margin:5px; padding:5px 10px; border:1px solid #00ff88; background:none; color:#00ff88; border-radius:15px; cursor:pointer;">🚀 Projeler</button>
+        <button onclick="botReply('fiyat')" style="margin:5px; padding:5px 10px; border:1px solid #00ff88; background:none; color:#00ff88; border-radius:15px; cursor:pointer;">💰 Fiyat</button>
+        <button onclick="botReply('iletisim')" style="margin:5px; padding:5px 10px; border:1px solid #00ff88; background:none; color:#00ff88; border-radius:15px; cursor:pointer;">📞 İletişim</button>
     `;
     chatBody.appendChild(optionsDiv);
     chatBody.scrollTop = chatBody.scrollHeight;
@@ -37,16 +34,15 @@ function botReply(type) {
     const chatBody = document.getElementById('chat-body');
     let reply = "";
 
-    // Kullanıcı seçimi ekrana yaz
-    // (Opsiyonel: Seçilen butonu göstermek yerine direkt cevap verebiliriz, 
-    // ama akış görünsün diye kullanıcı mesajı ekleyelim)
-    
-    if (type === 'projeler') reply = "Şu an Lojistik ERP, Sosyal Medya Botları ve Veri Analizi üzerine çalışıyoruz. 'Çözümler' sayfasından detaylara bakabilirsin!";
-    else if (type === 'fiyat') reply = "Projeye göre fiyat değişiyor. İletişim sayfasından veya nurullahkartalai@gmail.com adresinden bana yazarsan net konuşabiliriz.";
-    else if (type === 'iletisim') reply = "Bana e-posta (nurullahkartalai@gmail.com) veya sosyal medya üzerinden ulaşabilirsin. İletişim sayfasında form var.";
-    else if (type === 'portal') reply = "Portal sadece müşterilerim içindir. Eğer müşterim isen şifreni e-posta ile almış olmalısın.";
+    if (type === 'projeler') reply = "Yapay Zeka, Lojistik ERP ve Finans Botları geliştiriyoruz. 'Çözümler' sayfasından detaylara bakabilirsin!";
+    else if (type === 'fiyat') reply = "Projeye göre fiyat değişiyor. İletişim sayfasından bana yazarsan net konuşabiliriz.";
+    else if (type === 'iletisim') reply = "Bana nurullahkartalai@gmail.com adresinden ulaşabilirsin.";
 
-    // Bot Cevabını Ekle
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.innerText = type.toUpperCase();
+    chatBody.appendChild(userMsg);
+
     setTimeout(() => {
         const botMsg = document.createElement('div');
         botMsg.className = 'msg bot';
@@ -61,7 +57,6 @@ function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
 
-    // Kullanıcı Mesajı
     const chatBody = document.getElementById('chat-body');
     const userMsg = document.createElement('div');
     userMsg.className = 'msg user';
@@ -69,43 +64,27 @@ function sendMessage() {
     chatBody.appendChild(userMsg);
     input.value = '';
 
-    // Basit Cevaplama
     setTimeout(() => {
         const botMsg = document.createElement('div');
         botMsg.className = 'msg bot';
-        
-        if(text.toLowerCase().includes('merhaba')) botMsg.innerText = "Merhaba! Hoş geldin.";
-        else if(text.toLowerCase().includes('fiyat')) botMsg.innerText = "Fiyat teklifi için lütfen iletişim sayfasını kullanın.";
-        else botMsg.innerText = "Şu an bunu anlayamadım ama aşağıdaki butonlardan seçim yapabilirsin.";
-        
+        botMsg.innerText = "Mesajını aldım! En kısa sürede döneceğim.";
         chatBody.appendChild(botMsg);
         chatBody.scrollTop = chatBody.scrollHeight;
-        
-        // Tekrar seçenekleri göster
-        if(!text.toLowerCase().includes('merhaba')) showOptions();
-        
     }, 1000);
 }
 
-
-// --- PORTAL GİRİŞ KONTROLÜ ---
+// --- PORTAL GİRİŞ (Simülasyon) ---
 function checkLogin() {
     const code = document.getElementById('access-code').value;
     const feedback = document.getElementById('login-feedback');
     
-    // Basit şifre kontrolü (Gerçek backend olmadığı için)
-    if (code === '1453' || code === 'admin' || code === 'nkartal') {
-        feedback.style.color = 'var(--primary)';
+    if (code === '1453' || code === 'admin') {
+        feedback.style.color = '#00ff88';
         feedback.innerText = 'Giriş Başarılı! Yönlendiriliyorsunuz...';
-        setTimeout(() => {
-            window.location.href = "dashboard.html"; // Yönlendirme
-        }, 1500);
+        // Gerçekte dashboard.html olsaydı oraya giderdi
+        setTimeout(() => alert("Hoş geldin Yönetici!"), 1000);
     } else {
         feedback.style.color = 'red';
         feedback.innerText = 'Hatalı Erişim Kodu!';
-        // Efekt: Kutuyu salla
-        const box = document.querySelector('.login-box');
-        box.style.transform = 'translateX(10px)';
-        setTimeout(() => box.style.transform = 'translateX(0)', 100);
     }
 }
