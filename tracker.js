@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userGeo = generateFakeGeo(); 
     let userActivityLog = [];
     const MAX_LOG_COUNT = 50; 
-    let realIP = 'N/A'; // Gerçek IP'yi Telegram'dan alacağız
+    let realIP = 'N/A'; 
 
     function generateFakeIP() {
         return `10.42.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
@@ -77,7 +77,7 @@ URL: ${window.location.pathname} | REF: ${document.referrer || 'DIRECT_ENTRY'}`;
             const now = new Date().toLocaleString('tr-TR');
             realIP = data.ip; 
             
-            // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI DÜZELTİLDİ
+            // 🛑 GİRİŞ BİLDİRİM BAŞLIĞI
             const telegramMessage = `🚨 *YENİ GİRİŞ YAPILDI!* (Sayfa Yükleme)\n\n` +
                             `📂 *Sayfa:* ${window.location.pathname}\n` +
                             `🕒 *Giriş:* ${now}\n` +
