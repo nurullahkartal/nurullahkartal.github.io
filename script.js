@@ -1,9 +1,9 @@
-/* script.js - v2.2 (Yeni Şifreler: 1 ve 47) */
+/* script.js - v2.2 (Final: Chatbot ve Portal Giriş Mantığı. Şifreler: 1 ve 47) */
 
 // --- 1. NEURAL CANVAS SETUP (Arka Plan Efekti) ---
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('neural-canvas');
-    if (!canvas) return; // Eğer bu sayfa canvas kullanmıyorsa çık
+    if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.radius = Math.random() * 2 + 1; // 1 ile 3 arasında
-            this.vx = Math.random() * 0.5 - 0.25; // -0.25 ile 0.25 arasında
+            this.radius = Math.random() * 2 + 1;
+            this.vx = Math.random() * 0.5 - 0.25;
             this.vy = Math.random() * 0.5 - 0.25;
         }
 
         draw() {
-            ctx.fillStyle = '#00ff88'; // Matrix Yeşili
+            ctx.fillStyle = '#00ff88';
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             ctx.fill();
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x += this.vx;
             this.y += this.vy;
 
-            // Kenarlardan sekme
             if (this.x < 0 || this.x > width) this.vx = -this.vx;
             if (this.y < 0 || this.y > height) this.vy = -this.vy;
         }
@@ -90,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- 2. CHATBOT MANTIĞI ---
 function toggleChat() {
     const chatWindow = document.getElementById('chat-window');
-    // Eğer chatWindow elementi mevcut değilse, fonksiyonu sonlandır.
     if (!chatWindow) return; 
     
     if (chatWindow.style.display === 'flex') {
@@ -98,7 +96,6 @@ function toggleChat() {
     } else {
         chatWindow.style.display = 'flex';
         const body = document.getElementById('chat-body');
-        // Eğer ilk açılışsa, hızlı menüyü göster
         if(body.children.length < 2) {
             showOptions();
         }
@@ -111,7 +108,7 @@ function showOptions() {
     
     const optionsDiv = document.createElement('div');
     optionsDiv.style.padding = '10px';
-    optionsDiv.className = 'msg bot'; // Seçenekleri bot mesajı olarak göster
+    optionsDiv.className = 'msg bot';
 
     optionsDiv.innerHTML = `
         <div style="color:#888; font-size:0.8rem; margin-bottom:5px;">Hızlı Menü:</div>
@@ -133,13 +130,11 @@ function botReply(type) {
     else if (type === 'fiyat') reply = "Projeye göre fiyat değişiyor. İletişim sayfasından bana yazarsan net konuşabiliriz.";
     else if (type === 'iletisim') reply = "Bana nurullahkartalai@gmail.com adresinden ulaşabilirsin.";
 
-    // Kullanıcı mesajı (Seçenek)
     const userMsg = document.createElement('div');
     userMsg.className = 'msg user';
     userMsg.innerText = type.toUpperCase();
     chatBody.appendChild(userMsg);
 
-    // Bot yanıtı
     setTimeout(() => {
         const botMsg = document.createElement('div');
         botMsg.className = 'msg bot';
@@ -157,14 +152,12 @@ function sendMessage() {
     const text = input.value.trim();
     if (!text) return;
 
-    // Kullanıcı mesajı
     const userMsg = document.createElement('div');
     userMsg.className = 'msg user';
     userMsg.innerText = text;
     chatBody.appendChild(userMsg);
     input.value = '';
 
-    // Bot yanıtı (Basit yanıt)
     setTimeout(() => {
         const botMsg = document.createElement('div');
         botMsg.className = 'msg bot';
@@ -180,28 +173,30 @@ function checkLogin() {
     const codeInput = document.getElementById('access-code');
     const feedback = document.getElementById('login-feedback');
     
-    if (!codeInput || !feedback) return; // Elementler yoksa çık
+    if (!codeInput || !feedback) return; 
     
     const code = codeInput.value;
     
-    // YENİ GÜVENLİK KODLARI KONTROLÜ
+    // GÜNCEL GÜVENLİK KODLARI KONTROLÜ (1 ve 47)
     if (code === '1' || code === '47') {
         feedback.style.color = '#00ff88';
         feedback.innerHTML = '<i class="fas fa-check-circle"></i> Erişim Başarılı! Yönlendiriliyorsunuz...';
         
+        // CRITICAL: Oturumu Başlat (Dashboard güvenliği için)
+        sessionStorage.setItem('nk_access_granted', 'true');
+        
         // BAŞARILI YÖNLENDİRME
         setTimeout(() => {
-            window.location.href = 'dashboard.html'; // Kullanıcıyı dashboard'a yönlendir
-        }, 1500); // 1.5 saniye sonra yönlendir
+            window.location.href = 'dashboard.html'; 
+        }, 1500); 
         
     } else {
         feedback.style.color = 'red';
         feedback.innerHTML = '<i class="fas fa-times-circle"></i> Hatalı Erişim Kodu!';
         
-        // Hatalı girişte 3 saniye sonra mesajı temizle
         setTimeout(() => {
              feedback.innerHTML = '';
-             codeInput.value = ''; // Giriş alanını temizle
+             codeInput.value = ''; 
         }, 3000);
     }
 }
