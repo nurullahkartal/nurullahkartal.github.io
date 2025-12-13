@@ -2,21 +2,151 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Giriş Yap | NKartal Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş | NKartal Yönetim Portalı</title>
+    
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        .login-body {
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: #0d0d0d;
+            border: 2px solid var(--primary); /* Güvenlik Vurgusu */
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2); /* Neon parlama */
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .login-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+        }
+
+        .btn-access {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-access:hover {
+            background: #fff;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        #login-feedback {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Güvenlik Bilgisi Alanı */
+        .security-note {
+            margin-top: 30px;
+            padding: 15px;
+            background: #000;
+            border-left: 4px solid #f39c12;
+            color: #ccc;
+            font-size: 0.85rem;
+        }
+        .security-note i {
+            color: #f39c12;
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
     <canvas id="neural-canvas"></canvas>
-    <div class="login-wrapper">
-        <div class="login-box glass-card">
-            <h2 style="margin-bottom: 5px;">NK<span class="highlight">ID</span></h2>
-            <p style="color:#aaa; font-size:0.9rem; margin-bottom: 20px;">Müşteri Paneli Erişimi</p>
-            <input type="text" class="login-input" placeholder="Kullanıcı Adı">
-            <input type="password" class="login-input" placeholder="Şifre">
-            <button onclick="window.location.href='dashboard.html'" class="login-btn">Giriş Yap</button>
-            <p style="margin-top:15px; font-size:0.8rem; color:#666;"><a href="index.html" style="color:#666;">← Ana Sayfaya Dön</a></p>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="logo">
+            <img src="logo.svg" alt="Nurullah Kartal Logo">
+            <span>NK<span class="highlight">ARTAL</span></span>
+        </a>
+        <a href="index.html" class="portal-btn" style="border:1px solid #555; color:#fff !important;"><i class="fas fa-home"></i> Ana Sayfa</a>
+    </nav>
+
+    <section class="login-body">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-fingerprint" style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;"></i>
+                <h2>Yönetim Portalı</h2>
+                <p style="color:#aaa; font-size:0.9rem;">Güvenlik Kodunuzu Girin</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="access-code"><i class="fas fa-key"></i> Erişim Kodu</label>
+                <input type="password" id="access-code" placeholder="PIN / Şifre" required onkeypress="if(event.key==='Enter') checkLogin()">
+            </div>
+            
+            <button class="btn-access" onclick="checkLogin()">
+                <i class="fas fa-sign-in-alt"></i> Sisteme Eriş
+            </button>
+            
+            <div id="login-feedback"></div>
+
+            <div class="security-note">
+                <i class="fas fa-exclamation-triangle"></i>
+                Bu alan sadece yetkili müşteriler ve personel için ayrılmıştır. Yetkisiz giriş denemeleri kaydedilmektedir.
+            </div>
         </div>
-    </div>
+    </section>
+
     <script src="script.js"></script>
+    <script src="tracker.js"></script>
 </body>
 </html>
