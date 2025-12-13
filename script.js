@@ -1,64 +1,111 @@
-// script.js - FİNAL SÜRÜM
+/* NKartal Akıllı Script v5.1 */
 
-// 1. NEURAL NETWORK ANIMATION
-const canvas = document.getElementById("neural-canvas");
-if(canvas){
-    const ctx = canvas.getContext("2d");
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let particlesArray;
-    window.addEventListener('resize', function() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1; this.speedX = (Math.random() * 1) - 0.5; this.speedY = (Math.random() * 1) - 0.5;
+// --- CHATBOT MANTIĞI ---
+function toggleChat() {
+    const chatWindow = document.getElementById('chat-window');
+    if (chatWindow.style.display === 'flex') {
+        chatWindow.style.display = 'none';
+    } else {
+        chatWindow.style.display = 'flex';
+        // Eğer ilk kez açılıyorsa menüyü göster
+        const body = document.getElementById('chat-body');
+        if(body.children.length < 2) {
+            showOptions();
         }
-        update() {
-            this.x += this.speedX; this.y += this.speedY;
-            if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
-            if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
-        }
-        draw() { ctx.fillStyle = '#1f2a36'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
     }
-    function init() { particlesArray = []; for (let i = 0; i < 100; i++) { particlesArray.push(new Particle()); } }
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < particlesArray.length; i++) {
-            particlesArray[i].update(); particlesArray[i].draw();
-            for (let j = i; j < particlesArray.length; j++) {
-                let dx = particlesArray[i].x - particlesArray[j].x; let dy = particlesArray[i].y - particlesArray[j].y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < 100) { ctx.strokeStyle = 'rgba(30, 40, 50, 0.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[i].x, particlesArray[i].y); ctx.lineTo(particlesArray[j].x, particlesArray[j].y); ctx.stroke(); }
-            }
-        }
-        requestAnimationFrame(animate);
-    }
-    init(); animate();
 }
 
-// 2. CHAT WIDGET LOGIC
-function toggleChat() {
-    const chatWindow = document.getElementById("chat-window");
-    chatWindow.classList.toggle("active");
+function showOptions() {
+    const chatBody = document.getElementById('chat-body');
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'chat-options';
+    optionsDiv.style.padding = '10px';
+    
+    // Hazır Butonlar
+    optionsDiv.innerHTML = `
+        <div style="color:#888; font-size:0.8rem; margin-bottom:5px;">Size nasıl yardımcı olabilirim?</div>
+        <button onclick="botReply('projeler')">🚀 Projeleriniz neler?</button>
+        <button onclick="botReply('fiyat')">💰 Fiyat teklifi al</button>
+        <button onclick="botReply('iletisim')">📞 İletişim bilgileri</button>
+        <button onclick="botReply('portal')">🔐 Portala nasıl girerim?</button>
+    `;
+    chatBody.appendChild(optionsDiv);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function botReply(type) {
+    const chatBody = document.getElementById('chat-body');
+    let reply = "";
+
+    // Kullanıcı seçimi ekrana yaz
+    // (Opsiyonel: Seçilen butonu göstermek yerine direkt cevap verebiliriz, 
+    // ama akış görünsün diye kullanıcı mesajı ekleyelim)
+    
+    if (type === 'projeler') reply = "Şu an Lojistik ERP, Sosyal Medya Botları ve Veri Analizi üzerine çalışıyoruz. 'Çözümler' sayfasından detaylara bakabilirsin!";
+    else if (type === 'fiyat') reply = "Projeye göre fiyat değişiyor. İletişim sayfasından veya nurullahkartalai@gmail.com adresinden bana yazarsan net konuşabiliriz.";
+    else if (type === 'iletisim') reply = "Bana e-posta (nurullahkartalai@gmail.com) veya sosyal medya üzerinden ulaşabilirsin. İletişim sayfasında form var.";
+    else if (type === 'portal') reply = "Portal sadece müşterilerim içindir. Eğer müşterim isen şifreni e-posta ile almış olmalısın.";
+
+    // Bot Cevabını Ekle
+    setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg bot';
+        botMsg.innerText = reply;
+        chatBody.appendChild(botMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 500);
 }
 
 function sendMessage() {
-    const input = document.getElementById("chat-input-field");
-    const chatBody = document.getElementById("chat-body");
+    const input = document.getElementById('chat-input-field');
     const text = input.value.trim();
-    if(!text) return;
+    if (!text) return;
 
-    // User Message
-    const userDiv = document.createElement("div"); userDiv.className = "msg user"; userDiv.innerText = text;
-    chatBody.appendChild(userDiv); input.value = ""; chatBody.scrollTop = chatBody.scrollHeight;
+    // Kullanıcı Mesajı
+    const chatBody = document.getElementById('chat-body');
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.innerText = text;
+    chatBody.appendChild(userMsg);
+    input.value = '';
 
-    // Bot Response (Simulated)
+    // Basit Cevaplama
     setTimeout(() => {
-        const botDiv = document.createElement("div"); botDiv.className = "msg bot";
-        if(text.toLowerCase().includes("fiyat") || text.toLowerCase().includes("mail")) {
-            botDiv.innerHTML = "Detaylı bilgi için: <a href='mailto:nurullahkartalai@gmail.com' style='color:#4da6ff'>nurullahkartalai@gmail.com</a>";
-        } else {
-            botDiv.innerText = "Projelerimiz ve API erişimi hakkında size yardımcı olabilirim. Lütfen menüden 'Projeler' kısmına göz atın.";
-        }
-        chatBody.appendChild(botDiv); chatBody.scrollTop = chatBody.scrollHeight;
-    }, 800);
+        const botMsg = document.createElement('div');
+        botMsg.className = 'msg bot';
+        
+        if(text.toLowerCase().includes('merhaba')) botMsg.innerText = "Merhaba! Hoş geldin.";
+        else if(text.toLowerCase().includes('fiyat')) botMsg.innerText = "Fiyat teklifi için lütfen iletişim sayfasını kullanın.";
+        else botMsg.innerText = "Şu an bunu anlayamadım ama aşağıdaki butonlardan seçim yapabilirsin.";
+        
+        chatBody.appendChild(botMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        
+        // Tekrar seçenekleri göster
+        if(!text.toLowerCase().includes('merhaba')) showOptions();
+        
+    }, 1000);
+}
+
+
+// --- PORTAL GİRİŞ KONTROLÜ ---
+function checkLogin() {
+    const code = document.getElementById('access-code').value;
+    const feedback = document.getElementById('login-feedback');
+    
+    // Basit şifre kontrolü (Gerçek backend olmadığı için)
+    if (code === '1453' || code === 'admin' || code === 'nkartal') {
+        feedback.style.color = 'var(--primary)';
+        feedback.innerText = 'Giriş Başarılı! Yönlendiriliyorsunuz...';
+        setTimeout(() => {
+            window.location.href = "dashboard.html"; // Yönlendirme
+        }, 1500);
+    } else {
+        feedback.style.color = 'red';
+        feedback.innerText = 'Hatalı Erişim Kodu!';
+        // Efekt: Kutuyu salla
+        const box = document.querySelector('.login-box');
+        box.style.transform = 'translateX(10px)';
+        setTimeout(() => box.style.transform = 'translateX(0)', 100);
+    }
 }
