@@ -80,7 +80,7 @@
             color: #fff;
         }
 
-        /* --- YENİ LOG STİLLERİ --- */
+        /* --- LOG STİLLERİ --- */
         .log-section {
             margin-top: 50px;
         }
@@ -177,6 +177,7 @@
     <script>
         // --- LOGOUT FONKSİYONU ---
         function logout() {
+            // KRİTİK: Oturumu sonlandır
             sessionStorage.removeItem('nk_access_granted');
             window.location.href = 'index.html';
         }
