@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KARTAL YATIRIM</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #0a0e17;
             --card-glass: rgba(30, 41, 59, 0.7);
-            --gold: #fbbf24;       
+            --gold: #fbbf24;      
             --gold-glow: rgba(251, 191, 36, 0.3);
             --text-main: #ffffff;
             --text-sec: #94a3b8;
@@ -121,7 +122,7 @@
         
         /* SAAT STİLİ */
         .live-clock {
-            font-family: 'Courier New', Courier, monospace; /* Dijital saat fontu */
+            font-family: 'Courier New', Courier, monospace;
             font-size: 16px;
             font-weight: bold;
             color: var(--text-main);
@@ -137,6 +138,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         .main-card::before {
             content: '';
@@ -155,7 +157,7 @@
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 20px;
-            margin-top: 20px;
+            margin-top: 0px;
             backdrop-filter: blur(10px);
         }
 
@@ -190,6 +192,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: 0.2s;
+            margin-bottom: 15px;
         }
         .btn-calc:active { transform: scale(0.98); background: #e2e8f0; }
 
@@ -206,6 +209,52 @@
 
         .profit-style { background: rgba(16, 185, 129, 0.15); color: var(--green); border: 1px solid rgba(16, 185, 129, 0.3); }
         .loss-style { background: rgba(239, 68, 68, 0.15); color: var(--red); border: 1px solid rgba(239, 68, 68, 0.3); }
+        
+        /* --- TL HESAPLAMA BUTONU VE MODAL --- */
+        #tlCalcButton {
+            display: none; /* Başlangıçta gizli */
+            margin: 15px 0 0 0;
+            background: #4f46e5;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #tlCalcButton:hover { background: #6366f1; }
+
+        /* Modal Stilleri */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .modal-content {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 350px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-title { font-size: 18px; font-weight: 800; margin-bottom: 20px; text-align: center; color: var(--gold); }
+        .modal-close { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 20px; color: var(--text-sec); cursor: pointer; }
+        #tlResult { margin-top: 15px; font-size: 28px; font-weight: 800; color: var(--green); }
+
 
         .footer { margin-top: 40px; text-align: center; opacity: 0.5; font-size: 10px; letter-spacing: 1px; }
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -261,6 +310,11 @@
             </div>
 
             <button class="btn-calc" onclick="hesapla()">DURUMU ANALİZ ET</button>
+            
+            <button id="tlCalcButton" onclick="showTLCalc()">
+                <i class="fas fa-turkish-lira-sign"></i> TL Karşılığını Hesapla
+            </button>
+
         </div>
 
         <div id="resultCard"></div>
@@ -268,10 +322,29 @@
         <div class="footer">DEVELOPED BY NURULLAH KARTAL</div>
     </div>
 
+    <div id="tlKurModal" class="modal-overlay" onclick="hideTLCalc(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="hideTLCalc()">&times;</button>
+            <div class="modal-title">ANLIK TL KURU İLE HESAPLAMA</div>
+
+            <div class="input-group">
+                <span class="input-label">USD/TRY GÜNCEL KUR</span>
+                <input type="number" id="tlKurInput" class="input-field" placeholder="Örn: 30.50">
+            </div>
+
+            <button class="btn-calc" style="background:#10b981; color:white;" onclick="hesaplaTL()">TL Karşılığını Gör</button>
+            
+            <p id="tlResult" style="color:var(--text-sec); font-size:16px; margin-top:20px;">0.00 ₺</p>
+        </div>
+    </div>
+
+
     <script>
+        // --- SABİT FİNANSAL DEĞERLER (Değiştirilmedi) ---
         const DOGRU_SIFRE = "47";
         const ELDEKI_SYP_VAL = 214000000;
         const GIRIS_MALIYETI_VAL = 16990;
+        let mevcutUsdDegeri = 0; // Hesaplanan USD değerini TL hesaplaması için tutar
 
         function checkPass() {
             let girilen = document.getElementById("passwordInput").value;
@@ -290,7 +363,6 @@
                     document.getElementById("loginScreen").style.display = "none";
                     document.getElementById("dashboard").style.display = "block";
                     
-                    // Saati Başlat
                     startClock();
 
                     // Rakam Animasyonları
@@ -305,11 +377,9 @@
             }
         }
 
-        // CANLI SAAT FONKSİYONU
+        // CANLI SAAT FONKSİYONLARI
         function startClock() {
-            // İlk açılışta hemen göster
             updateTime();
-            // Her saniye güncelle
             setInterval(updateTime, 1000);
         }
 
@@ -320,13 +390,23 @@
         }
 
         function hesapla() {
+            // Önceki sonuçları ve TL butonunu sıfırla/gizle
+            document.getElementById("resultCard").style.display = "none";
+            document.getElementById("tlCalcButton").style.display = "none";
+            document.getElementById("usdText").innerText = "--- $";
+            mevcutUsdDegeri = 0;
+
             let kur = parseFloat(document.getElementById('manualKur').value);
-            if (!kur || kur <= 0) { alert("Lütfen geçerli bir kur girin."); return; }
+            if (!kur || kur <= 0) { 
+                alert("Lütfen geçerli bir kur girin."); 
+                return; 
+            }
 
             document.getElementById('manualKur').blur();
 
             let mevcutUsd = Math.floor(ELDEKI_SYP_VAL / kur);
             let fark = mevcutUsd - GIRIS_MALIYETI_VAL;
+            mevcutUsdDegeri = mevcutUsd; // Global değişkeni güncelle
 
             animateValue("usdText", 0, mevcutUsd, 1000, " $");
 
@@ -350,8 +430,56 @@
                 `;
                 animateValue("resAmount", 0, Math.abs(fark), 1200, " $", "-");
             }
+            
+            // 🛑 YENİ ÖZELLİK: 2 saniye sonra TL hesaplama butonunu göster
+            setTimeout(() => {
+                 document.getElementById("tlCalcButton").style.display = "block";
+            }, 2000); 
         }
 
+        // --- TL HESAPLAMA MODAL FONKSİYONLARI ---
+        
+        function showTLCalc() {
+            const modal = document.getElementById("tlKurModal");
+            modal.style.display = "flex";
+            setTimeout(() => { modal.classList.add('active'); }, 10);
+            document.getElementById("tlResult").innerText = "0.00 ₺"; 
+            document.getElementById("tlKurInput").value = ""; 
+        }
+
+        function hideTLCalc(event) {
+            const modal = document.getElementById("tlKurModal");
+            // Overlay'e veya kapatma butonuna basılırsa kapat
+            if (!event || event.target.id === 'tlKurModal' || event.target.className === 'modal-close') {
+                modal.classList.remove('active');
+                setTimeout(() => { modal.style.display = "none"; }, 300);
+            }
+        }
+
+        function hesaplaTL() {
+            let tlKur = parseFloat(document.getElementById('tlKurInput').value);
+            
+            if (!tlKur || tlKur <= 0) { 
+                document.getElementById("tlResult").innerText = "Geçersiz Kur!";
+                document.getElementById("tlResult").style.color = var(--red);
+                return; 
+            }
+            
+            // Hesapla fonksiyonundan gelen mevcut USD değerini kullan
+            if (mevcutUsdDegeri === 0) {
+                 document.getElementById("tlResult").innerText = "Önce Durumu Analiz Edin!";
+                 document.getElementById("tlResult").style.color = var(--red);
+                 return;
+            }
+
+            let tlKarsiligi = Math.floor(mevcutUsdDegeri * tlKur);
+            
+            // Sonucu animasyonla göster
+            document.getElementById("tlResult").style.color = var(--green);
+            animateValue("tlResult", 0, tlKarsiligi, 1500, " ₺", "");
+        }
+
+        // RAKAM ANİMASYON FONKSİYONU
         function animateValue(id, start, end, duration, suffix, prefix = "") {
             let obj = document.getElementById(id);
             if(!obj) return;
@@ -363,6 +491,7 @@
                 const easeProgress = 1 - Math.pow(1 - progress, 3);
                 const currentVal = Math.floor(easeProgress * (end - start) + start);
                 
+                // Binlik ayıracı ekleme
                 obj.innerHTML = prefix + currentVal.toLocaleString('en-US') + suffix;
                 
                 if (progress < 1) {
