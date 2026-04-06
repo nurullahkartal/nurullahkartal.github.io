@@ -2,36 +2,48 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hakkımda | NURULLAH KARTAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>body { background: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #bc1888 100%); }
+        @media (prefers-color-scheme: dark) { body { background: #050505; color: #eee; } .glass-card { background: rgba(255,255,255,0.03); } }
+        @media (prefers-color-scheme: light) { body { background: #fff; color: #222; } .glass-card { background: rgba(0,0,0,0.02); } }
+        .tech-font { font-family: 'Space Grotesk', sans-serif; }
+        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
 </head>
-<body class="p-10 md:p-32">
-    <div class="max-w-4xl mx-auto p-12 rounded-[3rem] border border-white/5 bg-slate-900/40 backdrop-blur-md">
-        <a href="index.html" class="text-sky-500 font-bold text-xs mb-10 block tracking-widest italic underline">← GERİ DÖN</a>
-        <h1 class="text-5xl font-black mb-10 italic uppercase tracking-tighter">Profil <span class="text-sky-500 text-transparent" style="-webkit-text-stroke: 1px #0ea5e9;">Özeti</span></h1>
+<body class="antialiased pb-20">
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 flex justify-between items-center backdrop-blur-md border-b border-black/5">
+        <a href="index.html" class="tech-font text-xl font-bold insta-text">NK.</a>
+        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50">← Geri</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto pt-32 px-6">
+        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-10 tracking-tighter">PROFESYONEL <span class="insta-text">ÖZET</span></h1>
         
-        <div class="space-y-8 text-slate-400 text-lg leading-relaxed font-light italic">
-            <p>18 yaşındayım. İş hayatına erken yaşta atılarak muhasebe ve lojistik sektörlerinde 4 yıllık yoğun bir tecrübe kazandım. Finansal evrak yönetimi ve sevkiyat planlama konularında uzmanlaştım.</p>
+        <div class="glass-card p-8 md:p-12 rounded-[2.5rem] italic font-light text-base md:text-lg leading-relaxed border border-black/5">
+            <p class="mb-10">18 yaşındayım. Erken yaşta başladığım profesyonel kariyerimde muhasebe ve lojistik alanlarında 4 yıllık yoğun bir tecrübeye ulaştım. Gaziantep ve Mardin operasyonlarında finansal veri yönetimi ve süreç optimizasyonu sağlıyorum.</p>
             
-            <div class="grid md:grid-cols-2 gap-10 py-10 border-y border-white/5 italic">
+            <div class="grid md:grid-cols-2 gap-10 border-t border-black/5 pt-10">
                 <div>
-                    <h3 class="text-white font-black uppercase text-sm mb-4 tracking-widest">Eğitim</h3>
-                    <ul class="text-sm space-y-2">
+                    <h3 class="insta-text tech-font font-bold uppercase text-xs mb-6 tracking-widest">Eğitim</h3>
+                    <ul class="text-sm space-y-4 opacity-70">
                         <li>• Anadolu Üniv. - Uluslararası Ticaret ve Lojistik</li>
                         <li>• Atatürk Üniv. - Muhasebe ve Vergi Uygulamaları</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-white font-black uppercase text-sm mb-4 tracking-widest">Yetenekler</h3>
-                    <ul class="text-sm space-y-2">
-                        <li>• Mikro, Logo ve Nes Portal Uzmanlığı</li>
-                        <li>• e-Fatura / e-Arşiv Süreç Yönetimi</li>
+                    <h3 class="insta-text tech-font font-bold uppercase text-xs mb-6 tracking-widest">Yetenekler</h3>
+                    <ul class="text-sm space-y-4 opacity-70">
+                        <li>• Mikro, Logo, Nes Portal Uzmanlığı</li>
+                        <li>• E-Fatura / E-Arşiv Süreç Yönetimi</li>
                         <li>• Türkçe & Kürtçe Dilleri</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </body>
 </html>

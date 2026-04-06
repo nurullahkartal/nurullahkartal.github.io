@@ -1,103 +1,53 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NK Panel | Operasyonel Kayıtlar</title>
-    
+    <title>Deneyimler | NURULLAH KARTAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0ea5e9; --bg-dark: #020617; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: #f8fafc; }
+        :root { --ig-grad: linear-gradient(45deg, #dc2743 0%, #bc1888 100%); }
+        @media (prefers-color-scheme: dark) { body { background: #050505; color: #fff; } .glass-card { background: rgba(255,255,255,0.03); } }
+        @media (prefers-color-scheme: light) { body { background: #fafafa; color: #111; } .glass-card { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.05); } }
         .tech-font { font-family: 'Space Grotesk', sans-serif; }
-        .glass-card { 
-            background: rgba(15, 23, 42, 0.6); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover { 
-            border-color: var(--primary);
-            background: rgba(14, 165, 233, 0.05);
-            transform: translateY(-2px);
-        }
+        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="antialiased pb-20">
-
-    <nav class="fixed top-0 w-full z-50 py-6 px-10 flex justify-between items-center backdrop-blur-md border-b border-white/5">
-        <a href="index.html" class="tech-font text-2xl font-bold text-sky-500 tracking-tighter">NK<span class="text-white">.</span></a>
-        <div class="space-x-8 text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">
-            <a href="index.html" class="hover:text-white transition">Geri Dön</a>
-            <a href="hakkimda.html" class="hover:text-white transition">Hakkımda</a>
-        </div>
+    <nav class="fixed top-0 w-full z-50 py-4 px-6 flex justify-between items-center backdrop-blur-md border-b border-black/5">
+        <a href="index.html" class="tech-font text-xl font-bold insta-text">NK.</a>
+        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50">← Menü</a>
     </nav>
 
-    <main class="max-w-6xl mx-auto pt-32 px-6">
-        <div class="mb-16">
-            <h2 class="text-sky-500 tech-font font-bold tracking-[0.5em] uppercase mb-4 text-xs italic">System Logs / Operasyonel Veriler</h2>
-            <h1 class="tech-font text-5xl md:text-6xl font-black uppercase italic tracking-tighter">
-                DENEYİM <span class="text-transparent" style="-webkit-text-stroke: 1px #0ea5e9;">MERKEZİ</span>
-            </h1>
-        </div>
+    <main class="max-w-5xl mx-auto pt-32 px-6">
+        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-12 tracking-tighter">İŞ <span class="insta-text">GEÇMİŞİ</span></h1>
 
-        <div class="grid gap-8">
-            <div class="glass-card p-8 rounded-[2rem]">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <div>
-                        <h3 class="text-white text-xl font-bold uppercase italic tracking-tight">Solviss Yazılım</h3>
-                        <p class="text-sky-500 text-xs font-bold mt-1 uppercase tracking-widest">Banka ve Operasyon Destek Elemanı</p>
-                    </div>
-                    <span class="text-[10px] text-slate-500 border border-white/10 px-4 py-2 rounded-full font-bold">KASIM 2025 - OCAK 2026</span>
+        <div class="space-y-6">
+            <div class="glass-card p-8 rounded-3xl border border-black/5">
+                <div class="flex flex-col md:flex-row justify-between mb-4">
+                    <h3 class="font-black italic uppercase text-xl">Solviss Yazılım</h3>
+                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Kasım 2025 - Ocak 2026</span>
                 </div>
-                <ul class="space-y-3 text-sm text-slate-400 italic font-light leading-relaxed">
-                    <li>• Finansal evrak trafiği ve banka operasyonlarının ofis dışı takibi ve yürütülmesi[cite: 53].</li>
-                    <li>• Resmi kurumlarla olan evrak süreçlerinin yönetimi ve idari operasyonel destek[cite: 54].</li>
-                </ul>
+                <p class="text-sm opacity-60 italic">Banka ve Operasyon Destek Elemanı // Finansal evrak trafiği ve resmi kurum süreçleri.</p>
             </div>
 
-            <div class="glass-card p-8 rounded-[2rem]">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <div>
-                        <h3 class="text-white text-xl font-bold uppercase italic tracking-tight">Tekkelioğlu Yumurta</h3>
-                        <p class="text-sky-500 text-xs font-bold mt-1 uppercase tracking-widest">Lojistik Departmanı (Veri Giriş)</p>
-                    </div>
-                    <span class="text-[10px] text-slate-500 border border-white/10 px-4 py-2 rounded-full font-bold">EYLÜL 2025 - KASIM 2025</span>
+            <div class="glass-card p-8 rounded-3xl border border-black/5">
+                <div class="flex flex-col md:flex-row justify-between mb-4">
+                    <h3 class="font-black italic uppercase text-xl">Tekkelioğlu Yumurta</h3>
+                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Eylül 2025 - Kasım 2025</span>
                 </div>
-                <ul class="space-y-3 text-sm text-slate-400 italic font-light leading-relaxed">
-                    <li>• Araç giriş-çıkış süreçlerinin sistem üzerinden takibi ve kayıt altına alınması[cite: 56].</li>
-                    <li>• Operasyonel verilerin sisteme düzenli girişinin sağlanması ve süreç yönetimi[cite: 57].</li>
-                </ul>
+                <p class="text-sm opacity-60 italic">Lojistik Departmanı // Araç giriş-çıkış takibi ve Nes Portal veri giriş süreçleri.</p>
             </div>
 
-            <div class="glass-card p-8 rounded-[2rem]">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <div>
-                        <h3 class="text-white text-xl font-bold uppercase italic tracking-tight">Altunkaynak Grup / Altuntur</h3>
-                        <p class="text-sky-500 text-xs font-bold mt-1 uppercase tracking-widest">Muhasebe Yardımcı Elemanı & Staj</p>
-                    </div>
-                    <span class="text-[10px] text-slate-500 border border-white/10 px-4 py-2 rounded-full font-bold">ŞUBAT 2022 - AĞUSTOS 2025</span>
+            <div class="glass-card p-8 rounded-3xl border border-black/5">
+                <div class="flex flex-col md:flex-row justify-between mb-4">
+                    <h3 class="font-black italic uppercase text-xl">Altuntur / Altunkaynak Grup</h3>
+                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Şubat 2022 - Ağustos 2025</span>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <ul class="space-y-3 text-sm text-slate-400 italic font-light leading-relaxed">
-                        <li>• Günlük muhasebe kayıtları ve banka hesap mutabakatları[cite: 59].</li>
-                        <li>• Mikro üzerinden e-Fatura/e-Arşiv ve fatura kesim işlemleri[cite: 61].</li>
-                    </ul>
-                    <ul class="space-y-3 text-sm text-slate-400 italic font-light leading-relaxed">
-                        <li>• İrsaliye yönetimi, alış-satış ve ihracat faturalarının düzenlenmesi[cite: 60].</li>
-                        <li>• Araç işlemleri, DAB takibi ve arşivleme süreçlerinin yönetimi[cite: 62].</li>
-                    </ul>
-                </div>
+                <p class="text-sm opacity-60 italic">Muhasebe Yardımcı Elemanı // Mikro yazılımı ile e-fatura, ihracat ve mutabakat yönetimi.</p>
             </div>
         </div>
     </main>
-
-    <footer class="mt-20 py-10 text-center border-t border-white/5">
-        <p class="text-[8px] text-slate-700 tracking-[0.8em] uppercase">© 2026 NURULLAH KARTAL | OPERASYONEL VERİ MERKEZİ</p>
-    </footer>
-
 </body>
 </html>
