@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>NK Panel | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body { background: #010409; color: #00ff88; font-family: monospace; }</style>
+</head>
+<body class="p-8">
+    <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-black border border-[#00ff88]/20 rounded-xl">
+            <p class="text-xs">AKTİF KULLANICI</p>
+            <h4 class="text-4xl font-bold">1,245</h4>
+        </div>
+        <div class="p-6 bg-black border border-[#00ff88]/20 rounded-xl">
+            <p class="text-xs">SİSTEM STATUS</p>
+            <h4 class="text-4xl font-bold">ONLINE</h4>
+        </div>
+        <div class="p-6 bg-black border border-[#00ff88]/20 rounded-xl">
+            <p class="text-xs">DATABASE LOAD</p>
+            <h4 class="text-4xl font-bold">%12</h4>
+        </div>
+    </div>
+    <div class="mt-10 bg-black p-10 border border-[#00ff88]/10 h-80 overflow-y-auto rounded-2xl text-sm italic">
+        <p>[14:20] NURULLAH_KARTAL_CORE: Initializing...</p>
+        <p>[14:21] LMTNASY_MODULE: Data Sync Active.</p>
+        <p>[14:22] NK_ASSISTANT_AI: Bot Status: Idle.</p>
+        <p>[14:23] ACCESS_GRANTED: Admin session established.</p>
+    </div>
+</body>
+</html>
