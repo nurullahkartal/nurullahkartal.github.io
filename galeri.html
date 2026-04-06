@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görsel Arşiv | NURULLAH KARTAL</title>
+    
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Nurullah Kartal profesyonel fotoğraf galerisi ve etkinlik görselleri.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f8fafc; }
+        .tech-font { font-family: 'Space Grotesk', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; }
+        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        img { transition: transform 0.5s ease; filter: grayscale(20%); }
+        img:hover { transform: scale(1.05); filter: grayscale(0%); }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="p-6">
+        <a href="index.html" class="text-[10px] uppercase tracking-widest opacity-30 hover:opacity-100 transition">← Ana Sayfaya Dön</a>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-10">
+        <header class="mb-16 text-center">
+            <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-4 tracking-tighter">
+                GÖRSEL <span class="insta-text">ARŞİV</span>
+            </h1>
+            <p class="text-xs opacity-40 uppercase tracking-[0.4em] italic text-slate-500">Nurullah Kartal Dijital Veri Merkezi</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="glass-card rounded-[2rem]">
+                <img src="img/nurullah-kartal-profil.jpeg" 
+                     alt="Nurullah Kartal - Yazılım Geliştirici, Lojistik ve Muhasebe Uzmanı" 
+                     title="Nurullah Kartal Profesyonel Profil"
+                     class="w-full h-auto object-cover">
+                <div class="p-6">
+                    <span class="text-[10px] font-bold opacity-30 tracking-widest uppercase italic">Kurumsal Portre</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-[2rem]">
+                <img src="img/nurullah-kartal-gdg.jpeg" 
+                     alt="Nurullah Kartal - GDG Gaziantep Yazılım ve Teknoloji Etkinliği" 
+                     title="Nurullah Kartal Google Developer Groups"
+                     class="w-full h-auto object-cover">
+                <div class="p-6">
+                    <span class="text-[10px] font-bold opacity-30 tracking-widest uppercase italic">Etkinlik Kaydı</span>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-[2rem] flex items-center justify-center min-h-[300px]">
+                <span class="text-[8px] opacity-10 uppercase tracking-[1em] -rotate-90">Veri Bekleniyor</span>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="opacity-0 h-0 overflow-hidden">
+        <h2>Nurullah Kartal Kimdir?</h2>
+        <p>Gaziantep ve Mardin'de lojistik, muhasebe ve yazılım alanlarında faaliyet gösteren Nurullah Kartal'ın profesyonel galeri sayfasıdır. Python, Kotlin ve Firebase teknolojileri ile geliştirdiği projelerin görsel arşividir.</p>
+    </section>
+
+    <footer class="py-20 text-center opacity-10 text-[8px] uppercase tracking-[0.5em]">
+        © 2026 NK DATABASE ACCESS
+    </footer>
+
+</body>
+</html>
