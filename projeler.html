@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeler & Teknoloji | NURULLAH KARTAL</title>
+    <meta name="description" content="Nurullah Kartal'ın kullandığı teknolojiler, projeleri ve görsel galerisi.">
+    <link rel="canonical" href="https://www.nurullahkartal.com.tr/projeler.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { darkBg: '#050505', lightBg: '#f8fafc' } } } }</script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer src="https://unpkg.com/tippy.js@6"></script>
+    <style>
+        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); }
+        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; }
+        .tech-font { font-family: 'Space Grotesk', sans-serif; }
+        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-card { background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.08); backdrop-filter: blur(20px); transition: all 0.3s ease; }
+        .dark .glass-card { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
+        .glass-card:hover { transform: translateY(-5px); }
+        .fade-in { animation: fadeIn 0.8s forwards; opacity: 0; }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+        /* Terminal UI */
+        #terminal-ui { display: none; font-family: 'Courier New', monospace; background: #000; border: 1px solid #333; color: #0f0; }
+        .gallery-img { border-radius: 20px; transition: 0.5s ease; filter: grayscale(20%); }
+        .gallery-img:hover { filter: grayscale(0%); transform: scale(1.03); }
+    </style>
+</head>
+<body class="antialiased dark:bg-darkBg dark:text-slate-100 bg-lightBg text-slate-900 pb-20 fade-in">
+
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-10 flex justify-between items-center backdrop-blur-xl border-b border-black/5 dark:border-white/10">
+        <a href="index.html" class="tech-font text-2xl font-bold insta-text">NK.</a>
+        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50 hover:opacity-100"><i class="fas fa-arrow-left mr-2"></i>Karargaha Dön</a>
+    </nav>
+
+    <main class="max-w-5xl mx-auto pt-32 px-6">
+        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-12 text-center">TEKNOLOJİ <span class="insta-text">& PROJELER</span></h1>
+
+        <div class="flex justify-center space-x-6 md:space-x-12 mb-16 opacity-70">
+            <i class="fab fa-python text-5xl hover:text-yellow-500 transition" data-tippy-content="Python (AI & Scripting)"></i>
+            <i class="fab fa-android text-5xl hover:text-green-500 transition" data-tippy-content="Kotlin"></i>
+            <i class="fas fa-fire text-5xl hover:text-orange-500 transition" data-tippy-content="Firebase"></i>
+            <i class="fas fa-robot text-5xl hover:text-blue-500 transition" data-tippy-content="AI Prompting"></i>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <article class="glass-card p-8 rounded-3xl border-l-4 border-sky-500">
+                <span class="text-[10px] font-bold text-sky-500 tracking-widest uppercase">Aktif Proje</span>
+                <h3 class="tech-font text-2xl mt-2 mb-4">LMTNASY 🌐</h3>
+                <p class="text-sm opacity-80 mb-4">Suriye pazarına yönelik geliştirilen seri ilan ve ticaret platformu. Python ve modern veritabanı çözümleriyle tasarlandı.</p>
+                <div class="flex space-x-2 text-[10px] uppercase font-bold opacity-50">
+                    <span class="bg-black/10 dark:bg-white/10 px-2 py-1 rounded">E-Ticaret</span>
+                    <span class="bg-black/10 dark:bg-white/10 px-2 py-1 rounded">Backend</span>
+                </div>
+            </article>
+
+            <article class="glass-card p-8 rounded-3xl border-l-4 border-green-500">
+                <span class="text-[10px] font-bold text-green-500 tracking-widest uppercase">Topluluk & Open Source</span>
+                <h3 class="tech-font text-2xl mt-2 mb-4">GDG Gaziantep 🧑‍💻</h3>
+                <p class="text-sm opacity-80 mb-4">Google Developer Groups Gaziantep ekosisteminde aktif katılım. Açık kaynak kültürüne destek ve teknoloji takibi.</p>
+            </article>
+        </div>
+
+        <h3 class="tech-font text-center text-xl mb-8 opacity-50 uppercase tracking-widest">Görsel Arşiv & Belgeler</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="glass-card p-4 rounded-3xl">
+                <img src="img/nurullah-kartal-gdg.jpeg" alt="GDG Etkinliği" class="w-full h-48 object-cover gallery-img mb-4" onerror="this.src='https://via.placeholder.com/600x400/222/fff?text=GDG+Gaziantep'">
+                <span class="text-[10px] font-bold opacity-50 tracking-widest uppercase px-2">Etkinlik Kaydı</span>
+            </div>
+            <div class="glass-card p-4 rounded-3xl flex flex-col justify-center items-center text-center h-full border-dashed border-2 border-white/10">
+                <i class="fas fa-file-certificate text-4xl mb-4 text-pink-500"></i>
+                <span class="text-[10px] font-bold opacity-50 tracking-widest uppercase">Kalfalık & Ustalık Belgeleri</span>
+                <span class="text-xs mt-2 italic">(Yakında Dijitalize Edilecek)</span>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button onclick="document.getElementById('terminal-ui').style.display='block'" class="text-[10px] bg-black text-green-500 px-6 py-3 rounded-lg uppercase tracking-widest font-black hover:bg-gray-900 transition shadow-lg"><i class="fas fa-terminal mr-2"></i>Sistem Konsolunu Aç</button>
+        </div>
+        
+        <div id="terminal-ui" class="mt-8 text-left max-w-2xl mx-auto p-6 rounded-xl shadow-2xl">
+            <p>> root@NK-Karargah:~# ./start_engine.sh</p>
+            <p>> Modüller yükleniyor: Muhasebe [OK] Lojistik [OK] Python [OK]</p>
+            <p>> Yapay Zeka Entegrasyonu: Aktif. İş yükü %70 azaltıldı.</p>
+            <p>> Hedef 2031: Holding Yöneticiliği = True</p>
+            <p class="animate-pulse">> _</p>
+            <button onclick="document.getElementById('terminal-ui').style.display='none'" class="mt-4 text-xs text-red-500 border border-red-500 px-2 rounded hover:bg-red-500 hover:text-black">Kapat</button>
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => { tippy('[data-tippy-content]'); });
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karargah Günlükleri | NURULLAH KARTAL</title>
+    <meta name="description" content="Nurullah Kartal - Yazılım, lojistik ve teknoloji üzerine blog yazıları ve kod snippetları.">
+    <link rel="canonical" href="https://www.nurullahkartal.com.tr/blog.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { darkBg: '#050505', lightBg: '#f8fafc' } } } }</script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    
+    <style>
+        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); }
+        body { font-family: 'Inter', sans-serif; transition: 0.5s ease; }
+        .tech-font { font-family: 'Space Grotesk', sans-serif; }
+        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .progress-container { position: fixed; top: 0; z-index: 100; width: 100%; height: 4px; }
+        .progress-bar { height: 100%; background: var(--ig-grad); width: 0%; transition: 0.1s; }
+        .fade-in { animation: fadeIn 0.8s forwards; opacity: 0; }
+        @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+    </style>
+</head>
+<body class="antialiased dark:bg-darkBg dark:text-slate-100 bg-lightBg text-slate-900 pb-20 fade-in">
+    
+    <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+
+    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-10 flex justify-between items-center backdrop-blur-xl border-b border-black/5 dark:border-white/10">
+        <a href="index.html" class="tech-font text-2xl font-bold insta-text">NK.</a>
+        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50 hover:opacity-100"><i class="fas fa-arrow-left mr-2"></i>Geri Dön</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto pt-32 px-6">
+        <article>
+            <h1 class="tech-font text-3xl md:text-5xl font-black mb-4">Operasyonlarda Yapay Zeka (AI) Kullanımı 🤖</h1>
+            <div class="flex items-center text-xs uppercase tracking-widest opacity-50 font-bold mb-10 border-b border-black/10 dark:border-white/10 pb-6">
+                <span><i class="far fa-calendar-alt mr-2"></i>7 Nisan 2026</span>
+                <span class="mx-4">|</span>
+                <span class="text-pink-500">Yazılım & Verimlilik</span>
+            </div>
+            
+            <p class="mb-6 leading-relaxed opacity-90 text-sm md:text-base">Geleneksel lojistik ve muhasebe süreçleri çok fazla manuel veri girişi gerektirir. Ancak temel bir Python betiği (scripti) ile bu süreçleri otomatize edebiliriz. Aşağıda fatura hesaplamalarını yapan çok basit bir veri işleme kodunu paylaşıyorum:</p>
+            
+            <pre><code class="language-python rounded-2xl p-6 mb-8 text-sm shadow-xl border border-white/5">
+import pandas as pd
+
+def muhasebe_raporu_olustur(veri_yolu):
+    # Fatura verilerini oku
+    df = pd.read_excel(veri_yolu)
+    toplam_gelir = df['Tutar'].sum()
+    
+    print(f"Günlük Toplam Operasyon Hacmi: {toplam_gelir} TL")
+    return "Rapor NK Karargahına İletildi."
+
+# Sistemi Çalıştır
+muhasebe_raporu_olustur('gunluk_fatura.xlsx')
+            </code></pre>
+            
+            <p class="leading-relaxed opacity-90 text-sm md:text-base mb-6">Bu tarz küçük scriptler sayesinde manuel iş yükünü %70 oranında azaltmak mümkün. Özellikle Yapay Zeka asistanlarından "Prompt" ile destek alarak sıfırdan hiç kod yazmadan da bu kurguları yapabiliyorum. Sıradaki hedef, yerel dosyalar yerine bu işlemleri Firebase ile buluta taşımak ve LMTNASY projesine entegre etmek. 💡</p>
+        </article>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll(); // Kodları Renklendir
+        window.onscroll = function() {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById("myBar").style.width = ((winScroll / height) * 100) + "%";
+        };
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

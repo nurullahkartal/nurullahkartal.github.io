@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Sayfa Bulunamadı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={darkMode:'class',theme:{extend:{colors:{darkBg:'#050505',lightBg:'#f8fafc'}}}}</script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@900&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body{font-family:'Inter',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh;}
+        .glass-card{background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); backdrop-filter:blur(20px);}
+        .insta-bg{background:linear-gradient(45deg,#f09433 0%,#dc2743 50%,#bc1888 100%);}
+    </style>
+</head>
+<body class="dark:bg-darkBg dark:text-slate-100 bg-lightBg text-slate-900 text-center px-6">
+    <div class="max-w-md w-full glass-card p-10 rounded-[3rem] shadow-2xl relative">
+        <h1 class="font-['Space_Grotesk'] text-8xl font-black text-transparent bg-clip-text insta-bg mb-4">404</h1>
+        <div class="text-6xl mb-6">🚧</div>
+        <h2 class="text-xl font-bold mb-4">Eyvah, Çıkmaz Sokak!</h2>
+        <p class="text-sm opacity-70 mb-8 font-medium italic">"Valla kardeş Nurullah bu sayfayı tam yapamamış, en iyisi sen ona Instagram'dan mesaj at."</p>
+        
+        <a href="https://www.instagram.com/nurullahkrtal/" target="_blank" class="insta-bg inline-block w-full py-4 rounded-full text-white text-xs font-black uppercase tracking-widest hover:scale-105 transition shadow-lg shadow-pink-500/30 mb-4"><i class="fab fa-instagram mr-2 text-lg"></i> Instagram'a Git</a>
+        <a href="index.html" class="block text-[10px] font-bold uppercase tracking-widest opacity-40 hover:opacity-100 transition">Ana Karargaha Dön</a>
+    </div>
+    <script>if(localStorage.getItem('theme')==='dark'||(!('theme' in localStorage)&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}</script>
+</body>
+</html>
