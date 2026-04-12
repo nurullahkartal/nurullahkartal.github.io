@@ -1,53 +1,129 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deneyimler | NURULLAH KARTAL</title>
+    
+    <link rel="icon" type="image/png" href="nklogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { 
+            darkMode: 'class', 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        mayaBeige: '#f4ece6',
+                        mayaBlue: '#0052ff',
+                        mayaDark: '#1a1a1a'
+                    } 
+                } 
+            } 
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root { --ig-grad: linear-gradient(45deg, #dc2743 0%, #bc1888 100%); }
-        @media (prefers-color-scheme: dark) { body { background: #050505; color: #fff; } .glass-card { background: rgba(255,255,255,0.03); } }
-        @media (prefers-color-scheme: light) { body { background: #fafafa; color: #111; } .glass-card { background: #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.05); } }
-        .tech-font { font-family: 'Space Grotesk', sans-serif; }
-        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        body { font-family: 'Inter', sans-serif; transition: all 0.5s ease; cursor: none; }
+        .main-card { background: #ffffff; border-radius: 2.5rem; }
+        .dark body { background-color: #0f1115; color: #fff; }
+        .dark .main-card { background-color: #16181d; box-shadow: 0 40px 100px -20px rgba(0,0,0,0.5); }
+
+        /* Özel İmleç - Maya Mavisi */
+        .cursor-dot { width: 6px; height: 6px; background: #0052ff; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(0, 82, 255, 0.2); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.15s ease; }
+
+        .brand-logo { height: 40px; }
+        .dark .brand-logo { filter: invert(1) brightness(2); }
+
+        .exp-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
+        .exp-card:hover { border-left-color: #0052ff; transform: translateX(10px); }
     </style>
 </head>
-<body class="antialiased pb-20">
-    <nav class="fixed top-0 w-full z-50 py-4 px-6 flex justify-between items-center backdrop-blur-md border-b border-black/5">
-        <a href="index.html" class="tech-font text-xl font-bold insta-text">NK.</a>
-        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50">← Menü</a>
+<body class="antialiased bg-mayaBeige text-mayaDark min-h-screen">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <nav class="fixed top-0 w-full z-50 py-8 px-8 md:px-16 flex justify-between items-center backdrop-blur-sm">
+        <a href="index.html" class="flex items-center gap-3">
+            <img src="nklogo.png" alt="NK" class="brand-logo">
+            <span class="text-sm font-black tracking-[0.3em] uppercase hidden sm:block">Digital</span>
+        </a>
+        <div class="flex items-center space-x-6">
+            <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
+            <button id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-mayaDark shadow-sm hover:scale-110 transition">
+                <i id="theme-icon" class="fas fa-moon text-mayaBlue"></i>
+            </button>
+        </div>
     </nav>
 
-    <main class="max-w-5xl mx-auto pt-32 px-6">
-        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-12 tracking-tighter">İŞ <span class="insta-text">GEÇMİŞİ</span></h1>
+    <main class="pt-32 pb-20 px-6 flex flex-col items-center">
+        <div class="max-w-4xl w-full">
+            
+            <header class="text-center mb-16">
+                <div class="w-16 h-1.5 bg-mayaBlue mx-auto mb-8 rounded-full"></div>
+                <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter italic leading-none">İŞ <span class="text-mayaBlue">GEÇMİŞİ</span></h1>
+                <p class="text-[9px] font-black opacity-40 uppercase tracking-[0.6em]">NK Digital // Kariyer Kayıtları</p>
+            </header>
 
-        <div class="space-y-6">
-            <div class="glass-card p-8 rounded-3xl border border-black/5">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
-                    <h3 class="font-black italic uppercase text-xl">Solviss Yazılım</h3>
-                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Kasım 2025 - Ocak 2026</span>
+            <div class="space-y-6">
+                
+                <div class="exp-card main-card p-8 md:p-12 shadow-xl shadow-black/5">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-2xl font-black uppercase italic tracking-tight">Solviss Yazılım</h3>
+                        <span class="text-[10px] font-black text-mayaBlue bg-mayaBlue/5 px-4 py-2 rounded-full mt-4 md:mt-0 uppercase tracking-widest">Kasım 2025 - Ocak 2026</span>
+                    </div>
+                    <p class="text-sm leading-relaxed opacity-60 font-medium">Banka ve Operasyon Destek Elemanı // Finansal evrak trafiğinin yönetimi ve resmi kurum süreçlerinin dijital takibi.</p>
                 </div>
-                <p class="text-sm opacity-60 italic">Banka ve Operasyon Destek Elemanı // Finansal evrak trafiği ve resmi kurum süreçleri.</p>
+
+                <div class="exp-card main-card p-8 md:p-12 shadow-xl shadow-black/5">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-2xl font-black uppercase italic tracking-tight text-mayaDark dark:text-white">Tekkelioğlu Yumurta</h3>
+                        <span class="text-[10px] font-black text-mayaBlue bg-mayaBlue/5 px-4 py-2 rounded-full mt-4 md:mt-0 uppercase tracking-widest">Eylül 2025 - Kasım 2025</span>
+                    </div>
+                    <p class="text-sm leading-relaxed opacity-60 font-medium">Lojistik Departmanı // Araç giriş-çıkış operasyonlarının takibi ve Nes Portal veri giriş süreçleri.</p>
+                </div>
+
+                <div class="exp-card main-card p-8 md:p-12 shadow-xl shadow-black/5">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h3 class="text-2xl font-black uppercase italic tracking-tight">Altuntur / Altunkaynak Grup</h3>
+                        <span class="text-[10px] font-black text-mayaBlue bg-mayaBlue/5 px-4 py-2 rounded-full mt-4 md:mt-0 uppercase tracking-widest">Şubat 2022 - Ağustos 2025</span>
+                    </div>
+                    <p class="text-sm leading-relaxed opacity-60 font-medium">Muhasebe Yardımcı Elemanı // Mikro yazılımı ile e-fatura, ihracat süreçleri ve banka mutabakatlarının yönetimi.</p>
+                </div>
+
             </div>
 
-            <div class="glass-card p-8 rounded-3xl border border-black/5">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
-                    <h3 class="font-black italic uppercase text-xl">Tekkelioğlu Yumurta</h3>
-                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Eylül 2025 - Kasım 2025</span>
-                </div>
-                <p class="text-sm opacity-60 italic">Lojistik Departmanı // Araç giriş-çıkış takibi ve Nes Portal veri giriş süreçleri.</p>
-            </div>
-
-            <div class="glass-card p-8 rounded-3xl border border-black/5">
-                <div class="flex flex-col md:flex-row justify-between mb-4">
-                    <h3 class="font-black italic uppercase text-xl">Altuntur / Altunkaynak Grup</h3>
-                    <span class="insta-text font-bold text-[10px] tracking-widest uppercase">Şubat 2022 - Ağustos 2025</span>
-                </div>
-                <p class="text-sm opacity-60 italic">Muhasebe Yardımcı Elemanı // Mikro yazılımı ile e-fatura, ihracat ve mutabakat yönetimi.</p>
-            </div>
         </div>
     </main>
+
+    <footer class="py-12 text-center opacity-20 text-[7px] uppercase tracking-[1em] font-black">
+        NK.DIGITAL // CAREER LOGS // 2026
+    </footer>
+
+    <script>
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 300, fill: "forwards" });
+        });
+
+        const btn = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        const html = document.documentElement;
+        btn.addEventListener('click', () => {
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            icon.classList.replace(isDark ? 'fa-sun' : 'fa-moon', isDark ? 'fa-moon' : 'fa-sun');
+        });
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
 </body>
 </html>

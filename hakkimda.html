@@ -1,155 +1,33 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımda & Kariyer | NURULLAH KARTAL</title>
-    <meta name="description" content="Nurullah Kartal'ın iş geçmişi, yetkinlikleri, okuduğu kitaplar ve 2031 vizyonu.">
-    <link rel="canonical" href="https://www.nurullahkartal.com.tr/hakkimda.html">
+    <title>Hakkımda | NURULLAH KARTAL</title>
+    <link rel="icon" type="image/png" href="nklogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { darkBg: '#050505', lightBg: '#f8fafc' } } } }</script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); }
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; cursor: default; }
-        .tech-font { font-family: 'Space Grotesk', sans-serif; }
-        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass-card { background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.08); backdrop-filter: blur(20px); transition: transform 0.3s ease; }
-        .dark .glass-card { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
-        .fade-in { animation: fadeIn 0.8s ease-in forwards; opacity: 0; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        /* İlerleme Çubuğu */
-        .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 9999; }
-        .reading-progress { height: 100%; background: var(--ig-grad); width: 0%; transition: width 0.1s; }
-        .skill-progress-bg { width: 100%; background: rgba(128,128,128,0.2); height: 6px; border-radius: 10px; overflow: hidden; margin-top: 4px; }
-        .skill-progress-fill { height: 100%; background: var(--ig-grad); }
-        details > summary { list-style: none; outline: none; }
-        details > summary::-webkit-details-marker { display: none; }
-    </style>
+    <script>tailwind.config={theme:{extend:{colors:{nkPlatinum:'#f1f5f9',nkAnthracite:'#1e293b',nkPower:'#7f1d1d'}}}}</script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <style>body{font-family:'Inter',sans-serif; cursor:none;} .brand-logo{height:100px; transition:0.3s;} .cursor-dot{width:6px;height:6px;background:#7f1d1d;position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}</style>
 </head>
-<body class="antialiased dark:bg-darkBg dark:text-slate-100 bg-lightBg text-slate-900 pb-20 fade-in">
-    
-    <div class="progress-bar-container"><div class="reading-progress" id="reading-progress"></div></div>
-
-    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-10 flex justify-between items-center backdrop-blur-xl border-b border-black/5 dark:border-white/10">
-        <a href="index.html" class="tech-font text-2xl font-bold insta-text">NK.</a>
-        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition"><i class="fas fa-arrow-left mr-2"></i>Karargaha Dön</a>
+<body class="bg-nkPlatinum text-nkAnthracite min-h-screen pt-40 px-6">
+    <div class="cursor-dot"></div>
+    <nav class="fixed top-0 w-full z-50 py-10 px-12 flex justify-between items-center backdrop-blur-sm">
+        <div class="flex items-center gap-8">
+            <img src="nklogo.png" alt="NK" class="brand-logo">
+            <span class="text-xl font-black tracking-[0.5em] uppercase text-nkPower">NK DIGITAL</span>
+        </div>
+        <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
     </nav>
-
-    <main class="max-w-5xl mx-auto pt-32 px-6">
-        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-12 tracking-tighter text-center">KARARGAH <span class="insta-text">RAPORU</span></h1>
-
-        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="glass-card p-6 text-center rounded-2xl">
-                <div class="text-3xl font-black insta-text mb-2">4+</div>
-                <div class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Yıllık Operasyon<br>Tecrübesi</div>
-            </div>
-            <div class="glass-card p-6 text-center rounded-2xl">
-                <div class="text-3xl font-black insta-text mb-2"><i class="fas fa-robot"></i></div>
-                <div class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Yapay Zeka Destekli<br>Süreç Geliştirme</div>
-            </div>
-            <div class="glass-card p-6 text-center rounded-2xl">
-                <div class="text-3xl font-black insta-text mb-2">3</div>
-                <div class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Farklı Sektör<br>(Lojistik, Yazılım, Muhasebe)</div>
-            </div>
-            <div class="glass-card p-6 text-center rounded-2xl">
-                <div class="text-3xl font-black insta-text mb-2">🎓</div>
-                <div class="text-[9px] uppercase tracking-widest opacity-60 font-bold">Çift Üniversite<br>& Kalfalık Belgeleri</div>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h3 class="tech-font font-bold uppercase text-[12px] mb-6 opacity-50 tracking-[0.3em]"><i class="fas fa-briefcase mr-2"></i>Kariyer & İş Geçmişi</h3>
-            <div class="space-y-4">
-                <div class="glass-card p-6 rounded-3xl flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-black italic uppercase text-lg">Solviss Yazılım</h4>
-                        <p class="text-xs opacity-60 mt-1">Banka ve Operasyon Destek Elemanı (Resmi kurum süreçleri)</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-sky-500 mt-2 md:mt-0 tracking-widest uppercase">Kas 2025 - Oca 2026</span>
-                </div>
-                <div class="glass-card p-6 rounded-3xl flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-black italic uppercase text-lg">Tekkelioğlu Yumurta</h4>
-                        <p class="text-xs opacity-60 mt-1">Lojistik Departmanı (Araç giriş-çıkış takibi & Nes Portal)</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-orange-500 mt-2 md:mt-0 tracking-widest uppercase">Eyl 2025 - Kas 2025</span>
-                </div>
-                <div class="glass-card p-6 rounded-3xl flex flex-col md:flex-row justify-between md:items-center">
-                    <div>
-                        <h4 class="font-black italic uppercase text-lg">Altunkaynak Grup (Altuntur)</h4>
-                        <p class="text-xs opacity-60 mt-1">Muhasebe Yardımcı Elemanı (Mikro, e-fatura, mutabakat)</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-pink-500 mt-2 md:mt-0 tracking-widest uppercase">Şub 2022 - Ağu 2025</span>
-                </div>
-            </div>
-        </section>
-
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-            <article class="glass-card p-8 rounded-[2.5rem]">
-                <h3 class="tech-font font-bold uppercase text-[12px] mb-6 opacity-50 tracking-[0.3em]"><i class="fas fa-user-tie mr-2"></i>Profesyonel Profil</h3>
-                <p class="text-sm leading-relaxed opacity-80 mb-4">Erken yaşta atıldığım iş hayatında finansal evrak yönetimi, lojistik araç takibi ve banka mutabakatlarında piştim. Geleneksel yöntemlere takılı kalmıyor, "Prompt Engineering" mantığıyla yapay zeka araçlarını süreçlerime entegre ederek verimliliği katlıyorum.</p>
-                <p class="text-sm leading-relaxed opacity-80">Mesleki eğitimimi MESEM'de tamamlayarak Muhasebe Dalı Kalfalık ve Ustalık belgelerimi aldım. Şu an Anadolu Üniversitesi (Uluslararası Ticaret ve Lojistik) ve Atatürk Üniversitesi'nde (Muhasebe) akademik altyapımı güçlendiriyorum.</p>
-            </article>
-
-            <div class="space-y-6">
-                <div class="glass-card p-8 rounded-[2.5rem] border-l-4 border-l-pink-500 hover:scale-[1.02] transition">
-                    <h3 class="tech-font font-bold uppercase text-[10px] mb-2 opacity-50 tracking-[0.3em]">🎯 2031 Vizyonu</h3>
-                    <p class="text-sm leading-relaxed font-bold italic">"Sanko veya Altunkaya gibi köklü holdinglerin operasyon ve dijital dönüşüm süreçlerinde şef/yönetici pozisyonunda yer alarak teknolojiyi sahayla buluşturmak."</p>
-                </div>
-                <div class="glass-card p-8 rounded-[2.5rem] border-l-4 border-l-sky-500 hover:scale-[1.02] transition">
-                    <h3 class="tech-font font-bold uppercase text-[10px] mb-2 opacity-50 tracking-[0.3em]">🌍 Kültürel Köşe</h3>
-                    <p class="text-sm leading-relaxed font-bold italic">"Mezopotamya'nın kadim şehri Mardin'in köklü vizyonunu, sanayinin kalbi Gaziantep'in sönmeyen dinamiğiyle harmanlayarak dijital dünyada adımlarımı atıyorum."</p>
-                </div>
+    <main class="max-w-4xl mx-auto bg-white p-16 rounded-[4rem] shadow-2xl border-t-8 border-nkPower">
+        <h1 class="text-6xl font-black uppercase mb-10 italic">NURULLAH <span class="text-nkPower">KARTAL</span></h1>
+        <p class="text-lg opacity-80 leading-relaxed mb-10">Gaziantep sanayisinin dinamizmini dijital mühürle buluşturan, 2031 holding vizyonuna sahip operasyon şefi.</p>
+        <div class="grid grid-cols-2 gap-8">
+            <div class="p-8 bg-nkPlatinum rounded-3xl border-l-8 border-nkAnthracite">
+                <h4 class="text-[10px] font-black uppercase opacity-40 mb-2">HEDEF 2031</h4>
+                <p class="font-bold italic text-sm">"Operasyonel dijital dönüşümün zirvesinde yer almak."</p>
             </div>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-            <section class="glass-card p-8 rounded-[2.5rem]">
-                <h3 class="tech-font font-bold uppercase text-[12px] mb-6 opacity-50 tracking-[0.3em]"><i class="fas fa-language mr-2"></i>Dil Yetkinlikleri</h3>
-                <div class="space-y-4">
-                    <div><div class="flex justify-between text-xs font-bold mb-1"><span>Türkçe</span><span>%80</span></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%"></div></div></div>
-                    <div><div class="flex justify-between text-xs font-bold mb-1"><span>Kürtçe</span><span>%90</span></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%"></div></div></div>
-                    <div><div class="flex justify-between text-xs font-bold mb-1"><span>İngilizce</span><span>%0</span></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 0%"></div></div></div>
-                    <div><div class="flex justify-between text-xs font-bold mb-1"><span>Arapça</span><span>%0</span></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 0%"></div></div></div>
-                </div>
-            </section>
-
-            <section class="glass-card p-8 rounded-[2.5rem]">
-                <h3 class="tech-font font-bold uppercase text-[12px] mb-6 opacity-50 tracking-[0.3em]"><i class="fas fa-book mr-2"></i>Gelişim Kütüphanesi</h3>
-                <ul class="space-y-4">
-                    <li class="flex items-start space-x-4"><div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center font-black">1</div><div><h4 class="font-bold text-sm">Etkili İnsanların 7 Alışkanlığı</h4><span class="text-xs opacity-60">Stephen R. Covey</span></div></li>
-                    <li class="flex items-start space-x-4"><div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center font-black">2</div><div><h4 class="font-bold text-sm">Atomik Alışkanlıklar</h4><span class="text-xs opacity-60">James Clear</span></div></li>
-                    <li class="flex items-start space-x-4"><div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center font-black">3</div><div><h4 class="font-bold text-sm">İnsan Geleceğini Nasıl Kurar?</h4><span class="text-xs opacity-60">İlber Ortaylı</span></div></li>
-                </ul>
-            </section>
-        </div>
-
-        <h3 class="tech-font text-center font-bold uppercase text-[12px] mb-8 opacity-50 tracking-[0.4em]">SSS (Sıkça Sorulanlar)</h3>
-        <details class="glass-card p-6 rounded-[2rem] mb-4 group cursor-pointer">
-            <summary class="font-black uppercase tracking-widest text-xs flex justify-between items-center">Hangi yazılım dillerini/araçlarını kullanıyorsun? <i class="fas fa-chevron-down opacity-50 group-open:rotate-180 transition"></i></summary>
-            <div class="mt-4 opacity-80 text-sm leading-relaxed border-t border-white/10 pt-4">Operasyonları otomatize etmek için Python, mobil fikirler için Kotlin ve veritabanı süreçleri için Firebase altyapısını kullanıyorum. Tüm bu süreci Yapay Zeka (AI) asistanlarıyla kodlayarak geliştiriyorum.</div>
-        </details>
-        <details class="glass-card p-6 rounded-[2rem] mb-4 group cursor-pointer">
-            <summary class="font-black uppercase tracking-widest text-xs flex justify-between items-center">Sertifikaların ve uzmanlık alanların neler? <i class="fas fa-chevron-down opacity-50 group-open:rotate-180 transition"></i></summary>
-            <div class="mt-4 opacity-80 text-sm leading-relaxed border-t border-white/10 pt-4">Mesleki Eğitim Merkezinden alınmış "Muhasebe Dalı Kalfalık ve Ustalık" belgelerine sahibim. Mikro, Logo ve Nes Portal gibi programlarda e-Fatura, banka mutabakatı ve lojistik sevkiyat planlamalarında uzmanım.</div>
-        </details>
-
     </main>
-
-    <script>
-        // Sayfa okuma ilerleme çubuğu
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("reading-progress").style.width = scrolled + "%";
-        };
-        // Tema ayarı koruma
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
-    </script>
+    <script>const dot=document.querySelector('.cursor-dot'); window.addEventListener('mousemove',(e)=>{dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';});</script>
 </body>
 </html>

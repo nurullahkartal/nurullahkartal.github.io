@@ -3,75 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Görsel Arşiv | NURULLAH KARTAL</title>
-    
-    <meta name="robots" content="index, follow">
-    <meta name="description" content="Nurullah Kartal profesyonel fotoğraf galerisi ve etkinlik görselleri.">
-    
+    <title>Galeri | NURULLAH KARTAL</title>
+    <link rel="icon" type="image/png" href="nklogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
-    
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { mayaBeige: '#f4ece6', mayaBlue: '#0052ff', mayaDark: '#1a1a1a' } } } }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #f8fafc; }
-        .tech-font { font-family: 'Space Grotesk', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; }
-        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        img { transition: transform 0.5s ease; filter: grayscale(20%); }
-        img:hover { transform: scale(1.05); filter: grayscale(0%); }
+        body { font-family: 'Inter', sans-serif; transition: all 0.5s ease; cursor: none; }
+        .main-card { background: #ffffff; border-radius: 2rem; overflow: hidden; }
+        .dark body { background-color: #0f1115; }
+        .dark .main-card { background-color: #16181d; }
+        img { filter: grayscale(100%); transition: 0.6s ease; }
+        img:hover { filter: grayscale(0%); transform: scale(1.03); }
+        .cursor-dot { width: 6px; height: 6px; background: #0052ff; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(0, 82, 255, 0.2); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.15s ease; }
+        .brand-logo { height: 65px; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased bg-mayaBeige text-mayaDark min-h-screen">
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
 
-    <nav class="p-6">
-        <a href="index.html" class="text-[10px] uppercase tracking-widest opacity-30 hover:opacity-100 transition">← Ana Sayfaya Dön</a>
+    <nav class="fixed top-0 w-full z-50 py-10 px-8 md:px-16 flex justify-between items-center backdrop-blur-sm">
+        <a href="index.html" class="flex items-center gap-4">
+            <img src="nklogo.png" alt="NK" class="brand-logo dark:invert dark:brightness-200">
+            <span class="text-lg font-black tracking-[0.4em] uppercase">NK DIGITAL</span>
+        </a>
+        <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
     </nav>
 
-    <main class="max-w-6xl mx-auto px-6 py-10">
-        <header class="mb-16 text-center">
-            <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-4 tracking-tighter">
-                GÖRSEL <span class="insta-text">ARŞİV</span>
-            </h1>
-            <p class="text-xs opacity-40 uppercase tracking-[0.4em] italic text-slate-500">Nurullah Kartal Dijital Veri Merkezi</p>
-        </header>
+    <main class="pt-48 pb-20 px-6 flex flex-col items-center">
+        <div class="max-w-6xl w-full text-center">
+            <div class="w-16 h-1 bg-mayaBlue mx-auto mb-8 rounded-full"></div>
+            <h1 class="text-5xl md:text-7xl font-black uppercase mb-16 tracking-tighter italic">GÖRSEL <span class="text-mayaBlue">ARŞİV</span></h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="glass-card rounded-[2rem]">
-                <img src="img/nurullah-kartal-profil.jpeg" 
-                     alt="Nurullah Kartal - Yazılım Geliştirici, Lojistik ve Muhasebe Uzmanı" 
-                     title="Nurullah Kartal Profesyonel Profil"
-                     class="w-full h-auto object-cover">
-                <div class="p-6">
-                    <span class="text-[10px] font-bold opacity-30 tracking-widest uppercase italic">Kurumsal Portre</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="main-card shadow-xl shadow-black/5">
+                    <img src="img/nurullah-kartal-profil.jpeg" alt="Nurullah Kartal" class="w-full h-80 object-cover" onerror="this.src='https://via.placeholder.com/600x800/111/fff?text=Profil'">
+                    <div class="p-6"><span class="text-[8px] font-black uppercase tracking-widest opacity-40">Kurumsal Portre</span></div>
+                </div>
+                <div class="main-card shadow-xl shadow-black/5">
+                    <img src="img/nurullah-kartal-gdg.jpeg" alt="GDG" class="w-full h-80 object-cover" onerror="this.src='https://via.placeholder.com/600x800/111/fff?text=GDG+Gaziantep'">
+                    <div class="p-6"><span class="text-[8px] font-black uppercase tracking-widest opacity-40">Etkinlik Kaydı</span></div>
                 </div>
             </div>
-
-            <div class="glass-card rounded-[2rem]">
-                <img src="img/nurullah-kartal-gdg.jpeg" 
-                     alt="Nurullah Kartal - GDG Gaziantep Yazılım ve Teknoloji Etkinliği" 
-                     title="Nurullah Kartal Google Developer Groups"
-                     class="w-full h-auto object-cover">
-                <div class="p-6">
-                    <span class="text-[10px] font-bold opacity-30 tracking-widest uppercase italic">Etkinlik Kaydı</span>
-                </div>
-            </div>
-
-            <div class="glass-card rounded-[2rem] flex items-center justify-center min-h-[300px]">
-                <span class="text-[8px] opacity-10 uppercase tracking-[1em] -rotate-90">Veri Bekleniyor</span>
-            </div>
-
         </div>
     </main>
 
-    <section class="opacity-0 h-0 overflow-hidden">
-        <h2>Nurullah Kartal Kimdir?</h2>
-        <p>Gaziantep ve Mardin'de lojistik, muhasebe ve yazılım alanlarında faaliyet gösteren Nurullah Kartal'ın profesyonel galeri sayfasıdır. Python, Kotlin ve Firebase teknolojileri ile geliştirdiği projelerin görsel arşividir.</p>
-    </section>
-
-    <footer class="py-20 text-center opacity-10 text-[8px] uppercase tracking-[0.5em]">
-        © 2026 NK DATABASE ACCESS
-    </footer>
-
+    <script>
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 300, fill: "forwards" });
+        });
+    </script>
 </body>
 </html>

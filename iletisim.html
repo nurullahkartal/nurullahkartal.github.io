@@ -3,109 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim & CV | NURULLAH KARTAL</title>
-    
-    <meta name="description" content="Nurullah Kartal iletişim bilgileri, PDF CV indirme, VCard rehber kaydı ve iletişim formu.">
-    <link rel="canonical" href="https://www.nurullahkartal.com.tr/iletisim.html">
-    
+    <title>İletişim | NURULLAH KARTAL</title>
+    <link rel="icon" type="image/png" href="nklogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { darkBg: '#050505', lightBg: '#f8fafc' } } } }</script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { mayaBeige: '#f4ece6', mayaBlue: '#0052ff', mayaDark: '#1a1a1a' } } } }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-    
     <style>
-        :root { --ig-grad: linear-gradient(45deg, #f09433 0%, #bc1888 100%); }
-        body { font-family: 'Inter', sans-serif; transition: background-color 0.5s ease; cursor: default; }
-        .insta-text { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .tech-font { font-family: 'Space Grotesk', sans-serif; }
-        .glass-card { background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(0, 0, 0, 0.08); backdrop-filter: blur(20px); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .dark .glass-card { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1); }
-        .glass-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px -10px rgba(220,39,67,0.15); }
-        .fade-in { animation: fadeIn 0.8s forwards; opacity: 0; }
-        @keyframes fadeIn { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+        body { font-family: 'Inter', sans-serif; transition: all 0.5s ease; cursor: none; }
+        .main-card { background: #ffffff; border-radius: 2.5rem; }
+        .dark body { background-color: #0f1115; color: #fff; }
+        .dark .main-card { background-color: #16181d; }
+        .pill-btn { border-radius: 9999px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+        .cursor-dot { width: 6px; height: 6px; background: #0052ff; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+        .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(0, 82, 255, 0.2); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.15s ease; }
+        .brand-logo { height: 65px; }
     </style>
 </head>
-<body class="antialiased dark:bg-darkBg dark:text-slate-100 bg-lightBg text-slate-900 pb-20 fade-in">
-    
-    <nav class="fixed top-0 w-full z-50 py-6 px-6 md:px-10 flex justify-between items-center backdrop-blur-xl border-b border-black/5 dark:border-white/10">
-        <a href="index.html" class="tech-font text-2xl font-bold insta-text">NK.</a>
-        <a href="index.html" class="text-[10px] font-bold uppercase tracking-widest opacity-50 hover:opacity-100 transition"><i class="fas fa-arrow-left mr-2"></i>Karargaha Dön</a>
+<body class="antialiased bg-mayaBeige text-mayaDark min-h-screen">
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <nav class="fixed top-0 w-full z-50 py-10 px-8 md:px-16 flex justify-between items-center backdrop-blur-sm">
+        <a href="index.html" class="flex items-center gap-4">
+            <img src="nklogo.png" alt="NK" class="brand-logo dark:invert dark:brightness-200">
+            <span class="text-lg font-black tracking-[0.4em] uppercase hidden sm:block">NK DIGITAL</span>
+        </a>
+        <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
     </nav>
 
-    <main class="max-w-5xl mx-auto pt-32 px-6">
-        <h1 class="tech-font text-4xl md:text-6xl font-black uppercase italic mb-12 text-center">BANA <span class="insta-text">ULASIN</span></h1>
-
-        <div class="grid md:grid-cols-2 gap-6 mb-10">
-            <a href="nurullah_kartal_cv.pdf" download class="glass-card p-6 rounded-[2rem] flex items-center justify-between group">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center"><i class="fas fa-file-pdf text-xl text-pink-500 group-hover:scale-110 transition"></i></div>
-                    <div><span class="block text-[10px] font-bold opacity-50 uppercase tracking-widest">Özgeçmiş</span><span class="text-sm font-black">CV İndir (PDF)</span></div>
-                </div>
-                <i class="fas fa-download opacity-30 group-hover:opacity-100 transition text-pink-500"></i>
-            </a>
-            
-            <a href="nurullah_iletisim.vcf" download class="glass-card p-6 rounded-[2rem] flex items-center justify-between group">
-                <div class="flex items-center space-x-4">
-                    <div class="w-12 h-12 rounded-full bg-sky-500/10 flex items-center justify-center"><i class="fas fa-address-card text-xl text-sky-500 group-hover:scale-110 transition"></i></div>
-                    <div><span class="block text-[10px] font-bold opacity-50 uppercase tracking-widest">Rehbere Ekle</span><span class="text-sm font-black">VCard İndir</span></div>
-                </div>
-                <i class="fas fa-download opacity-30 group-hover:opacity-100 transition text-sky-500"></i>
-            </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 mb-8">
-            <div class="space-y-8">
-                <a href="mailto:nurullahkartaltr@gmail.com" class="glass-card block p-8 rounded-3xl flex items-center justify-between group">
-                    <div class="flex items-center space-x-6">
-                        <i class="fas fa-envelope text-3xl insta-text group-hover:scale-110 transition"></i>
-                        <div>
-                            <span class="block text-[10px] font-bold opacity-40 uppercase tracking-widest">Karargah E-Posta</span>
-                            <span class="text-sm md:text-base font-bold">nurullahkartaltr@gmail.com</span>
-                        </div>
-                    </div>
-                </a>
+    <main class="pt-48 pb-20 px-6 flex flex-col items-center">
+        <div class="max-w-5xl w-full">
+            <div class="main-card p-10 md:p-16 mb-10 shadow-2xl shadow-black/5 text-center">
+                <div class="w-20 h-1.5 bg-mayaBlue mx-auto mb-10 rounded-full"></div>
+                <h1 class="text-4xl md:text-6xl font-black uppercase mb-12 tracking-tighter italic">İRTİBAT <span class="text-mayaBlue">Hattı</span></h1>
                 
-                <div class="glass-card p-8 rounded-3xl flex flex-col items-center">
-                    <span class="block text-[10px] font-bold opacity-40 uppercase tracking-widest mb-4">LinkedIn Profili</span>
-                    <div class="badge-base LI-profile-badge w-full flex justify-center" data-locale="tr_TR" data-size="large" data-theme="dark" data-type="HORIZONTAL" data-vanity="nurullahkartal" data-version="v1"></div>
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <a href="nurullah_kartal_cv.pdf" download class="p-8 bg-gray-50 dark:bg-white/5 rounded-3xl flex flex-col items-center group transition border border-transparent hover:border-mayaBlue">
+                        <i class="fas fa-file-pdf text-3xl text-mayaBlue mb-4 group-hover:scale-110 transition"></i>
+                        <span class="text-[10px] font-bold opacity-40 uppercase tracking-widest mb-1">Özgeçmiş</span>
+                        <span class="text-xs font-black">CV İNDİR (PDF)</span>
+                    </a>
+                    <a href="mailto:nurullahkartaltr@gmail.com" class="p-8 bg-gray-50 dark:bg-white/5 rounded-3xl flex flex-col items-center group transition border border-transparent hover:border-mayaBlue">
+                        <i class="fas fa-envelope-open-text text-3xl text-mayaBlue mb-4 group-hover:scale-110 transition"></i>
+                        <span class="text-[10px] font-bold opacity-40 uppercase tracking-widest mb-1">Resmi Yazışma</span>
+                        <span class="text-xs font-black">nurullahkartaltr@gmail.com</span>
+                    </a>
                 </div>
-            </div>
-
-            <div class="glass-card p-8 rounded-3xl">
-                <h3 class="font-bold uppercase tracking-widest text-[10px] mb-6 opacity-50"><i class="fas fa-paper-plane mr-2"></i>Hızlı Mesaj</h3>
-                <form action="mailto:nurullahkartaltr@gmail.com" method="POST" enctype="text/plain" class="space-y-4">
-                    <input type="text" placeholder="Adınız Soyadınız" class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-pink-500 transition" required>
-                    <textarea placeholder="Mesajınızı buraya yazın..." rows="5" class="w-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl p-3 text-sm focus:outline-none focus:border-pink-500 transition" required></textarea>
-                    <button type="submit" class="w-full bg-gradient-to-r from-pink-600 to-purple-600 text-white hover:opacity-90 transition py-3 rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-pink-500/20 active:scale-95">Gönder</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass-card rounded-3xl overflow-hidden h-48 border border-black/5 dark:border-white/5 relative group">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d101768.45544778174!2d37.3116812!3d37.0662215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1531e6b4f7312d1f%3A0x6bba84b917da559!2sGaziantep!5e0!3m2!1str!2str!4v1700000000000" width="100%" height="100%" style="border:0; filter: grayscale(80%) invert(90%);" allowfullscreen="" loading="lazy"></iframe>
-                <div class="absolute inset-0 bg-black/20 pointer-events-none group-hover:bg-transparent transition"></div>
-            </div>
-            
-            <div class="glass-card p-6 rounded-3xl flex flex-col items-center justify-center text-center group">
-                <img src="qrcode.svg" alt="Nurullah Kartal İletişim QR" class="w-28 h-28 rounded-xl mb-3 shadow-md bg-white p-2 group-hover:scale-110 transition duration-300">
-                <p class="text-[9px] uppercase tracking-widest font-bold opacity-50">Telefonla Okut & Rehbere Kaydet</p>
-            </div>
-
-            <div class="glass-card p-6 rounded-3xl flex flex-col justify-center text-center">
-                <i class="far fa-calendar-alt text-3xl mb-3 text-sky-500"></i>
-                <h3 class="font-bold text-sm mb-1">Toplantı Ayarla</h3>
-                <p class="text-[10px] opacity-60 mb-4">Projeler için 7/24 uygun zaman dilimi.</p>
-                <a href="#" class="px-4 py-2 bg-sky-500/10 text-sky-500 border border-sky-500/30 rounded-full hover:bg-sky-500 hover:text-white transition text-[10px] font-bold uppercase tracking-widest active:scale-95">Takvimi Gör (Yakında)</a>
             </div>
         </div>
     </main>
 
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { 
-            document.documentElement.classList.add('dark'); 
-        }
+        const dot = document.querySelector('.cursor-dot');
+        const outline = document.querySelector('.cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 300, fill: "forwards" });
+        });
     </script>
 </body>
 </html>
