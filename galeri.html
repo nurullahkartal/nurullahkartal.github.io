@@ -1,64 +1,38 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeri | NURULLAH KARTAL</title>
-    <link rel="icon" type="image/png" href="nklogo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { mayaBeige: '#f4ece6', mayaBlue: '#0052ff', mayaDark: '#1a1a1a' } } } }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Galeri | NK</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; transition: all 0.5s ease; cursor: none; }
-        .main-card { background: #ffffff; border-radius: 2rem; overflow: hidden; }
-        .dark body { background-color: #0f1115; }
-        .dark .main-card { background-color: #16181d; }
-        img { filter: grayscale(100%); transition: 0.6s ease; }
-        img:hover { filter: grayscale(0%); transform: scale(1.03); }
-        .cursor-dot { width: 6px; height: 6px; background: #0052ff; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(0, 82, 255, 0.2); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.15s ease; }
-        .brand-logo { height: 65px; }
+        :root { --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --nk-red: #e11d48; --border: rgba(0,0,0,0.05); }
+        [data-theme="dark"] { --bg: #0e0e0e; --card: #181818; --text: #ffffff; --border: rgba(255,255,255,0.05); }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.4s; padding: 4vw; }
+        .galeri-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .img-box { background: var(--card); border-radius: 15px; height: 300px; border: 1px solid var(--border); overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .theme-switch { display: inline-block; height: 3vh; position: relative; width: 6vh; }
+        .theme-switch input { display: none; }
+        .slider { background-color: #ccc; cursor: pointer; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: .4s; border-radius: 34px; }
+        .slider:before { background-color: white; bottom: 0.3vh; content: ""; height: 2.4vh; left: 0.3vh; position: absolute; transition: .4s; width: 2.4vh; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--nk-red); }
+        input:checked + .slider:before { transform: translateX(3vh); }
     </style>
 </head>
-<body class="antialiased bg-mayaBeige text-mayaDark min-h-screen">
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
-
-    <nav class="fixed top-0 w-full z-50 py-10 px-8 md:px-16 flex justify-between items-center backdrop-blur-sm">
-        <a href="index.html" class="flex items-center gap-4">
-            <img src="nklogo.png" alt="NK" class="brand-logo dark:invert dark:brightness-200">
-            <span class="text-lg font-black tracking-[0.4em] uppercase">NK DIGITAL</span>
-        </a>
-        <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
-    </nav>
-
-    <main class="pt-48 pb-20 px-6 flex flex-col items-center">
-        <div class="max-w-6xl w-full text-center">
-            <div class="w-16 h-1 bg-mayaBlue mx-auto mb-8 rounded-full"></div>
-            <h1 class="text-5xl md:text-7xl font-black uppercase mb-16 tracking-tighter italic">GÖRSEL <span class="text-mayaBlue">ARŞİV</span></h1>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="main-card shadow-xl shadow-black/5">
-                    <img src="img/nurullah-kartal-profil.jpeg" alt="Nurullah Kartal" class="w-full h-80 object-cover" onerror="this.src='https://via.placeholder.com/600x800/111/fff?text=Profil'">
-                    <div class="p-6"><span class="text-[8px] font-black uppercase tracking-widest opacity-40">Kurumsal Portre</span></div>
-                </div>
-                <div class="main-card shadow-xl shadow-black/5">
-                    <img src="img/nurullah-kartal-gdg.jpeg" alt="GDG" class="w-full h-80 object-cover" onerror="this.src='https://via.placeholder.com/600x800/111/fff?text=GDG+Gaziantep'">
-                    <div class="p-6"><span class="text-[8px] font-black uppercase tracking-widest opacity-40">Etkinlik Kaydı</span></div>
-                </div>
-            </div>
-        </div>
-    </main>
-
+<body data-theme="light">
+    <div style="display:flex; justify-content:space-between; margin-bottom:40px;">
+        <a href="index.html"><img src="nklogo.png" style="height:6vh;"></a>
+        <div style="display:flex; align-items:center; gap:15px;"><i class="fas fa-sun"></i><label class="theme-switch"><input type="checkbox" id="checkbox" onchange="toggleTheme()"><div class="slider"></div></label><i class="fas fa-moon"></i></div>
+    </div>
+    <div class="galeri-grid">
+        <div class="img-box"><img src="img/galeri1.jpg" alt="NK"></div>
+        <div class="img-box"><img src="img/galeri2.jpg" alt="NK"></div>
+        <div class="img-box"><img src="img/galeri3.jpg" alt="NK"></div>
+    </div>
     <script>
-        const dot = document.querySelector('.cursor-dot');
-        const outline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 300, fill: "forwards" });
-        });
+        function toggleTheme() { const target = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; document.body.setAttribute('data-theme', target); localStorage.setItem('nk-theme', target); }
+        const saved = localStorage.getItem('nk-theme') || 'light'; document.body.setAttribute('data-theme', saved); document.getElementById('checkbox').checked = saved === 'dark';
     </script>
 </body>
 </html>

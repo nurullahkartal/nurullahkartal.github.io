@@ -1,85 +1,55 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeler | NURULLAH KARTAL</title>
-    <link rel="icon" type="image/png" href="nklogo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { mayaBeige: '#f4ece6', mayaBlue: '#0052ff', mayaDark: '#1a1a1a' } } } }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; transition: all 0.5s ease; cursor: none; }
-        .main-card { background: #ffffff; border-radius: 2.5rem; }
-        .dark body { background-color: #0f1115; color: #fff; }
-        .dark .main-card { background-color: #16181d; }
-        .project-item { transition: all 0.3s ease; border: 1px solid transparent; }
-        .project-item:hover { border-color: #0052ff; transform: translateY(-5px); }
-        .cursor-dot { width: 6px; height: 6px; background: #0052ff; position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        .cursor-outline { width: 35px; height: 35px; border: 1.5px solid rgba(0, 82, 255, 0.2); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.15s ease; }
-        .brand-logo { height: 65px; }
+        :root { --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --text-muted: #64748b; --nk-red: #e11d48; --border: rgba(0,0,0,0.05); }
+        [data-theme="dark"] { --bg: #0e0e0e; --card: #181818; --text: #ffffff; --text-muted: #888888; --border: rgba(255,255,255,0.05); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; transition: 0.4s; }
+        .header { height: 12vh; display: flex; justify-content: space-between; align-items: center; padding: 0 4vw; border-bottom: 1px solid var(--border); background: var(--card); }
+        .header-brand img { height: 8vh; width: auto; transition: 0.3s; }
+        [data-theme="dark"] .header-brand img { filter: brightness(10); }
+        .container { max-width: 1000px; margin: 5vh auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { background: var(--card); border-radius: 20px; padding: 2.5rem; border: 1px solid var(--border); transition: 0.3s; }
+        .project-card:hover { border-color: var(--nk-red); transform: translateY(-5px); }
+        .tag { font-size: 0.6rem; font-weight: 900; background: var(--bg); padding: 5px 12px; border-radius: 50px; text-transform: uppercase; color: var(--nk-red); }
+        .theme-switch { display: inline-block; height: 3vh; position: relative; width: 6vh; }
+        .theme-switch input { display: none; }
+        .slider { background-color: #ccc; cursor: pointer; position: absolute; top: 0; left: 0; right: 0; bottom: 0; transition: .4s; border-radius: 34px; }
+        .slider:before { background-color: white; bottom: 0.3vh; content: ""; height: 2.4vh; left: 0.3vh; position: absolute; transition: .4s; width: 2.4vh; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--nk-red); }
+        input:checked + .slider:before { transform: translateX(3vh); }
     </style>
 </head>
-<body class="antialiased bg-mayaBeige text-mayaDark min-h-screen">
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
-
-    <nav class="fixed top-0 w-full z-50 py-10 px-8 md:px-16 flex justify-between items-center backdrop-blur-sm">
-        <a href="index.html" class="flex items-center gap-4">
-            <img src="nklogo.png" alt="NK" class="brand-logo dark:invert dark:brightness-200">
-            <span class="text-lg font-black tracking-[0.4em] uppercase hidden sm:block">NK DIGITAL</span>
-        </a>
-        <a href="index.html" class="text-[10px] font-black uppercase tracking-widest opacity-50 hover:opacity-100 transition">← Karargah</a>
-    </nav>
-
-    <main class="pt-48 pb-20 px-6 flex flex-col items-center">
-        <div class="max-w-5xl w-full">
-            <header class="text-center mb-16">
-                <div class="w-16 h-1 bg-mayaBlue mx-auto mb-8 rounded-full"></div>
-                <h1 class="text-5xl md:text-7xl font-black uppercase mb-4 tracking-tighter italic">TEKNOLOJİ <span class="text-mayaBlue">& PROJELER</span></h1>
-                <p class="text-sm opacity-50 uppercase tracking-widest font-bold">NK Karargah Yazılım & Geliştirme Envanteri</p>
-            </header>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-item main-card p-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <i class="fab fa-python text-3xl text-mayaBlue"></i>
-                        <span class="text-[9px] font-black bg-mayaBlue text-white px-3 py-1 rounded-full">AKTİF</span>
-                    </div>
-                    <h3 class="text-2xl font-black uppercase mb-4 italic">LMTNASY</h3>
-                    <p class="text-xs leading-relaxed opacity-60 mb-6">Suriye pazarına yönelik çok yönlü seri ilan ve e-ticaret platformu. Python ve modern veritabanı altyapısıyla geliştirildi.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[8px] font-bold border border-gray-200 dark:border-white/10 px-2 py-1 rounded">E-Commerce</span>
-                        <span class="text-[8px] font-bold border border-gray-200 dark:border-white/10 px-2 py-1 rounded">Backend</span>
-                    </div>
-                </div>
-
-                <div class="project-item main-card p-10">
-                    <div class="flex items-center justify-between mb-6">
-                        <i class="fas fa-robot text-3xl text-mayaBlue"></i>
-                        <span class="text-[9px] font-black border border-mayaBlue text-mayaBlue px-3 py-1 rounded-full">AR-GE</span>
-                    </div>
-                    <h3 class="text-2xl font-black uppercase mb-4 italic">NK-OPERATIONAL AI</h3>
-                    <p class="text-xs leading-relaxed opacity-60 mb-6">Prompt Engineering teknikleriyle muhasebe ve lojistik raporlamalarını otomatize eden özel scriptler bütünü.</p>
-                    <div class="flex gap-2">
-                        <span class="text-[8px] font-bold border border-gray-200 dark:border-white/10 px-2 py-1 rounded">AI Prompting</span>
-                        <span class="text-[8px] font-bold border border-gray-200 dark:border-white/10 px-2 py-1 rounded">Automation</span>
-                    </div>
-                </div>
+<body data-theme="light">
+    <header class="header">
+        <a href="index.html" class="header-brand"><img src="nklogo.png" alt="NK"></a>
+        <div style="display:flex; align-items:center; gap:15px;"><i class="fas fa-sun"></i><label class="theme-switch"><input type="checkbox" id="checkbox" onchange="toggleTheme()"><div class="slider"></div></label><i class="fas fa-moon"></i></div>
+    </header>
+    <div class="container">
+        <h2 style="font-size:2.5rem; font-weight:900; margin-bottom:3rem; text-transform:uppercase; letter-spacing:-1px;">Teknoloji <span style="color:var(--nk-red);">Envanteri</span></h2>
+        <div class="grid">
+            <div class="project-card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem;"><i class="fab fa-python" style="font-size:2rem; color:var(--nk-red);"></i><span class="tag">E-Ticaret</span></div>
+                <h3 style="font-weight:900; margin-bottom:1rem;">LMTNASY</h3>
+                <p style="font-size:0.9rem; opacity:0.7; line-height:1.5;">Suriye pazarı için geliştirilen, Python tabanlı ilan ve seri satış platformu.</p>
+            </div>
+            <div class="project-card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem;"><i class="fas fa-robot" style="font-size:2rem; color:var(--nk-red);"></i><span class="tag">AI Bot</span></div>
+                <h3 style="font-weight:900; margin-bottom:1rem;">NK-OPERATIONAL AI</h3>
+                <p style="font-size:0.9rem; opacity:0.7; line-height:1.5;">Muhasebe ve lojistik raporlamalarını saniye sektirmeden otomatize eden özel AI scriptleri.</p>
             </div>
         </div>
-    </main>
-
+    </div>
     <script>
-        const dot = document.querySelector('.cursor-dot');
-        const outline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
-            outline.animate({ left: e.clientX + 'px', top: e.clientY + 'px' }, { duration: 300, fill: "forwards" });
-        });
+        function toggleTheme() { const target = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light'; document.body.setAttribute('data-theme', target); localStorage.setItem('nk-theme', target); }
+        const saved = localStorage.getItem('nk-theme') || 'light'; document.body.setAttribute('data-theme', saved); document.getElementById('checkbox').checked = saved === 'dark';
     </script>
 </body>
 </html>
