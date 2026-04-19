@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- ANA SAYFA -->
   <url>
     <loc>https://nurullahkartal.com.tr/</loc>
-    <lastmod>2026-04-17</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  
+  <!-- GALERİ SAYFASI VE GÖRSELLERİ -->
+  <url>
+    <loc>https://nurullahkartal.com.tr/galeri.html</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    
+    <!-- DevFest -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/devfest.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - DevFest 2025 Gaziantep</image:caption>
+      <image:title>Nurullah Kartal DevFest 2025</image:title>
+    </image:image>
+    
+    <!-- Takım Elbise -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/takımelbise.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Takım Elbise Profesyonel</image:caption>
+      <image:title>Nurullah Kartal Takım Elbise</image:title>
+    </image:image>
+    
+    <!-- Kaban -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/kaban.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Kaban Kış</image:caption>
+      <image:title>Nurullah Kartal Kaban</image:title>
+    </image:image>
+    
+    <!-- Manzara -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/manzara.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Manzara Doğa</image:caption>
+      <image:title>Nurullah Kartal Manzara</image:title>
+    </image:image>
+    
+    <!-- Vesikalık -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/vesikalık.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Vesikalık Resmi</image:caption>
+      <image:title>Nurullah Kartal Vesikalık</image:title>
+    </image:image>
+    
+    <!-- Manzara 2 -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/files/galeri/manzara2.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Manzara 2 Gün Batımı</image:caption>
+      <image:title>Nurullah Kartal Manzara 2</image:title>
+    </image:image>
+    
   </url>
 </urlset>
