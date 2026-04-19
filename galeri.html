@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- SEO BAŞLIK VE AÇIKLAMA -->
+    <title>Nurullah Kartal | Fotoğraf Galerisi - Gaziantep Muhasebe & Lojistik</title>
+    <meta name="description" content="Nurullah Kartal'ın profesyonel ve günlük hayattan fotoğrafları. Gaziantep, Mardin bölgesinde muhasebe, lojistik ve operasyon uzmanı.">
+    <meta name="keywords" content="Nurullah Kartal, fotoğraf galerisi, resimler, Gaziantep, Mardin, muhasebe, lojistik, operasyon, DevFest, takım elbise, kaban, manzara, vesikalık">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #f5f7fa 0%, #e9ecf2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #2c3e50;
+        }
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+        }
+        .profile-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #2c3e50;
+            object-fit: cover;
+        }
+        .profile-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .profile-header p {
+            font-size: 1rem;
+            color: #5a6c7e;
+            margin-top: 5px;
+        }
+        
+        /* GRID SİSTEMİ: MASAÜSTÜ 3, TABLET 2, MOBİL 1 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #fff;
+            aspect-ratio: 1 / 1;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* ALT YÖNLENDİRME ÇUBUĞU */
+        .redirect-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2c3e50;
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .redirect-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn {
+            background: white;
+            color: #2c3e50;
+            padding: 10px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.02);
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-right: 15px;
+        }
+        .btn-outline:hover {
+            background: white;
+            color: #2c3e50;
+        }
+        .countdown {
+            font-weight: 700;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 30px;
+            margin-left: 15px;
+        }
+        
+        /* RESPONSIVE (MOBİL VE TABLET) */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .redirect-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+    <!-- 5 saniye sonra ana sayfaya yönlendir -->
+    <meta http-equiv="refresh" content="5;url=https://nurullahkartal.com.tr/">
+</head>
+<body>
+
+<div class="gallery-container">
+    <!-- Profil Başlığı -->
+    <div class="profile-header">
+        <img src="./files/profil.jpg" alt="Nurullah Kartal - Muhasebe Lojistik Uzmanı Gaziantep Mardin">
+        <div>
+            <h1>Nurullah Kartal</h1>
+            <p>Muhasebe & Lojistik Operasyon Uzmanı | Fotoğraf Galerisi</p>
+        </div>
+    </div>
+
+    <!-- 3'lü (Mobilde 2'li/1'li) FOTOĞRAF GALERİSİ -->
+    <div class="gallery-grid">
+        <!-- Fotoğraf 1: DevFest -->
+        <div class="gallery-item">
+            <img src="./files/galeri/devfest.jpeg" 
+                 alt="Nurullah Kartal DevFest 2025 Gaziantep - GDG etkinliği - yazılım ve teknoloji">
+        </div>
+        <!-- Fotoğraf 2: Takım Elbise -->
+        <div class="gallery-item">
+            <img src="./files/galeri/takımelbise.jpeg" 
+                 alt="Nurullah Kartal takım elbise - profesyonel iş görüşmesi - muhasebe lojistik yönetici">
+        </div>
+        <!-- Fotoğraf 3: Kaban -->
+        <div class="gallery-item">
+            <img src="./files/galeri/kaban.jpeg" 
+                 alt="Nurullah Kartal kaban - kış modası - Gaziantep Mardin soğuk hava">
+        </div>
+        <!-- Fotoğraf 4: Manzara -->
+        <div class="gallery-item">
+            <img src="./files/galeri/manzara.jpeg" 
+                 alt="Nurullah Kartal manzara - doğa yürüyüşü - Güneydoğu Anadolu">
+        </div>
+        <!-- Fotoğraf 5: Vesikalık -->
+        <div class="gallery-item">
+            <img src="./files/galeri/vesikalık.jpeg" 
+                 alt="Nurullah Kartal vesikalık fotoğraf - özgeçmiş CV - resmi profil">
+        </div>
+        <!-- Fotoğraf 6: Manzara 2 -->
+        <div class="gallery-item">
+            <img src="./files/galeri/manzara2.jpeg" 
+                 alt="Nurullah Kartal manzara 2 - gün batımı - Mardin Gaziantep">
+        </div>
+    </div>
+</div>
+
+<!-- Alt Yönlendirme Çubuğu -->
+<div class="redirect-bar">
+    <div class="redirect-message">
+        <span>🖼️ Nurullah Kartal Fotoğraf Galerisi</span>
+        <span class="countdown" id="countdown">5</span>
+    </div>
+    <div>
+        <a href="https://nurullahkartal.com.tr/" class="btn btn-outline">Hemen Git</a>
+        <a href="https://nurullahkartal.com.tr/" class="btn">Ana Sayfa</a>
+    </div>
+</div>
+
+<script>
+    // Geri sayım sayacı
+    let seconds = 5;
+    const countdownEl = document.getElementById('countdown');
+    
+    const timer = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds;
+        if (seconds <= 0) {
+            clearInterval(timer);
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
