@@ -39,7 +39,7 @@ def get_title(icerik):
         return match.group(1).strip()
     return "Yeni Demo"
 
-def add_to_index_html(demo_id, title, file_ext):
+def add_to_index_html(demo_id, title):
     index_path = os.path.join(BASE_DIR, 'yazilimlar', 'index.html')
     if not os.path.exists(index_path):
         print(f"Hata: {index_path} bulunamadı!")
@@ -53,7 +53,7 @@ def add_to_index_html(demo_id, title, file_ext):
         return
 
     # Basic category
-    new_product = f"{{ id: '{demo_id}', title: '{title}', category: 'kurumsal', catName: 'Kurumsal & Ajans', file: '{file_ext}' }}"
+    new_product = f"{{ id: '{demo_id}', title: '{title}', category: 'kurumsal', catName: 'Kurumsal & Ajans' }}"
     
     # Insert before the closing bracket of the products array
     pattern = r'(const products = \[.*?)(];)'
@@ -105,7 +105,7 @@ def main():
         
         print(f"\n✅ Toplam {sayac} dosya temizlendi.")
         print("Listeye ekleniyor...")
-        add_to_index_html(demo_id, demo_title, index_file_name)
+        add_to_index_html(demo_id, demo_title)
 
     else:
         # Eski kullanım
