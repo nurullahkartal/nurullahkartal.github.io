@@ -8,14 +8,12 @@
     <style>
         :root { --zer-blue: #0000FF; --harem-gold: #c5a059; --bg: #f8fafc; --gko-red: #d32f2f; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
         body {
             background-color: var(--bg); color: #1a1a1a; 
             font-family: 'Inter', sans-serif; height: 100vh; 
             overflow: hidden; display: flex; flex-direction: column; 
             padding: 0.5vh 0.5vw;
         }
-
         /* 👑 DEV LOGO */
         .header-logo {
             height: 16vh; background: #fff; border-radius: 12px; 
@@ -24,13 +22,11 @@
             margin-bottom: 0.8vh; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .header-logo img { height: 90%; width: auto; object-fit: contain; }
-
         /* 📊 DÖVİZ PANELİ */
         .currency-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1vw; margin-bottom: 0.8vh; height: 9vh; }
         .cur-box { background: #fff; border-radius: 10px; text-align: center; display: flex; flex-direction: column; justify-content: center; border: 1.5px solid #e2e8f0; }
         .cur-n { font-size: 1.4vh; font-weight: 900; color: var(--harem-gold); text-transform: uppercase; }
         .cur-v { font-size: 2.8vh; font-weight: 800; font-family: monospace; }
-
         /* 🏦 ANA TABLO (11 ÜRÜN İÇİN OPTİMİZE EDİLDİ) */
         .main-terminal { 
             background: #fff; flex: 1; border-radius: 12px; 
@@ -39,7 +35,6 @@
         }
         .t-head { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 0.8vh 2.5vw; background: #1a1a1a; color: #fff; font-size: 1.7vh; font-weight: 900; text-align: center; }
         .t-head div:first-child { text-align: left; }
-
         .data-list { flex: 1; display: flex; flex-direction: column; }
         .row { 
             flex: 1; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; 
@@ -48,12 +43,10 @@
         }
         .row:nth-child(even) { background: #fafafa; }
         .row.has-gold { background: #ffff00 !important; }
-
         .n-m { font-size: 2.8vh; font-weight: 900; line-height: 1; text-align: left; } 
         .n-s { font-size: 1vh; color: #666; font-weight: 700; text-transform: uppercase; text-align: left; }
         .price { font-size: 3.5vh; font-weight: 900; font-variant-numeric: tabular-nums; }
         .price.gko { color: var(--gko-red); }
-
         /* 🕒 FOOTER */
         .footer { 
             height: 7.5vh; background: var(--zer-blue); color: #fff; 
@@ -61,7 +54,6 @@
             padding: 0 3vw; border-radius: 12px; margin-top: 0.8vh; 
         }
         #clock { font-size: 4.5vh; font-weight: 900; font-family: monospace; }
-
         /* ANİMASYONLAR */
         .flash-up { animation: flash-green 1s ease-out; }
         .flash-down { animation: flash-red 1s ease-out; }
@@ -70,28 +62,21 @@
     </style>
 </head>
 <body>
-
     <div class="header-logo"><img src="https://doviz.zerjewel.com/l.png"></div>
-
     <div class="currency-panel">
         <div class="cur-box" id="box-USDTRY"><div class="cur-n">USD/TRY</div><div class="cur-v" id="v-usdtry">--</div></div>
         <div class="cur-box" id="box-EURUSD"><div class="cur-n">EUR/USD</div><div class="cur-v" id="v-eurusd">--</div></div>
         <div class="cur-box" id="box-EURTRY"><div class="cur-n">EUR/TRY</div><div class="cur-v" id="v-eurtry">--</div></div>
     </div>
-
     <div class="main-terminal">
         <div class="t-head"><div>BİRİM</div><div>ZER ALIŞ</div><div>ZER SATIŞ</div><div style="color: #ffca28;">GKO</div></div>
         <div id="list" class="data-list"></div>
     </div>
-
     <div class="footer"><div>❖ ZER DÖVİZ | CANLI PİYASA AKIŞI ❖</div><div id="clock">00:00:00</div></div>
-
     <script>
         const workerURL = "https://harem.nurullahkartal4153012.workers.dev";
         let prev = {}; 
-
         setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString('tr-TR'); }, 1000);
-
         const splitVal = (id, data) => {
             if(!data[id]) return { a: "--", s: "--" };
             let raw = data[id].Alis;
@@ -101,18 +86,15 @@
             }
             return { a: data[id].Alis, s: data[id].Satis };
         };
-
         async function sync() {
             try {
                 const res = await fetch(workerURL + "?t=" + Date.now());
                 const data = await res.json();
-                
                 ["USDTRY", "EURUSD", "EURTRY"].forEach(id => {
                     const v = splitVal(id, data);
                     const el = document.getElementById('v-' + id.toLowerCase());
                     if(el) el.innerText = v.a + " | " + v.s;
                 });
-
                 // 🏁 ONS LİSTEYE EKLENDİ
                 const items = [
                     { id: "HAS", n: "HAS ALTIN", s: "HAS ALTIN (995)" },
@@ -127,7 +109,6 @@
                     { id: "GÜMÜŞ", n: "GÜMÜŞ", s: "GÜMÜŞ (GR)" },
                     { id: "ONS", n: "ONS", s: "ALTIN ONS ($)" }
                 ];
-
                 let html = "";
                 items.forEach(i => {
                     if(data[i.id]) {
