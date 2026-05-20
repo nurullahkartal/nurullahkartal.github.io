@@ -1,10 +1,3 @@
-export interface Photo {
-  id: string;
-  url: string;
-  title: string;
-  location: string;
-  date: string;
-}
 
 export interface Project {
   id: string;
@@ -23,50 +16,6 @@ export interface WebTool {
   url: string;
 }
 
-export const photos: Photo[] = [
-  {
-    id: "nurullah-takim-elbise",
-    url: "/images/takımelbise.jpeg",
-    title: "Nurullah Kartal - Takım Elbiseli Profesyonel Ön Muhasebe ve Operasyon Uzmanı Profili",
-    location: "Gaziantep",
-    date: "Aralık 2025"
-  },
-  {
-    id: "nurullah-devfest",
-    url: "/images/devfest.jpeg",
-    title: "Nurullah Kartal - GDG Gaziantep DevFest 2025 Teknoloji ve Yazılım Geliştiricileri Etkinliği",
-    location: "Gaziantep",
-    date: "Aralık 2025"
-  },
-  {
-    id: "nurullah-kaban",
-    url: "/images/kaban.jpeg",
-    title: "Nurullah Kartal - Kışlık Kombini ile Dış Saha Lojistik ve İletişim Takipleri",
-    location: "Gaziantep",
-    date: "Ocak 2026"
-  },
-  {
-    id: "nurullah-profil-is",
-    url: "/images/profil.jpg",
-    title: "Nurullah Kartal - Profesyonel Ofis ve İş Hayatı Ön Muhasebe Profili",
-    location: "Gaziantep",
-    date: "Eylül 2025"
-  },
-  {
-    id: "gaziantep-manzara-1",
-    url: "/images/manzara.jpeg",
-    title: "Nurullah Kartal Kadrajından - Tarihi Gaziantep Sokakları ve Kültürel Gezi",
-    location: "Gaziantep",
-    date: "Ekim 2025"
-  },
-  {
-    id: "gaziantep-manzara-2",
-    url: "/images/manzara2.jpeg",
-    title: "Nurullah Kartal Kadrajından - Şehirlerarası Lojistik Rotası ve Taş Evler",
-    location: "Mardin",
-    date: "Kasım 2025"
-  }
-];
 
 export const projects: Project[] = [
   {

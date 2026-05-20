@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { 
-  photos, 
   projects, 
   webTools, 
   educations, 
@@ -11,7 +10,7 @@ import {
 } from './data/siteData';
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<'home' | 'gallery' | 'projects' | 'about'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'projects' | 'about'>('home');
   
   // Theme State
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -37,7 +36,6 @@ export default function App() {
   useEffect(() => {
     const tabTitleMap = {
       home: "Nurullah Kartal | Muhasebe & Lojistik Uzmanı",
-      gallery: "Fotoğraflarım | Nurullah Kartal",
       projects: "Dijital Gelişim & Hobiler | Nurullah Kartal",
       about: "Hakkımda | Nurullah Kartal"
     };
@@ -83,7 +81,7 @@ export default function App() {
           
           <div className="flex items-center space-x-2 sm:space-x-4">
             <nav className="flex space-x-1 sm:space-x-2">
-              {(['home', 'gallery', 'projects', 'about'] as const).map((tab) => (
+              {(['home', 'projects', 'about'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { setCurrentTab(tab); }}
@@ -93,7 +91,7 @@ export default function App() {
                       : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
-                  {tab === 'home' ? 'Ana Sayfa' : tab === 'gallery' ? 'Fotoğraflarım' : tab === 'projects' ? 'Dijital Gelişim & Hobiler' : 'Hakkımda'}
+                  {tab === 'home' ? 'Ana Sayfa' : tab === 'projects' ? 'Dijital Gelişim & Hobiler' : 'Hakkımda'}
                 </button>
               ))}
             </nav>
@@ -214,74 +212,7 @@ export default function App() {
                   <p className="text-xs text-slate-500 dark:text-slate-400">Gaziantep Merkezli</p>
                 </div>
               </section>
-
-              {/* Öne Çıkan Fotoğraflar Bölümü */}
-              <section className="space-y-6">
-                <div className="flex justify-between items-baseline border-b border-slate-200 dark:border-slate-800 pb-2">
-                  <h2 className="text-2xl font-bold text-slate-950 dark:text-white">Fotoğraflarım</h2>
-                  <button onClick={() => setCurrentTab('gallery')} className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer">Tümünü Gör →</button>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  {photos.slice(0, 3).map(photo => (
-                    <div 
-                      key={photo.id} 
-                      className="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 aspect-[4/3] shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
-                      onClick={() => setCurrentTab('gallery')}
-                    >
-                      <img 
-                        src={photo.url} 
-                        alt={`Nurullah Kartal - ${photo.title} (${photo.location})`}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 backdrop-blur-[2px]">
-                        <div className="text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                          <h3 className="font-bold text-sm line-clamp-1">{photo.title}</h3>
-                          <div className="flex items-center gap-2 text-[10px] text-slate-200 mt-0.5">
-                            <span>📍 {photo.location}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
             </div>
-          )}
-
-          {/* 2. FOTOĞRAFLARIM (GALERİ) */}
-          {currentTab === 'gallery' && (
-            <section className="space-y-8">
-              <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
-                <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Fotoğraflarım</h1>
-                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Gezdiğim şehirlerden ve kadrajıma takılan estetik kareler.</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {photos.map(photo => (
-                  <div 
-                    key={photo.id} 
-                    className="group relative overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 aspect-[4/3] shadow-xs hover:shadow-md transition-all duration-300"
-                  >
-                    <img 
-                      src={photo.url} 
-                      alt={`Nurullah Kartal - ${photo.title} (${photo.location})`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    {/* Hover Glassmorphism Overlay */}
-                    <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 backdrop-blur-[2px]">
-                      <div className="text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="font-bold text-base line-clamp-1">{photo.title}</h3>
-                        <div className="flex items-center gap-3 text-xs text-slate-200 mt-1">
-                          <span className="flex items-center gap-1">📍 {photo.location}</span>
-                          <span>📅 {photo.date}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
           )}
 
           {/* 3. PROJELER (DİJİTAL GELİŞİM & HOBİLER) */}

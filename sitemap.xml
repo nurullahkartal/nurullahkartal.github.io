@@ -2,62 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
-  <!-- ANA SAYFA -->
+  <!-- ANA SAYFA VE RESİMLERİ (GOOGLE BOTLARI İÇİN ARKA PLAN İNDEKSLEME) -->
   <url>
     <loc>https://nurullahkartal.com.tr/</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-  </url>
-  
-  <!-- GALERİ SAYFASI VE GÖRSELLERİ -->
-  <url>
-    <loc>https://nurullahkartal.com.tr/galeri.html</loc>
-    <lastmod>2026-04-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
     
+    <!-- Profil Resmi -->
+    <image:image>
+      <image:loc>https://nurullahkartal.com.tr/images/profil.jpg</image:loc>
+      <image:caption>Nurullah Kartal - Profesyonel Ofis ve İş Hayatı Ön Muhasebe Profili</image:caption>
+      <image:title>Nurullah Kartal Profil Resmi</image:title>
+    </image:image>
+
     <!-- DevFest -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/devfest.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - DevFest 2025 Gaziantep</image:caption>
-      <image:title>Nurullah Kartal DevFest 2025</image:title>
+      <image:loc>https://nurullahkartal.com.tr/images/devfest.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - GDG Gaziantep DevFest 2025 Teknoloji ve Yazılım Geliştiricileri Etkinliği</image:caption>
+      <image:title>Nurullah Kartal DevFest 2025 Gaziantep</image:title>
     </image:image>
     
     <!-- Takım Elbise -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/takımelbise.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - Takım Elbise Profesyonel</image:caption>
+      <image:loc>https://nurullahkartal.com.tr/images/takımelbise.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Takım Elbiseli Profesyonel Ön Muhasebe ve Lojistik Uzman Profili</image:caption>
       <image:title>Nurullah Kartal Takım Elbise</image:title>
     </image:image>
     
     <!-- Kaban -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/kaban.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - Kaban Kış</image:caption>
-      <image:title>Nurullah Kartal Kaban</image:title>
+      <image:loc>https://nurullahkartal.com.tr/images/kaban.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Kışlık Kombini ile Dış Saha Lojistik ve İletişim Takipleri</image:caption>
+      <image:title>Nurullah Kartal Dış Saha Takipleri</image:title>
     </image:image>
     
     <!-- Manzara -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/manzara.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - Manzara Doğa</image:caption>
-      <image:title>Nurullah Kartal Manzara</image:title>
+      <image:loc>https://nurullahkartal.com.tr/images/manzara.jpeg</image:loc>
+      <image:caption>Nurullah Kartal Kadrajından - Tarihi Gaziantep Sokakları ve Kültürel Gezi</image:caption>
+      <image:title>Nurullah Kartal Kadrajından Gaziantep</image:title>
     </image:image>
     
     <!-- Vesikalık -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/vesikalık.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - Vesikalık Resmi</image:caption>
-      <image:title>Nurullah Kartal Vesikalık</image:title>
+      <image:loc>https://nurullahkartal.com.tr/images/vesikalık.jpeg</image:loc>
+      <image:caption>Nurullah Kartal - Resmi İş Başvuruları Vesikalık Fotoğrafı</image:caption>
+      <image:title>Nurullah Kartal Vesikalık Fotoğraf</image:title>
     </image:image>
     
     <!-- Manzara 2 -->
     <image:image>
-      <image:loc>https://nurullahkartal.com.tr/files/galeri/manzara2.jpeg</image:loc>
-      <image:caption>Nurullah Kartal - Manzara 2 Gün Batımı</image:caption>
-      <image:title>Nurullah Kartal Manzara 2</image:title>
+      <image:loc>https://nurullahkartal.com.tr/images/manzara2.jpeg</image:loc>
+      <image:caption>Nurullah Kartal Kadrajından - Şehirlerarası Lojistik Rotası ve Taş Evler</image:caption>
+      <image:title>Nurullah Kartal Kadrajından Lojistik Rotası</image:title>
     </image:image>
-    
   </url>
 </urlset>
