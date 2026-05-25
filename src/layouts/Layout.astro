@@ -1,0 +1,187 @@
+---
+import '../index.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  activeTab?: 'home' | 'blog' | 'projects' | 'about';
+}
+
+const { 
+  title = "Nurullah Kartal | Muhasebe ve Lojistik & Öğrenci", 
+  description = "Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışan, Atatürk Üniversitesi öğrencisi Nurullah Kartal'ın hobi amaçlı teknoloji ve dijital gelişim günlüğü.",
+  activeTab = "home"
+} = Astro.props;
+
+// Navigasyon elemanları
+const navItems = [
+  { id: 'home', path: '/', label: 'Ana Sayfa' },
+  { id: 'blog', path: '/blog', label: 'Mesleki Blog' },
+  { id: 'projects', path: '/hobiler', label: 'Dijital Gelişim & Hobiler' },
+  { id: 'about', path: '/hakkimda', label: 'Hakkımda' }
+];
+
+const socialLinks = {
+  instagram: "https://www.instagram.com/nurullahkrtal/",
+  linkedin: "https://tr.linkedin.com/in/n47kartal",
+  email: "mailto:nurullahkartaltr@gmail.com"
+};
+---
+
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/nk-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    
+    <!-- Meta SEO Etiketleri -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Nurullah Kartal, ön muhasebe, fatura takipleri, lojistik veri girişi, Atatürk Üniversitesi, öğrenci, teknoloji meraklısı, yazılım hobisi, kişisel gelişim" />
+    <meta name="author" content="Nurullah Kartal" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://nurullahkartal.com.tr/" />
+    <meta name="theme-color" content="#4f46e5" />
+
+    <!-- Open Graph (Sosyal Medya Paylaşımları) -->
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://nurullahkartal.com.tr/" />
+    <meta property="og:site_name" content="Nurullah Kartal" />
+    
+    <!-- Structured Data (JSON-LD) - Person & Author Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Nurullah Kartal",
+        "url": "https://nurullahkartal.com.tr",
+        "jobTitle": "Atatürk Üniversitesi Öğrencisi & Ön Muhasebe Çalışanı",
+        "knowsAbout": [
+          "Ön Muhasebe",
+          "Fatura Takibi",
+          "Lojistik Veri Girişi",
+          "Muhasebe ve Vergi Uygulamaları",
+          "Uluslararası Ticaret ve Lojistik",
+          "Teknoloji ve Yazılım (Hobi)"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Atatürk Üniversitesi"
+        },
+        "sameAs": [
+          "https://tr.linkedin.com/in/n47kartal",
+          "https://www.instagram.com/nurullahkrtal/"
+        ]
+      }
+    </script>
+
+    <!-- Dark Mode Inline Script to prevent visual flicker -->
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem('theme');
+          if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          console.warn('localStorage is not available:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white antialiased transition-colors duration-200 flex flex-col">
+    
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+        <a 
+          href="/" 
+          class="flex items-center gap-3 hover:opacity-90 transition-opacity"
+        >
+          <img 
+            src="/images/nk-logo.png" 
+            alt="Nurullah Kartal Logo" 
+            class="h-9 w-auto object-contain dark:brightness-110" 
+          />
+          <span class="text-lg font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
+            Nurullah KARTAL
+          </span>
+        </a>
+        
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <nav class="flex space-x-1 sm:space-x-2">
+            {navItems.map((item) => (
+              <a
+                href={item.path}
+                class={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md transition-colors capitalize ${
+                  activeTab === item.id
+                    ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <!-- Dark Mode Toggle Button -->
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg cursor-pointer border border-slate-200/50 dark:border-slate-700/50"
+            aria-label="Tema Değiştir"
+          >
+            <span id="theme-toggle-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="max-w-4xl mx-auto px-4 py-12 flex-grow w-full">
+      <slot />
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-200">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <div>© 2026 Nurullah Kartal. Tüm hakları saklıdır.</div>
+        <div class="flex gap-4">
+          <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" class="hover:underline">LinkedIn</a>
+          <a href={socialLinks.instagram} target="_blank" rel="noreferrer" class="hover:underline">Instagram</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Client-side script for theme toggler -->
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeToggleIcon = document.getElementById('theme-toggle-icon');
+
+      function updateThemeButton(theme: string) {
+        if (themeToggleIcon) {
+          themeToggleIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+      }
+
+      // Get initial theme
+      const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      updateThemeButton(currentTheme);
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          const newTheme = isDark ? 'dark' : 'light';
+          localStorage.setItem('theme', newTheme);
+          updateThemeButton(newTheme);
+        });
+      }
+    </script>
+  </body>
+</html>
