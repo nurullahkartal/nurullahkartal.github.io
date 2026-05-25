@@ -22,9 +22,8 @@ Sitenin çalışmasını sağlayan modern React tabanlı uygulama mimarisine ait
     *   **`src/assets/`**: Uygulama içinde kullanılan yerel görsel varlıkları barındırır.
 *   **`public/`**: Tarayıcıya doğrudan servis edilen statik varlıkları barındırır. Vite derleme esnasında bu dosyalara dokunmaz, aynen sunar.
     *   **`public/favicon.svg`**: Sitenin tarayıcı sekmesindeki ikonudur.
-    *   **`public/images/`**: Karşılama alanında ve navigasyon header'ında sergilenen yüksek kaliteli görsel varlıkları ve `sitemap.xml` üzerinden Google botlarına sunulan kişisel fotoğrafları barındırır. Nurullah Kartal markasını temsil eden kurumsal **`nklogo.png`** görseli de bu klasördedir.
+    *   **`public/images/`**: Karşılama alanında ve navigasyon header'ında sergilenen yüksek kaliteli görsel varlıkları ve `sitemap.xml` üzerinden Google botlarına sunulan kişisel fotoğrafları barındırır. Nurullah Kartal markasını temsil eden kurumsal **`nk-logo.png`** görseli de bu klasördedir.
     *   **`public/doviz/`**: Portfolyoda aktif olarak sunulan, farklı para birimleri arasında anlık ve hassas dönüşüm sağlayan finansal hesaplama ve çevrim modülüdür.
-    *   **`public/zerdoviz/`**: Portfolyoda aktif olarak sunulan, anlık piyasa kurlarını gerçek zamanlı izleme ve analiz etme amaçlı Zerdöviz finansal kur takip modülüdür.
     *   **`public/yazilimlar/`**: Portfolyoda aktif olarak sunulan, sektörel ve modern kurumsal web arayüz şablonlarını barındıran hazır web tasarım portalıdır.
 
 ### Yapılandırma ve Konfigürasyon Dosyaları:

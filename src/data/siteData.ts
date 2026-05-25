@@ -29,13 +29,6 @@ export const projects: Project[] = [
 
 export const webTools: WebTool[] = [
   {
-    id: "doviz-takip",
-    title: "Finansal Döviz Takip Modülü (Zerdöviz)",
-    description: "Anlık piyasa kurlarını ve finansal verileri gerçek zamanlı izlemek ve analiz etmek amacıyla geliştirilmiş, yüksek performanslı takip modülü.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    url: "/zerdoviz/zerdoviz.html"
-  },
-  {
     id: "doviz-hesapla",
     title: "Döviz Hesaplama ve Çevrim Modülü",
     description: "Farklı para birimleri arasında anlık ve hassas dönüşüm sağlayan, hızlı ve kullanıcı dostu finansal çevrim aracı.",

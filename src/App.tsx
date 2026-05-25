@@ -116,7 +116,7 @@ export default function App() {
             onClick={() => { setCurrentTab('home'); }}
           >
             <img 
-              src="/images/nklogo.png" 
+              src="./images/nk-logo.png" 
               alt="Nurullah Kartal Logo" 
               className="h-9 w-auto object-contain dark:brightness-110" 
             />
