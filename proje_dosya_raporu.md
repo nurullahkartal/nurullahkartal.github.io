@@ -24,7 +24,6 @@ Sitenin çalışmasını sağlayan modern React tabanlı uygulama mimarisine ait
     *   **`public/favicon.svg`**: Sitenin tarayıcı sekmesindeki ikonudur.
     *   **`public/images/`**: Karşılama alanında ve navigasyon header'ında sergilenen yüksek kaliteli görsel varlıkları ve `sitemap.xml` üzerinden Google botlarına sunulan kişisel fotoğrafları barındırır. Nurullah Kartal markasını temsil eden kurumsal **`nk-logo.png`** görseli de bu klasördedir.
     *   **`public/doviz/`**: Portfolyoda aktif olarak sunulan, farklı para birimleri arasında anlık ve hassas dönüşüm sağlayan finansal hesaplama ve çevrim modülüdür.
-    *   **`public/yazilimlar/`**: Portfolyoda aktif olarak sunulan, sektörel ve modern kurumsal web arayüz şablonlarını barındıran hazır web tasarım portalıdır.
 
 ### Yapılandırma ve Konfigürasyon Dosyaları:
 *   **`index.html`**: Sitenin ana HTML şablonudur. Arama motorları için optimize edilmiş SEO meta etiketlerini ve yapılandırılmış JSON-LD veri şemasını (Person & Author) barındırır.

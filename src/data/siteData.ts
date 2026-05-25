@@ -34,13 +34,6 @@ export const webTools: WebTool[] = [
     description: "Farklı para birimleri arasında anlık ve hassas dönüşüm sağlayan, hızlı ve kullanıcı dostu finansal çevrim aracı.",
     tech: ["HTML", "CSS", "JavaScript"],
     url: "/doviz/doviz.html"
-  },
-  {
-    id: "yazilim-portal",
-    title: "Sektörel Hazır Web Tasarım Portalı",
-    description: "Farklı iş kolları ve sektörler için optimize edilmiş, modern ve responsive kurumsal web arayüz şablonlarını barındıran profesyonel tasarım vitrini.",
-    tech: ["HTML", "CSS", "PHP"],
-    url: "/yazilimlar/"
   }
 ];
 
