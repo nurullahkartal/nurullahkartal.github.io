@@ -19,6 +19,7 @@ Sitenin çalışmasını sağlayan modern React tabanlı uygulama mimarisine ait
     *   **`src/index.css`**: Tailwind CSS v4 direktiflerini içeren stil dosyasıdır.
     *   **`src/data/`**: Sitede kullanılan statik verileri barındırır.
         *   **`src/data/siteData.ts`**: Hobi projelerini (`Project` şeması) ve aktif edilen dijital web araçlarının verilerini (`WebTool` şeması) tutan veri dosyasıdır. (Kişisel fotoğraflar ön yüzden tamamen gizlenmiş olup, doğrudan site haritası üzerinden arama motorlarına sunulmaktadır).
+        *   **`src/data/blogData.ts`**: Mesleki blog makalelerini (`BlogPost` şeması) ve SEO uyumlu zengin makale içeriklerini barındıran veri dosyasıdır.
     *   **`src/assets/`**: Uygulama içinde kullanılan yerel görsel varlıkları barındırır.
 *   **`public/`**: Tarayıcıya doğrudan servis edilen statik varlıkları barındırır. Vite derleme esnasında bu dosyalara dokunmaz, aynen sunar.
     *   **`public/favicon.svg`**: Sitenin tarayıcı sekmesindeki ikonudur.
