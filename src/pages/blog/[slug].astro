@@ -11,14 +11,25 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-// Bold text parser helper
-function parseBold(text: string) {
-  return text.split('**').map((part, index) => {
+// Bold and inline code markdown parser helper
+function parseInlineMarkdown(text: string) {
+  // 1. Parse bold (**text**)
+  let parsed = text.split('**').map((part, index) => {
     if (index % 2 === 1) {
       return `<strong class="font-bold text-slate-950 dark:text-white">${part}</strong>`;
     }
     return part;
   }).join('');
+
+  // 2. Parse inline code (`code`)
+  parsed = parsed.split('`').map((part, index) => {
+    if (index % 2 === 1) {
+      return `<code class="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-mono rounded text-xs sm:text-sm font-semibold select-all">${part}</code>`;
+    }
+    return part;
+  }).join('');
+
+  return parsed;
 }
 
 const blocks = post.content.split('\n\n');
@@ -26,23 +37,26 @@ const parsedBlocks = blocks.map((block) => {
   if (block.startsWith('📝 ')) {
     return {
       type: 'alert',
-      html: parseBold(block)
+      html: parseInlineMarkdown(block.replace(/^📝\s*/, ''))
     };
   }
   if (block.startsWith('### ')) {
     return {
       type: 'heading',
-      html: block.replace('### ', '')
+      html: parseInlineMarkdown(block.replace('### ', ''))
     };
   }
   if (block.startsWith('* ')) {
     const items = block.split('\n').map(item => {
       const cleanItem = item.replace(/^\*\s+/, '');
-      return `<li class="my-1.5">${parseBold(cleanItem)}</li>`;
+      return `<li class="flex items-start gap-2.5 text-slate-700 dark:text-slate-350 text-[16px] leading-[1.8] my-2">
+        <span class="text-indigo-500 mt-1.5 flex-shrink-0 text-[10px] select-none">◆</span>
+        <span>${parseInlineMarkdown(cleanItem)}</span>
+      </li>`;
     }).join('');
     return {
       type: 'list',
-      html: `<ul class="list-disc list-outside pl-5 space-y-1 my-4 text-sm text-slate-700 dark:text-slate-350 leading-relaxed">${items}</ul>`
+      html: `<ul class="list-none pl-2 my-5 space-y-2.5">${items}</ul>`
     };
   }
   if (block.includes('```')) {
@@ -58,91 +72,106 @@ const parsedBlocks = blocks.map((block) => {
   }
   return {
     type: 'paragraph',
-    html: parseBold(block)
+    html: parseInlineMarkdown(block)
   };
 });
 ---
 
 <Layout title={`${post.title} | Nurullah Kartal`} activeTab="blog" description={post.description}>
-  <div class="max-w-2xl mx-auto bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-2xl p-6 sm:p-8 animate-fade-in-up">
-    <!-- Geri Dönüş ve Üst Bilgi Barı -->
-    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-4 mb-6">
-      <div class="flex items-center gap-3">
-        <span class="px-2.5 py-0.5 bg-indigo-50 dark:bg-indigo-950/45 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded">
-          {post.category}
-        </span>
-        <span class="text-slate-400 dark:text-slate-500 text-xs font-semibold">⏱️ {post.readTime}</span>
-      </div>
+  <div class="max-w-3xl mx-auto animate-fade-in-up">
+    <!-- Premium Geri Dönüş ve Üst Navigasyon -->
+    <div class="mb-8">
       <a 
-        href="/blog"
-        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors text-sm font-bold"
-        aria-label="Blog Listesine Dön"
+        href="/blog" 
+        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 bg-white/80 dark:bg-slate-900/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-xl transition-all duration-300 border border-slate-200/50 dark:border-slate-800/80 hover:-translate-x-1 group shadow-xs"
       >
-        ✕
+        <span class="text-base transition-transform duration-300 group-hover:-translate-x-0.5">←</span> Blog Yazılarına Dön
       </a>
     </div>
 
-    <!-- Makale Başlık & Bilgi -->
-    <div class="space-y-3 mb-6">
-      <span class="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">{post.date}</span>
-      <h1 class="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
-        {post.title}
-      </h1>
-      <div class="flex items-center gap-2 pt-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
-        <div class="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-[10px]">NK</div>
-        <span>Yazar: <strong>{post.author}</strong></span>
-      </div>
-    </div>
-
-    <!-- Makale İçeriği (Dinamik Server-Side Renderer) -->
-    <div class="text-slate-750 dark:text-slate-300 text-sm leading-relaxed space-y-4">
-      {parsedBlocks.map((block) => {
-        if (block.type === 'alert') {
-          return (
-            <div class="p-4 bg-indigo-50/50 dark:bg-indigo-950/20 border-l-4 border-indigo-500 rounded-r-xl my-5 text-sm text-indigo-900 dark:text-indigo-300 leading-relaxed font-medium" set:html={block.html} />
-          );
-        }
-        if (block.type === 'heading') {
-          return (
-            <h3 class="text-lg sm:text-xl font-bold text-slate-950 dark:text-white mt-8 mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2" set:html={block.html} />
-          );
-        }
-        if (block.type === 'list') {
-          return (
-            <div set:html={block.html} />
-          );
-        }
-        if (block.type === 'code') {
-          return (
-            <div class="relative group my-5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800/80 shadow-xs">
-              <div class="bg-slate-100 dark:bg-slate-950 px-4 py-1.5 text-xs text-slate-400 font-mono border-b border-slate-200 dark:border-slate-800/80 flex justify-between items-center select-none">
-                <span>{(block.language || '').toUpperCase()}</span>
-                <button
-                  class="copy-formula-btn px-2 py-0.5 hover:text-white hover:bg-indigo-600 rounded transition-colors cursor-pointer font-bold text-[10px]"
-                  data-code={block.code}
-                >
-                  Kopyala
-                </button>
-              </div>
-              <pre class="p-4 bg-slate-950 text-emerald-400 dark:bg-slate-950 font-mono text-xs overflow-x-auto leading-relaxed"><code>{block.code}</code></pre>
+    <article class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 space-y-8">
+      <!-- Makale Üst Bilgi Başlığı -->
+      <div class="border-b border-slate-100 dark:border-slate-800/60 pb-6 space-y-4">
+        <div class="flex items-center gap-3">
+          <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/45 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded-lg uppercase tracking-wider">
+            {post.category}
+          </span>
+          <span class="text-slate-400 dark:text-slate-500 text-xs font-semibold tracking-wide">⏱️ {post.readTime}</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.25]">
+          {post.title}
+        </h1>
+        <div class="flex items-center justify-between gap-4 pt-2 flex-wrap">
+          <div class="flex items-center gap-2.5 text-xs font-semibold text-slate-500 dark:text-slate-450">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 text-white flex items-center justify-center font-bold text-[11px] shadow-sm">NK</div>
+            <div>
+              <p class="text-slate-800 dark:text-slate-200 font-bold">{post.author}</p>
+              <p class="text-[10px] text-slate-400 mt-0.5">Ön Muhasebe & Lojistik Uzmanı</p>
             </div>
-          );
-        }
-        return (
-          <p class="text-slate-700 dark:text-slate-350 text-sm leading-relaxed my-3" set:html={block.html} />
-        );
-      })}
-    </div>
+          </div>
+          <span class="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">{post.date}</span>
+        </div>
+      </div>
 
-    <!-- Geri Dönüş Linki -->
-    <div class="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800/60 flex justify-end">
-      <a 
-        href="/blog"
-        class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl transition-all inline-block"
-      >
-        Blog Listesine Geri Dön
-      </a>
-    </div>
+      <!-- Makale İçeriği (Dinamik Server-Side Renderer) -->
+      <div class="text-slate-700 dark:text-slate-300 text-[16px] leading-[1.85] space-y-6">
+        {parsedBlocks.map((block) => {
+          if (block.type === 'alert') {
+            return (
+              <div class="flex gap-4 p-5 bg-indigo-50/30 dark:bg-indigo-950/15 border-l-4 border-indigo-500 rounded-r-2xl my-6 text-[15px] text-slate-800 dark:text-slate-200 leading-[1.8] font-medium shadow-2xs">
+                <span class="text-2xl select-none flex-shrink-0">📝</span>
+                <div set:html={block.html} />
+              </div>
+            );
+          }
+          if (block.type === 'heading') {
+            return (
+              <h3 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white mt-10 mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-3 tracking-tight" set:html={block.html} />
+            );
+          }
+          if (block.type === 'list') {
+            return (
+              <div set:html={block.html} />
+            );
+          }
+          if (block.type === 'code') {
+            return (
+              <div class="relative group my-6 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/60 shadow-md">
+                <div class="bg-slate-100 dark:bg-slate-900/90 px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 font-mono border-b border-slate-200 dark:border-slate-800/80 flex justify-between items-center select-none">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-400 dark:bg-red-500/40 inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 dark:bg-amber-500/40 inline-block"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 dark:bg-emerald-500/40 inline-block"></span>
+                    <span class="ml-2 font-semibold text-[11px] tracking-wider text-slate-600 dark:text-slate-400">{(block.language || '').toUpperCase()} FORMÜLÜ</span>
+                  </div>
+                  <button
+                    class="copy-formula-btn px-2.5 py-1 text-slate-600 dark:text-slate-300 hover:text-white dark:hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-600 rounded-lg transition-all duration-200 cursor-pointer font-bold text-[10px] bg-slate-200/50 dark:bg-slate-800/50 border border-slate-300/30 dark:border-slate-700/50 shadow-2xs"
+                    data-code={block.code}
+                  >
+                    Kopyala 📋
+                  </button>
+                </div>
+                <pre class="p-5 bg-slate-950 text-emerald-400 dark:bg-slate-950 font-mono text-[13px] overflow-x-auto leading-relaxed scrollbar-thin"><code>{block.code}</code></pre>
+              </div>
+            );
+          }
+          return (
+            <p class="text-slate-700 dark:text-slate-300 text-[16px] leading-[1.85] my-4 text-justify sm:text-left" set:html={block.html} />
+          );
+        })}
+      </div>
+
+      <!-- Alt Kısım Paylaşım / Geri Dönüş Barı -->
+      <div class="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800/60 flex justify-between items-center flex-wrap gap-4">
+        <span class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase">© 2026 Nurullah Kartal • Mesleki Blog</span>
+        <a 
+          href="/blog"
+          class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl transition-all inline-block shadow-2xs border border-slate-200/40 dark:border-slate-700/50"
+        >
+          Tüm Yazılara Geri Dön
+        </a>
+      </div>
+    </article>
   </div>
 </Layout>
 
@@ -152,9 +181,15 @@ const parsedBlocks = blocks.map((block) => {
   copyButtons.forEach(button => {
     button.addEventListener('click', () => {
       const code = button.getAttribute('data-code');
+      const originalText = button.textContent;
       if (code) {
         navigator.clipboard.writeText(code).then(() => {
-          alert('Formül panoya kopyalandı! 📋');
+          button.textContent = 'Kopyalandı! ✓';
+          button.classList.add('bg-emerald-600', 'text-white');
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('bg-emerald-600', 'text-white');
+          }, 2000);
         }).catch(err => {
           console.error('Kopyalama hatası:', err);
         });
