@@ -32,49 +32,100 @@ function parseInlineMarkdown(text: string) {
   return parsed;
 }
 
-const blocks = post.content.split('\n\n');
-const parsedBlocks = blocks.map((block) => {
-  if (block.startsWith('📝 ')) {
-    return {
-      type: 'alert',
-      html: parseInlineMarkdown(block.replace(/^📝\s*/, ''))
-    };
+const lines = post.content.split('\n');
+const parsedBlocks = [];
+let currentList: string[] = [];
+let currentCode: { language: string; lines: string[] } | null = null;
+
+for (let i = 0; i < lines.length; i++) {
+  const line = lines[i].trim();
+  
+  if (currentCode !== null) {
+    if (line.startsWith('```')) {
+      parsedBlocks.push({
+        type: 'code',
+        language: currentCode.language,
+        code: currentCode.lines.join('\n'),
+        items: [] as string[],
+        html: ''
+      });
+      currentCode = null;
+    } else {
+      currentCode.lines.push(lines[i]);
+    }
+    continue;
   }
-  if (block.startsWith('### ')) {
-    return {
+
+  if (line.startsWith('```')) {
+    const language = line.replace('```', '').trim() || 'EXCEL';
+    currentCode = { language, lines: [] };
+    if (currentList.length > 0) {
+      parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+      currentList = [];
+    }
+    continue;
+  }
+
+  if (line === '') {
+    if (currentList.length > 0) {
+      parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+      currentList = [];
+    }
+    continue;
+  }
+
+  if (line.startsWith('### ')) {
+    if (currentList.length > 0) {
+      parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+      currentList = [];
+    }
+    parsedBlocks.push({
       type: 'heading',
-      html: parseInlineMarkdown(block.replace('### ', ''))
-    };
+      html: parseInlineMarkdown(line.replace('### ', '')),
+      items: [] as string[],
+      language: '',
+      code: ''
+    });
+    continue;
   }
-  if (block.startsWith('* ')) {
-    const items = block.split('\n').map(item => {
-      const cleanItem = item.replace(/^\*\s+/, '');
-      return `<li class="flex items-start gap-2.5 text-slate-700 dark:text-slate-350 text-[16px] leading-[1.8] my-2">
-        <span class="text-indigo-500 mt-1.5 flex-shrink-0 text-[10px] select-none">◆</span>
-        <span>${parseInlineMarkdown(cleanItem)}</span>
-      </li>`;
-    }).join('');
-    return {
-      type: 'list',
-      html: `<ul class="list-none pl-2 my-5 space-y-2.5">${items}</ul>`
-    };
+
+  if (line.startsWith('📝 ')) {
+    if (currentList.length > 0) {
+      parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+      currentList = [];
+    }
+    parsedBlocks.push({
+      type: 'alert',
+      html: parseInlineMarkdown(line.replace(/^📝\s*/, '')),
+      items: [] as string[],
+      language: '',
+      code: ''
+    });
+    continue;
   }
-  if (block.includes('```')) {
-    const lines = block.split('\n');
-    const language = lines[0].replace('```', '').trim() || 'EXCEL';
-    const code = lines.slice(1, -1).join('\n');
-    return {
-      type: 'code',
-      language,
-      code,
-      html: code
-    };
+
+  if (line.startsWith('* ')) {
+    currentList.push(parseInlineMarkdown(line.replace(/^\*\s+/, '')));
+    continue;
   }
-  return {
+
+  if (currentList.length > 0) {
+    parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+    currentList = [];
+  }
+  parsedBlocks.push({
     type: 'paragraph',
-    html: parseInlineMarkdown(block)
-  };
-});
+    html: parseInlineMarkdown(line),
+    items: [] as string[],
+    language: '',
+    code: ''
+  });
+}
+
+if (currentList.length > 0) {
+  parsedBlocks.push({ type: 'list', items: currentList, language: '', code: '', html: '' });
+}
+
 ---
 
 <Layout title={`${post.title} | Nurullah Kartal`} activeTab="blog" description={post.description}>
@@ -103,7 +154,9 @@ const parsedBlocks = blocks.map((block) => {
         </h1>
         <div class="flex items-center justify-between gap-4 pt-2 flex-wrap">
           <div class="flex items-center gap-2.5 text-xs font-semibold text-slate-500 dark:text-slate-450">
-            <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 text-white flex items-center justify-center font-bold text-[11px] shadow-sm">NK</div>
+            <div class="w-7 h-7 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm flex-shrink-0">
+              <img src="/images/profil.jpg" alt="Nurullah Kartal" class="w-full h-full object-cover" />
+            </div>
             <div>
               <p class="text-slate-800 dark:text-slate-200 font-bold">{post.author}</p>
               <p class="text-[10px] text-slate-400 mt-0.5">Ön Muhasebe & Lojistik Uzmanı</p>
@@ -131,7 +184,14 @@ const parsedBlocks = blocks.map((block) => {
           }
           if (block.type === 'list') {
             return (
-              <div set:html={block.html} />
+              <ul class="list-none pl-2 my-5 space-y-2.5">
+                {block.items.map((item) => (
+                  <li class="flex items-start gap-2.5 text-slate-700 dark:text-slate-350 text-[16px] leading-[1.8] my-2">
+                    <span class="text-indigo-500 mt-1.5 flex-shrink-0 text-[10px] select-none">◆</span>
+                    <span set:html={item} />
+                  </li>
+                ))}
+              </ul>
             );
           }
           if (block.type === 'code') {
