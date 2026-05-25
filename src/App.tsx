@@ -8,9 +8,11 @@ import {
   activities, 
   philosophies 
 } from './data/siteData';
+import { blogPosts } from './data/blogData';
+
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<'home' | 'projects' | 'about'>('home');
+  const [currentTab, setCurrentTab] = useState<'home' | 'blog' | 'projects' | 'about'>('home');
   
   // Theme State
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -54,11 +56,37 @@ export default function App() {
   useEffect(() => {
     const tabTitleMap = {
       home: "Nurullah Kartal | Muhasebe & Lojistik Uzmanı",
+      blog: "Mesleki Blog & İpuçları | Nurullah Kartal",
       projects: "Dijital Gelişim & Hobiler | Nurullah Kartal",
       about: "Hakkımda | Nurullah Kartal"
     };
     document.title = tabTitleMap[currentTab];
   }, [currentTab]);
+
+  // Escape key to close blog modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActivePostId(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Blog State Engine
+  const [selectedCategory, setSelectedCategory] = useState<string>('Tümü');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [activePostId, setActivePostId] = useState<string | null>(null);
+
+  const filteredPosts = blogPosts.filter(post => {
+    const matchesCategory = selectedCategory === 'Tümü' || post.category === selectedCategory;
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      post.content.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const activePost = blogPosts.find(post => post.id === activePostId);
 
   // Sosyal Medya Linkleri
   const socialLinks = {
@@ -99,7 +127,7 @@ export default function App() {
           
           <div className="flex items-center space-x-2 sm:space-x-4">
             <nav className="flex space-x-1 sm:space-x-2">
-              {(['home', 'projects', 'about'] as const).map((tab) => (
+              {(['home', 'blog', 'projects', 'about'] as const).map((tab) => (
                 <button
                   key={tab}
                   onClick={() => { setCurrentTab(tab); }}
@@ -109,7 +137,7 @@ export default function App() {
                       : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
-                  {tab === 'home' ? 'Ana Sayfa' : tab === 'projects' ? 'Dijital Gelişim & Hobiler' : 'Hakkımda'}
+                  {tab === 'home' ? 'Ana Sayfa' : tab === 'blog' ? 'Mesleki Blog' : tab === 'projects' ? 'Dijital Gelişim & Hobiler' : 'Hakkımda'}
                 </button>
               ))}
             </nav>
@@ -182,6 +210,12 @@ export default function App() {
                     >
                       🚀 Hazır Yazılımlar
                     </button>
+                    <button 
+                      onClick={() => setCurrentTab('blog')} 
+                      className="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:hover:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 text-sm font-semibold rounded-lg shadow-xs transition-all border border-indigo-100 dark:border-indigo-900/40 cursor-pointer"
+                    >
+                      ✍️ Mesleki Yazılarım
+                    </button>
                     <a 
                       href="/files/nurullah_kartal_cv.pdf" 
                       download 
@@ -231,6 +265,104 @@ export default function App() {
                 </div>
               </section>
             </div>
+          )}
+
+          {/* 2. MESLEKİ BLOG */}
+          {currentTab === 'blog' && (
+            <section className="space-y-8 animate-fade-in-up">
+              <div className="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <h1 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Mesleki Blog & İpuçları</h1>
+                <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Ön muhasebe, lojistik operasyonlar, ERP entegrasyonları ve Excel verimlilik ipuçları üzerine pratik rehberler ve yazılar.</p>
+              </div>
+
+              {/* Arama ve Filtre Kontrolleri */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-xs">
+                {/* Arama Barı */}
+                <div className="relative flex-1">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400 select-none pointer-events-none">🔍</span>
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Konu, etiket veya kelime ara..."
+                    className="w-full pl-9 pr-8 py-2 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:border-indigo-500 transition-colors text-slate-850 dark:text-slate-200"
+                  />
+                  {searchQuery && (
+                    <button 
+                      onClick={() => setSearchQuery('')}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-650 dark:hover:text-slate-200"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+
+                {/* Kategori Filtre Hapları */}
+                <div className="flex flex-wrap gap-1.5">
+                  {['Tümü', 'Muhasebe', 'Lojistik', 'Yazılım & ERP', 'Gelişim & Öğrenci'].map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all cursor-pointer ${
+                        selectedCategory === cat
+                          ? 'bg-indigo-600 text-white shadow-xs'
+                          : 'bg-slate-50 dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-650 dark:text-slate-350 border border-slate-100 dark:border-slate-850'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Makale Listeleme Kartları */}
+              {filteredPosts.length > 0 ? (
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {filteredPosts.map((post) => (
+                    <div 
+                      key={post.id} 
+                      onClick={() => setActivePostId(post.id)}
+                      className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-xs hover:shadow-md hover:border-indigo-500/40 dark:hover:border-indigo-400/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between cursor-pointer group"
+                    >
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="px-2.5 py-0.5 bg-indigo-50 dark:bg-indigo-950/45 text-indigo-600 dark:text-indigo-400 font-bold rounded">
+                            {post.category}
+                          </span>
+                          <span className="text-slate-450 dark:text-slate-500 font-medium">
+                            {post.date}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-slate-600 dark:text-slate-350 text-xs leading-relaxed line-clamp-3">
+                          {post.description}
+                        </p>
+                      </div>
+                      <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs">
+                        <span className="text-slate-400 font-medium">⏱️ {post.readTime}</span>
+                        <span className="font-bold text-indigo-600 dark:text-indigo-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                          Okumaya Başla <span className="text-sm">→</span>
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-16 text-center bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl">
+                  <span className="text-4xl">🔍</span>
+                  <h3 className="mt-4 font-bold text-slate-800 dark:text-slate-200">Aramanıza Uygun Makale Bulunamadı</h3>
+                  <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">Farklı anahtar kelimeler aramayı deneyebilir veya kategori filtrelerini sıfırlayabilirsiniz.</p>
+                  <button
+                    onClick={() => { setSearchQuery(''); setSelectedCategory('Tümü'); }}
+                    className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg cursor-pointer"
+                  >
+                    Filtreleri Temizle
+                  </button>
+                </div>
+              )}
+            </section>
           )}
 
           {/* 3. PROJELER (DİJİTAL GELİŞİM & HOBİLER) */}
@@ -528,6 +660,131 @@ export default function App() {
           </div>
         </div>
       </footer>
+      {/* BLOG OKUMA MODAL DETAYI */}
+      {activePost && (
+        <div 
+          className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md transition-all duration-300 animate-fade-in"
+          onClick={() => setActivePostId(null)}
+        >
+          <div 
+            className="bg-white dark:bg-slate-900 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl border border-slate-200/60 dark:border-slate-800/80 shadow-2xl flex flex-col p-6 sm:p-8 animate-fade-in-up"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Üst Barı */}
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-4 mb-6">
+              <div className="flex items-center gap-3">
+                <span className="px-2.5 py-0.5 bg-indigo-50 dark:bg-indigo-950/45 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded">
+                  {activePost.category}
+                </span>
+                <span className="text-slate-400 dark:text-slate-500 text-xs font-semibold">⏱️ {activePost.readTime}</span>
+              </div>
+              <button 
+                onClick={() => setActivePostId(null)}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors cursor-pointer text-sm font-bold"
+                aria-label="Kapat"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Makale Başlık & Bilgi */}
+            <div className="space-y-3 mb-6">
+              <span className="text-slate-400 dark:text-slate-500 text-xs font-bold uppercase tracking-wider">{activePost.date}</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">
+                {activePost.title}
+              </h2>
+              <div className="flex items-center gap-2 pt-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                <div className="w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-[10px]">NK</div>
+                <span>Yazar: <strong>{activePost.author}</strong></span>
+              </div>
+            </div>
+
+            {/* Makale İçeriği (Dinamik Renderer) */}
+            <div className="text-slate-700 dark:text-slate-350 text-sm leading-relaxed space-y-4">
+              {activePost.content.split('\n\n').map((block, idx) => {
+                // 1. Alert/Quote Block
+                if (block.startsWith('📝 ')) {
+                  return (
+                    <div key={idx} className="p-4 bg-indigo-50/50 dark:bg-indigo-950/20 border-l-4 border-indigo-500 rounded-r-xl my-5 text-sm text-indigo-750 dark:text-indigo-350 leading-relaxed font-medium">
+                      {block}
+                    </div>
+                  );
+                }
+
+                // 2. Headings (###)
+                if (block.startsWith('### ')) {
+                  return (
+                    <h3 key={idx} className="text-lg sm:text-xl font-bold text-slate-950 dark:text-white mt-8 mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
+                      {block.replace('### ', '')}
+                    </h3>
+                  );
+                }
+
+                // 3. Bullet list block
+                if (block.startsWith('* ')) {
+                  const items = block.split('\n');
+                  return (
+                    <ul key={idx} className="list-disc list-outside pl-5 space-y-2.5 my-4 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                      {items.map((item, itemIdx) => (
+                        <li key={itemIdx}>
+                          {item.replace(/^\*\s+/, '').split('**').map((part, bIdx) => {
+                            return bIdx % 2 === 1 ? <strong key={bIdx} className="font-bold text-slate-950 dark:text-white">{part}</strong> : part;
+                          })}
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                }
+
+                // 4. Code Blocks (```)
+                if (block.includes('```')) {
+                  const lines = block.split('\n');
+                  const language = lines[0].replace('```', '').trim();
+                  const code = lines.slice(1, -1).join('\n');
+                  return (
+                    <div key={idx} className="relative group my-5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800/80 shadow-xs">
+                      <div className="bg-slate-100 dark:bg-slate-950 px-4 py-1.5 text-xs text-slate-400 font-mono border-b border-slate-200 dark:border-slate-800/80 flex justify-between items-center select-none">
+                        <span>{language.toUpperCase() || 'EXCEL'}</span>
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(code);
+                            alert('Formül panoya kopyalandı! 📋');
+                          }}
+                          className="px-2 py-0.5 hover:text-white hover:bg-indigo-600 rounded transition-colors cursor-pointer font-bold text-[10px]"
+                        >
+                          Kopyala
+                        </button>
+                      </div>
+                      <pre className="p-4 bg-slate-950 text-emerald-400 dark:bg-slate-950 font-mono text-xs overflow-x-auto leading-relaxed">
+                        <code>{code}</code>
+                      </pre>
+                    </div>
+                  );
+                }
+
+                // 5. Standard paragraph with bold parsing (**text**)
+                return (
+                  <p key={idx} className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed my-3">
+                    {block.split('**').map((part, pIdx) => {
+                      return pIdx % 2 === 1 ? <strong key={pIdx} className="font-bold text-slate-950 dark:text-white">{part}</strong> : part;
+                    })}
+                  </p>
+                );
+              })}
+            </div>
+
+            {/* Modal Kapat Butonu */}
+            <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800/60 flex justify-end">
+              <button 
+                onClick={() => setActivePostId(null)}
+                className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-850 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer"
+              >
+                Kapat ve Geri Dön
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
