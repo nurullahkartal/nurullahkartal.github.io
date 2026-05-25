@@ -22,8 +22,7 @@ export const projects: Project[] = [
     id: "nk-ai",
     title: "NK AI Geliştirme Ortamı",
     description: "Teknolojiye meraklıyım. Boş zamanlarımda tamamen hobi amaçlı ve kendimi denemek için kurguladığım, yapay zeka entegrasyonu üzerine fikir ve SEO aşamalarıyla uğraştığım küçük bir dijital çalışma.",
-    tech: ["React", "TypeScript", "Vite"],
-    githubUrl: "https://github.com/nurullahkartal"
+    tech: ["React", "TypeScript", "Vite"]
   }
 ];
 
