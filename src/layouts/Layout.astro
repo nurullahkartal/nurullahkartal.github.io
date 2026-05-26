@@ -5,12 +5,18 @@ interface Props {
   title?: string;
   description?: string;
   activeTab?: 'home' | 'blog' | 'projects' | 'about';
+  /** Sayfanın tam canonical URL'si. Varsayılan: site kökü */
+  canonicalUrl?: string;
+  /** OG image URL'si. Varsayılan: profil fotoğrafı */
+  ogImage?: string;
 }
 
-const { 
-  title = "Nurullah Kartal | Muhasebe ve Lojistik & Öğrenci", 
-  description = "Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışan, Atatürk Üniversitesi öğrencisi Nurullah Kartal'ın hobi amaçlı teknoloji ve dijital gelişim günlüğü.",
-  activeTab = "home"
+const {
+  title = "Nurullah Kartal | Ön Muhasebe & Lojistik Uzmanı",
+  description = "Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışan, Atatürk Üniversitesi öğrencisi Nurullah Kartal'ın mesleki blog ve portfolyo sitesi.",
+  activeTab = "home",
+  canonicalUrl = "https://nurullahkartal.com.tr/",
+  ogImage = "https://nurullahkartal.com.tr/images/profil.jpg",
 } = Astro.props;
 
 // Navigasyon elemanları
@@ -26,6 +32,139 @@ const socialLinks = {
   linkedin: "https://tr.linkedin.com/in/n47kartal",
   email: "mailto:nurullahkartaltr@gmail.com"
 };
+
+// JSON-LD için JSON nesnesi oluştur (XSS güvenli)
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://nurullahkartal.com.tr/#person",
+      "name": "Nurullah Kartal",
+      "givenName": "Nurullah",
+      "familyName": "Kartal",
+      "url": "https://nurullahkartal.com.tr",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://nurullahkartal.com.tr/images/profil.jpg",
+        "caption": "Nurullah Kartal - Ön Muhasebe & Lojistik Uzmanı"
+      },
+      "jobTitle": [
+        "Ön Muhasebe Uzmanı",
+        "Lojistik Operasyon Uzmanı",
+        "Yazılım Geliştirici (Hobi)"
+      ],
+      "description": "Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışan uzman. Mikro, Logo ve Nes Portal ERP sistemlerinde deneyimli.",
+      "knowsAbout": [
+        "Ön Muhasebe",
+        "Fatura Takibi",
+        "Lojistik Veri Girişi",
+        "E-Fatura ve E-Arşiv",
+        "Muhasebe ve Vergi Uygulamaları",
+        "Uluslararası Ticaret ve Lojistik",
+        "Mikro ERP",
+        "Logo ERP",
+        "Nes Portal",
+        "Microsoft Excel",
+        "Yazılım ve Web Geliştirme (Hobi)"
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Atatürk Üniversitesi",
+          "department": "Muhasebe ve Vergi Uygulamaları"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Anadolu Üniversitesi",
+          "department": "Uluslararası Ticaret ve Lojistik"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gaziantep",
+        "addressCountry": "TR"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Türkiye"
+      },
+      "sameAs": [
+        "https://tr.linkedin.com/in/n47kartal",
+        "https://www.instagram.com/nurullahkrtal/",
+        "https://github.com/nurullahkartal"
+      ],
+      "worksFor": {
+        "@type": "Organization",
+        "@id": "https://nurullahkartal.com.tr/#organization"
+      },
+      "brand": {
+        "@type": "Organization",
+        "@id": "https://nurullahkartal.com.tr/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://nurullahkartal.com.tr/#organization",
+      "name": "NK YAZILIM",
+      "alternateName": "NK Yazılım",
+      "url": "https://nurullahkartal.com.tr",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://nurullahkartal.com.tr/images/nk-logo.png",
+        "caption": "NK YAZILIM Logosu"
+      },
+      "founder": {
+        "@type": "Person",
+        "@id": "https://nurullahkartal.com.tr/#person"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "nurullahkartaltr@gmail.com",
+        "availableLanguage": ["Turkish"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://nurullahkartal.com.tr/#website",
+      "url": "https://nurullahkartal.com.tr",
+      "name": "Nurullah Kartal",
+      "description": "Nurullah Kartal'ın kişisel mesleki blog ve portfolyo sitesi. Ön muhasebe, lojistik ve dijital gelişim üzerine pratik içerikler.",
+      "inLanguage": "tr-TR",
+      "publisher": {
+        "@id": "https://nurullahkartal.com.tr/#organization"
+      },
+      "author": {
+        "@id": "https://nurullahkartal.com.tr/#person"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://nurullahkartal.com.tr/blog?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      "url": canonicalUrl,
+      "name": title,
+      "description": description,
+      "inLanguage": "tr-TR",
+      "isPartOf": {
+        "@id": "https://nurullahkartal.com.tr/#website"
+      },
+      "about": {
+        "@id": "https://nurullahkartal.com.tr/#person"
+      }
+    }
+  ]
+};
+
+const schemaJson = JSON.stringify(schemaGraph);
 ---
 
 <!doctype html>
@@ -35,52 +174,42 @@ const socialLinks = {
     <link rel="icon" type="image/png" href="/images/nk-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    
-    <!-- Meta SEO Etiketleri -->
+
+    <!-- Temel SEO Meta Etiketleri -->
     <meta name="description" content={description} />
-    <meta name="keywords" content="Nurullah Kartal, ön muhasebe, fatura takipleri, lojistik veri girişi, Atatürk Üniversitesi, öğrenci, teknoloji meraklısı, yazılım hobisi, kişisel gelişim" />
+    <meta name="keywords" content="Nurullah Kartal, ön muhasebe uzmanı, fatura takibi, lojistik veri girişi, e-fatura, e-arşiv, Mikro ERP, Logo ERP, Atatürk Üniversitesi, muhasebe blogu, NK Yazılım, Gaziantep muhasebe" />
     <meta name="author" content="Nurullah Kartal" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <link rel="canonical" href="https://nurullahkartal.com.tr/" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="theme-color" content="#4f46e5" />
+    <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph (Sosyal Medya Paylaşımları) -->
     <meta property="og:locale" content="tr_TR" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://nurullahkartal.com.tr/" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Nurullah Kartal" />
-    
-    <!-- Structured Data (JSON-LD) - Person & Author Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Nurullah Kartal",
-        "url": "https://nurullahkartal.com.tr",
-        "jobTitle": "Atatürk Üniversitesi Öğrencisi & Ön Muhasebe Çalışanı",
-        "knowsAbout": [
-          "Ön Muhasebe",
-          "Fatura Takibi",
-          "Lojistik Veri Girişi",
-          "Muhasebe ve Vergi Uygulamaları",
-          "Uluslararası Ticaret ve Lojistik",
-          "Teknoloji ve Yazılım (Hobi)"
-        ],
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "Atatürk Üniversitesi"
-        },
-        "sameAs": [
-          "https://tr.linkedin.com/in/n47kartal",
-          "https://www.instagram.com/nurullahkrtal/"
-        ]
-      }
-    </script>
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Nurullah Kartal - Ön Muhasebe & Lojistik Uzmanı" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <!-- Dark Mode Inline Script to prevent visual flicker -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Kombine Master JSON-LD Schema (Graph Yapısı) -->
+    <script type="application/ld+json" set:html={schemaJson} />
+
+    <!-- Sayfaya özgü ek head içeriği (BlogPosting şeması vb.) -->
+    <slot name="head" />
+
+    <!-- Dark Mode Inline Script (görsel titreme önleme) -->
     <script is:inline>
       (function () {
         try {
@@ -97,26 +226,29 @@ const socialLinks = {
     </script>
   </head>
   <body class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-indigo-500 selection:text-white antialiased transition-colors duration-200 flex flex-col">
-    
+
     <!-- HEADER / NAVIGATION -->
     <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-200">
       <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a 
-          href="/" 
+        <a
+          href="/"
           class="flex items-center gap-3 hover:opacity-90 transition-opacity"
+          aria-label="Nurullah Kartal - Ana Sayfa"
         >
-          <img 
-            src="/images/nk-logo.png" 
-            alt="Nurullah Kartal Logo" 
-            class="h-9 w-auto object-contain dark:brightness-110" 
+          <img
+            src="/images/nk-logo.png"
+            alt="NK YAZILIM - Nurullah Kartal Logo"
+            class="h-9 w-auto object-contain dark:brightness-110"
+            width="36"
+            height="36"
           />
           <span class="text-lg font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
             Nurullah KARTAL
           </span>
         </a>
-        
+
         <div class="flex items-center space-x-2 sm:space-x-4">
-          <nav class="flex space-x-1 sm:space-x-2">
+          <nav class="flex space-x-1 sm:space-x-2" aria-label="Ana Navigasyon">
             {navItems.map((item) => (
               <a
                 href={item.path}
@@ -125,6 +257,7 @@ const socialLinks = {
                     ? 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400'
                     : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
+                aria-current={activeTab === item.id ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -135,7 +268,7 @@ const socialLinks = {
           <button
             id="theme-toggle"
             class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg cursor-pointer border border-slate-200/50 dark:border-slate-700/50"
-            aria-label="Tema Değiştir"
+            aria-label="Tema Değiştir (Koyu/Açık Mod)"
           >
             <span id="theme-toggle-icon">🌙</span>
           </button>
@@ -149,12 +282,12 @@ const socialLinks = {
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-200">
+    <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 transition-colors duration-200" aria-label="Site Alt Bilgisi">
       <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-        <div>© 2026 Nurullah Kartal. Tüm hakları saklıdır.</div>
+        <div>© 2026 Nurullah Kartal — NK YAZILIM. Tüm hakları saklıdır.</div>
         <div class="flex gap-4">
-          <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" class="hover:underline">LinkedIn</a>
-          <a href={socialLinks.instagram} target="_blank" rel="noreferrer" class="hover:underline">Instagram</a>
+          <a href={socialLinks.linkedin} target="_blank" rel="noreferrer noopener" class="hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">LinkedIn</a>
+          <a href={socialLinks.instagram} target="_blank" rel="noreferrer noopener" class="hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Instagram</a>
         </div>
       </div>
     </footer>
