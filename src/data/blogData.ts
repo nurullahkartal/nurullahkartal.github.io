@@ -1617,5 +1617,49 @@ export const blogPosts: BlogPost[] = [
     "readTime": "3 dk okuma",
     "author": "Nurullah Kartal",
     "content": "Türkiye'de sosyal güvenlik sisteminde iki temel prim türü bulunur: Çalışanların tabi olduğu **SGK (4A)** ve işveren/esnafın tabi olduğu **Bağkur (4B)**.\n\n### 1. SGK (4A) - Sigortalı Çalışanlar\n* Bir işyerinde sözleşmeli ve maaşlı çalışan kişilerin tabi olduğu sistemdir.\n* Primleri işveren tarafından ödenir ve takip edilir.\n* Emeklilik için gün şartı Bağkur'a göre daha düşüktür.\n\n### 2. Bağkur (4B) - Kendi İşinin Sahibi Olanlar\n* Şahıs firması kuranlar, limited şirket ortakları veya esnafların tabi olduğu sistemdir.\n* Primleri doğrudan kişi tarafından her ay bankaya ödenir.\n* Emeklilik için daha fazla prim günü (örneğin 9000 gün) biriktirilmesi gerekir.\n\n### 📝 Altın Kural:\nBir şahıs şirketiniz varsa ancak başka bir şirkette SGK'lı (4A) olarak çalışmaya başlarsanız, o süre boyunca kendi şirketinizden dolayı Bağkur primi ödemezsiniz!"
+  },
+  {
+    id: "gaziantep-ihracat-faturasi-ve-dab-takibi",
+    title: "Gaziantep Ticaretinde İhracat Faturası ve DAB (Döviz Alım Belgesi) Takibi",
+    description: "Gaziantep sanayi ve ihracat ekosisteminde alış-satış, ihracat faturalarının kesilmesi ve Döviz Alım Belgesi (DAB) süreçlerinin ön muhasebedeki pratik yönetimi.",
+    category: "Muhasebe",
+    tags: ["İhracat","DAB","e-Fatura","Gaziantep"],
+    date: "26 Mayıs 2026",
+    readTime: "3 dk okuma",
+    author: "Nurullah Kartal",
+    content: "Gaziantep, Türkiye'nin en büyük ihracat merkezlerinden biridir. İhracat operasyonlarında ön muhasebe çalışanlarının en çok dikkat etmesi gereken süreç ihracat faturası ve DAB (Döviz Alım Belgesi) takibidir.\n\n### İhracat Faturası Keserken Dikkat Edilecekler\n* **KDV Muafiyeti:** İhracat faturaları KDV'siz (KDV İstisna Kodu ile) düzenlenir.\n* **Gümrük Beyannamesi Uyumu:** Fatura üzerindeki kap adedi, kilo ve mal bedeli gümrük beyannamesiyle birebir eşleşmelidir.\n\n### DAB (Döviz Alım Belgesi) Nedir?\nİhracat bedellerinin yurda getirilmesinin ardından bankalarca düzenlenen resmi belgedir. Ön muhasebede gelen bedelin hangi ihracat faturasına ait olduğu milimetrik takip edilmeli, gelir-gider kayıtları banka mutabakatlarıyla senkronize işlenmelidir."
+  },
+  {
+    id: "gaziantep-lojistik-arac-giris-cikis-takibi",
+    title: "Gaziantep Nakliye ve Lojistik Sektöründe Araç Giriş-Çıkış ve Veri Giriş Süreçleri",
+    description: "Lojistik operasyonlarında araç giriş-çıkış süreçlerinin sistem üzerinden takibi, düzenli veri girişi ve sevkiyat planlama operasyonları.",
+    category: "Lojistik",
+    tags: ["Lojistik","Veri Girişi","Araç Takip","Gaziantep"],
+    date: "26 Mayıs 2026",
+    readTime: "2 dk okuma",
+    author: "Nurullah Kartal",
+    content: "Gaziantep'in lojistik ve sevkiyat ağlarında operasyonun sıfır hatayla yürümesi, araç giriş-çıkış verilerinin sisteme doğru işlenmesine bağlıdır.\n\n### Operasyonel Veri Girişinin Önemi\n* **Zaman Takibi:** Araçların tesise giriş ve çıkış saatlerinin kaydedilmesi, lojistik verimlilik analizi için şarttır.\n* **İrsaliye ve Evrak Kontrolü:** Gelen veya giden her aracın irsaliye kontrolleri ve yük bilgileri sisteme anında girilmelidir.\nSistem üzerinden yapılan düzenli veri girişleri, depoların stok durumunu ve sevkiyat planlamasını doğrudan korur."
+  },
+  {
+    id: "gaziantep-kobi-mikro-logo-e-fatura",
+    title: "Gaziantep KOBİ'leri İçin Mikro ve Logo Üzerinden e-Fatura Yönetimi",
+    description: "Gaziantep'teki ticari işletmelerde Mikro ve Logo ERP programları ile Nes Portal entegratörü üzerinden e-fatura ve e-arşiv süreçlerinin pratik işleyişi.",
+    category: "Yazılım & ERP",
+    tags: ["Mikro","Logo","Nes Portal","e-Fatura","Gaziantep"],
+    date: "26 Mayıs 2026",
+    readTime: "3 dk okuma",
+    author: "Nurullah Kartal",
+    content: "Gaziantep sanayisindeki KOBİ'lerin dijital dönüşümünde Mikro ve Logo yazılımları ile Nes Portal gibi entegratörlerin rolü büyüktür. Günlük ön muhasebe operasyonlarında fatura kesim işlemlerinin hatasız yürümesi ticari sağlığı korur.\n\n### e-Belge Süreçlerinde Altın Kurallar\n* **Cari Bilgi Kontrolü:** Fatura kesilmeden önce karşı tarafın e-fatura mükellefi olup olmadığı sistemden sorgulanmalıdır.\n* **7 Gün Kuralı:** Faturanın malın teslim veya hizmetin ifa tarihinden itibaren en geç 7 gün içinde kesilmesi zorunludur.\nMikro ve Logo üzerinde doğru cari eşleştirmeleriyle fatura iptal ve iade süreçleri minimuma indirilebilir."
+  },
+  {
+    id: "gaziantep-resmi-kurum-evrak-trafigi-ve-banka",
+    title: "Gaziantep'te İşletmeler İçin Resmi Kurum Evrak Trafiği ve Banka Mutabakatları",
+    description: "Şirketlerin banka işlemleri, finansal evrak takibi ve resmi kurumlarla olan evrak süreçlerinin ofis ve saha yönetim stratejileri.",
+    category: "Muhasebe",
+    tags: ["Banka Mutabakatı","Evrak Takibi","Resmi Kurum","Gaziantep"],
+    date: "26 Mayıs 2026",
+    readTime: "3 dk okuma",
+    author: "Nurullah Kartal",
+    content: "İşletmelerin finansal sağlığı, sadece bilgisayar başında değil, resmi kurumlar ve bankalarla olan evrak trafiğinin de doğru yönetilmesiyle korunur.\n\n### Banka ve Resmi Evrak Süreçleri\n* **Banka Mutabakatı:** Günlük banka ekstreleri ile ön muhasebe kayıtlarındaki borç/alacak bakiyeleri düzenli olarak karşılaştırılmalıdır.\n* **Resmi Kurum Evrakları:** Vergi dairesi, ticaret odası veya diğer resmi kurumlarla olan evrak trafiği, yasal süreler kaçırılmadan arşivlenip dosyalanmalıdır.\nSaha ve ofis arasındaki evrak senkronizasyonu, olası idari ve finansal risklerin önüne geçer."
   }
 ];
