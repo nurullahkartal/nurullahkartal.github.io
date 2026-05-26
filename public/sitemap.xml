@@ -669,4 +669,28 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://nurullahkartal.com.tr/blog/gaziantep-ihracat-faturasi-ve-dab-takibi</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nurullahkartal.com.tr/blog/gaziantep-lojistik-arac-giris-cikis-takibi</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nurullahkartal.com.tr/blog/gaziantep-kobi-mikro-logo-e-fatura</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nurullahkartal.com.tr/blog/gaziantep-resmi-kurum-evrak-trafigi-ve-banka</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
