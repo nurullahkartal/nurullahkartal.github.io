@@ -210,18 +210,18 @@ if (currentList.length > 0) {
   </Fragment>
 
   <div class="max-w-3xl mx-auto animate-fade-in-up">
-    <!-- Premium Geri Dönüş Navigasyonu -->
-    <div class="mb-8">
+    <!-- Geri Dönüş Navigasyonu -->
+    <div class="mb-6 sm:mb-8">
       <a
         href="/blog"
-        class="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 bg-white/80 dark:bg-slate-900/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-xl transition-all duration-300 border border-slate-200/50 dark:border-slate-800/80 hover:-translate-x-1 group shadow-xs"
+        class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 bg-white/80 dark:bg-slate-900/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 rounded-xl transition-all duration-300 border border-slate-200/50 dark:border-slate-800/80 hover:-translate-x-1 group shadow-xs"
       >
         <span class="text-base transition-transform duration-300 group-hover:-translate-x-0.5">←</span> Blog Yazılarına Dön
       </a>
     </div>
 
     <article
-      class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl shadow-xl p-6 sm:p-10 md:p-12 space-y-8"
+      class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-8 md:p-12 space-y-6 sm:space-y-8"
       itemscope
       itemtype="https://schema.org/BlogPosting"
     >
@@ -235,7 +235,7 @@ if (currentList.length > 0) {
         </div>
         <!-- H1: Makale başlığı — bu sayfanın tek H1'i -->
         <h1
-          class="text-3xl sm:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.25]"
+          class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-[1.2]"
           itemprop="headline"
         >
           {post.title}
@@ -281,13 +281,13 @@ if (currentList.length > 0) {
           // H2 bölüm başlığı (### içeriğinin üst kategorisi için ##)
           if (block.type === 'h2') {
             return (
-              <h2 class="text-2xl sm:text-3xl font-bold text-slate-950 dark:text-white mt-12 mb-5 border-b border-slate-100 dark:border-slate-800/80 pb-3 tracking-tight" set:html={block.html} />
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white mt-8 sm:mt-12 mb-4 sm:mb-5 border-b border-slate-100 dark:border-slate-800/80 pb-2 sm:pb-3 tracking-tight" set:html={block.html} />
             );
           }
           // H3 alt başlık (### ile işaretlenmiş başlıklar)
           if (block.type === 'h3') {
             return (
-              <h3 class="text-xl sm:text-2xl font-bold text-slate-950 dark:text-white mt-10 mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-3 tracking-tight" set:html={block.html} />
+              <h3 class="text-lg sm:text-xl font-bold text-slate-950 dark:text-white mt-7 sm:mt-10 mb-3 sm:mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2 sm:pb-3 tracking-tight" set:html={block.html} />
             );
           }
           if (block.type === 'list') {
@@ -304,23 +304,24 @@ if (currentList.length > 0) {
           }
           if (block.type === 'code') {
             return (
-              <div class="relative group my-6 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/60 shadow-md">
-                <div class="bg-slate-100 dark:bg-slate-900/90 px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 font-mono border-b border-slate-200 dark:border-slate-800/80 flex justify-between items-center select-none">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-red-400 dark:bg-red-500/40 inline-block"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 dark:bg-amber-500/40 inline-block"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 dark:bg-emerald-500/40 inline-block"></span>
-                    <span class="ml-2 font-semibold text-[11px] tracking-wider text-slate-600 dark:text-slate-400">{(block.language || '').toUpperCase()} FORMÜLÜ</span>
+              <div class="relative group my-4 sm:my-6 rounded-xl sm:rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/60 shadow-md">
+                <div class="bg-slate-100 dark:bg-slate-900/90 px-3 sm:px-4 py-2 sm:py-2.5 text-xs text-slate-500 dark:text-slate-400 font-mono border-b border-slate-200 dark:border-slate-800/80 flex justify-between items-center select-none">
+                  <div class="flex items-center gap-1.5 min-w-0">
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-red-400 dark:bg-red-500/40 inline-block flex-shrink-0"></span>
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 dark:bg-amber-500/40 inline-block flex-shrink-0"></span>
+                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 dark:bg-emerald-500/40 inline-block flex-shrink-0"></span>
+                    <span class="ml-2 font-semibold text-[10px] sm:text-[11px] tracking-wider text-slate-600 dark:text-slate-400 truncate">{(block.language || '').toUpperCase()} FORMÜLÜ</span>
                   </div>
                   <button
-                    class="copy-formula-btn px-2.5 py-1 text-slate-600 dark:text-slate-300 hover:text-white dark:hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-600 rounded-lg transition-all duration-200 cursor-pointer font-bold text-[10px] bg-slate-200/50 dark:bg-slate-800/50 border border-slate-300/30 dark:border-slate-700/50 shadow-2xs"
+                    class="copy-formula-btn flex-shrink-0 ml-2 px-2 sm:px-2.5 py-1 text-slate-600 dark:text-slate-300 hover:text-white dark:hover:text-white hover:bg-indigo-600 dark:hover:bg-indigo-600 rounded-lg transition-all duration-200 cursor-pointer font-bold text-[10px] bg-slate-200/50 dark:bg-slate-800/50 border border-slate-300/30 dark:border-slate-700/50 shadow-2xs"
                     data-code={block.code}
                     aria-label="Formülü kopyala"
                   >
                     Kopyala 📋
                   </button>
                 </div>
-                <pre class="p-5 bg-slate-950 text-emerald-400 dark:bg-slate-950 font-mono text-[13px] overflow-x-auto leading-relaxed scrollbar-thin"><code>{block.code}</code></pre>
+                {/* overflow-x-auto: mobilde uzun formüller sayfayı yatay kaydırmaz, sadece kutu içinde kayar */}
+                <pre class="p-3 sm:p-5 bg-slate-950 text-emerald-400 dark:bg-slate-950 font-mono text-[12px] sm:text-[13px] overflow-x-auto leading-relaxed"><code>{block.code}</code></pre>
               </div>
             );
           }

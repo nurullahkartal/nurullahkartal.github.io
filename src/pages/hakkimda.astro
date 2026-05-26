@@ -10,35 +10,37 @@ const socialLinks = {
 ---
 
 <Layout title="Hakkımda | Nurullah Kartal" activeTab="about" description="Saha tecrübelerim, uzmanlık alanlarım ve iş felsefem." canonicalUrl="https://nurullahkartal.com.tr/hakkimda">
-  <section class="space-y-12">
+  <section class="space-y-10 sm:space-y-12">
+
+    <!-- Sayfa Başlığı -->
     <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
-      <h1 class="text-3xl font-black tracking-tight text-slate-950 dark:text-white">Hakkımda</h1>
+      <h1 class="text-2xl sm:text-3xl font-black tracking-tight text-slate-950 dark:text-white">Hakkımda</h1>
       <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Saha tecrübelerim, uzmanlık alanlarım ve iş felsefem.</p>
     </div>
 
     <!-- Tanıtım Yazıları -->
-    <div class="space-y-4 max-w-2xl text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+    <div class="space-y-4 max-w-2xl text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
       <p>
-        Ben Nurullah Kartal. Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışıyorum. Bir yandan iş hayatında tecrübe kazanırken, diğer yandan Atatürk Üniversitesi ve Anadolu Üniversitesi bünyesinde eğitimime (Muhasebe ve Vergi Uygulamaları ile Uluslararası Ticaret ve Lojistik) aktif olarak devam ediyorum.
+        Ben Nurullah Kartal. Yaklaşık 4 yıldır sahada ön muhasebe, fatura takipleri ve lojistik veri girişleri üzerine çalışıyorum. Bir yandan iş hayatında tecrübe kazanırken, diğer yandan Atatürk Üniversitesi ve Anadolu Üniversitesi bünyesinde eğitimime aktif olarak devam ediyorum.
       </p>
       <p>
-        Yazılım ve teknoloji dünyası benim için büyük bir merak ve hobi alanı. Boş zamanlarımda kendimi denemek, yeni araçlar öğrenmek ve dijital süreçleri anlamak için küçük çalışmalar yapıyorum. Bu alanda öğrendiklerimi ve hobi amaçlı geliştirdiğim fikirleri de burada paylaşıyorum.
+        Yazılım ve teknoloji dünyası benim için büyük bir merak ve hobi alanı. Boş zamanlarımda kendimi denemek, yeni araçlar öğrenmek ve dijital süreçleri anlamak için küçük çalışmalar yapıyorum.
       </p>
     </div>
 
     <!-- İletişim Bilgileri Grid -->
     <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
-      <h2 class="text-xl font-bold text-slate-900 dark:text-white">Doğrudan İletişim</h2>
-      <div class="grid sm:grid-cols-3 gap-4">
+      <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Doğrudan İletişim</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl">
           <div class="text-xs text-slate-500 dark:text-slate-450 font-semibold uppercase tracking-wider">E-Posta Adresi</div>
-          <a href={socialLinks.email} class="font-bold text-indigo-600 dark:text-indigo-400 hover:underline mt-1 block truncate">
+          <a href={socialLinks.email} class="font-bold text-indigo-600 dark:text-indigo-400 hover:underline mt-1 block text-sm truncate">
             {socialLinks.email.replace('mailto:', '')}
           </a>
         </div>
         <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl">
           <div class="text-xs text-slate-500 dark:text-slate-450 font-semibold uppercase tracking-wider">Lokasyon</div>
-          <div class="font-bold text-slate-800 dark:text-slate-200 mt-1">Gaziantep, Türkiye</div>
+          <div class="font-bold text-slate-800 dark:text-slate-200 mt-1 text-sm">Gaziantep, Türkiye</div>
         </div>
         <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl">
           <div class="text-xs text-slate-500 dark:text-slate-450 font-semibold uppercase tracking-wider">Sosyal Profiller</div>
@@ -51,15 +53,15 @@ const socialLinks = {
     </div>
 
     <!-- Çalışma Felsefem Grid -->
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
-      <h2 class="text-xl font-bold text-slate-900 dark:text-white">Çalışma Felsefem</h2>
-      <div class="grid sm:grid-cols-2 gap-4">
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-5">
+      <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Çalışma Felsefem</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {philosophies.map(p => (
-          <div class="p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 hover:shadow-xs transition-shadow duration-200">
-            <span class="text-3xl select-none">{p.icon}</span>
+          <div class="p-4 sm:p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 hover:shadow-xs transition-shadow duration-200">
+            <span class="text-2xl sm:text-3xl select-none flex-shrink-0">{p.icon}</span>
             <div>
-              <h4 class="font-bold text-slate-950 dark:text-white text-base">{p.title}</h4>
-              <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">{p.description}</p>
+              <h3 class="font-bold text-slate-950 dark:text-white text-sm sm:text-base">{p.title}</h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">{p.description}</p>
             </div>
           </div>
         ))}
@@ -67,32 +69,32 @@ const socialLinks = {
     </div>
 
     <!-- Eğitim Bilgilerim Grid -->
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
-      <h2 class="text-xl font-bold text-slate-900 dark:text-white">Eğitim Bilgilerim</h2>
-      <div class="grid sm:grid-cols-3 gap-6">
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-5">
+      <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Eğitim Bilgilerim</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
         {educations.map(edu => (
-          <div class="p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex flex-col justify-between items-center text-center hover:shadow-xs transition-shadow">
-            <div class="w-16 h-16 flex items-center justify-center bg-slate-50 dark:bg-slate-950 rounded-full overflow-hidden p-2 border border-slate-100 dark:border-slate-850 shadow-inner">
+          <div class="p-4 sm:p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex sm:flex-col items-center sm:justify-between gap-4 sm:gap-0 sm:text-center hover:shadow-xs transition-shadow">
+            <div class="w-14 h-14 flex-shrink-0 sm:flex-shrink flex items-center justify-center bg-slate-50 dark:bg-slate-950 rounded-full overflow-hidden p-2 border border-slate-100 dark:border-slate-850 shadow-inner">
               {edu.logoUrl ? (
                 <img src={edu.logoUrl} alt={edu.school} class="w-full h-full object-contain" />
               ) : (
                 <span class="text-xs font-bold text-slate-400">{edu.fallbackText}</span>
               )}
             </div>
-            <div class="mt-4 flex-grow flex flex-col justify-center">
-              <h4 class="font-bold text-sm text-slate-950 dark:text-white line-clamp-1">{edu.degree}</h4>
+            <div class="sm:mt-4 flex-grow flex flex-col sm:items-center sm:justify-center">
+              <h3 class="font-bold text-sm text-slate-950 dark:text-white line-clamp-2">{edu.degree}</h3>
               <p class="text-xs text-slate-500 dark:text-slate-450 mt-1 line-clamp-2">{edu.school}</p>
+              <span class="mt-2 sm:mt-4 px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] rounded font-medium inline-block">{edu.date}</span>
             </div>
-            <span class="mt-4 px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] rounded font-medium">{edu.date}</span>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Yetkinlikler & Programlar Progress Bar -->
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
-      <h2 class="text-xl font-bold text-slate-900 dark:text-white">Yetkinlikler & Programlar</h2>
-      <div class="space-y-4 p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl">
+    <!-- Yetkinlikler & Programlar -->
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-5">
+      <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Yetkinlikler & Programlar</h2>
+      <div class="space-y-4 p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl">
         {skills.map(s => (
           <div class="space-y-1.5">
             <div class="flex justify-between text-sm font-semibold">
@@ -100,8 +102,8 @@ const socialLinks = {
               <span class="text-indigo-600 dark:text-indigo-400">{s.value}%</span>
             </div>
             <div class="w-full h-2.5 bg-slate-100 dark:bg-slate-850 rounded-full overflow-hidden border border-slate-200/30 dark:border-slate-800/20">
-              <div 
-                class="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-400 dark:to-indigo-500 rounded-full transition-all duration-1000" 
+              <div
+                class="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 dark:from-indigo-400 dark:to-indigo-500 rounded-full transition-all duration-1000"
                 style={{ width: `${s.value}%` }}
               ></div>
             </div>
@@ -110,20 +112,20 @@ const socialLinks = {
       </div>
     </div>
 
-    <!-- Son Etkinlikler GDG Badge -->
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
-      <h2 class="text-xl font-bold text-slate-900 dark:text-white">Son Etkinlikler</h2>
-      <div class="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-6 hover:shadow-xs transition-shadow">
-        <div class="flex-shrink-0 w-16 h-16 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-2xl select-none shadow-sm">in</div>
-        <div class="flex-grow">
-          <div class="flex justify-between items-baseline gap-2 flex-wrap">
-            <h4 class="font-bold text-slate-950 dark:text-white text-base">{activities[0].title}</h4>
-            <span class="text-xs text-slate-500 dark:text-slate-450">{activities[0].date}</span>
+    <!-- Son Etkinlikler -->
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-5">
+      <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Son Etkinlikler</h2>
+      <div class="p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 sm:gap-6 hover:shadow-xs transition-shadow">
+        <div class="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-blue-600 text-white rounded-lg flex items-center justify-center font-black text-xl sm:text-2xl select-none shadow-sm">in</div>
+        <div class="flex-grow min-w-0">
+          <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 flex-wrap">
+            <h3 class="font-bold text-slate-950 dark:text-white text-sm sm:text-base">{activities[0].title}</h3>
+            <span class="text-xs text-slate-500 dark:text-slate-450 flex-shrink-0">{activities[0].date}</span>
           </div>
           <div class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5">{activities[0].organizer}</div>
-          <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">{activities[0].description}</p>
+          <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">{activities[0].description}</p>
           {activities[0].url && (
-            <a href={activities[0].url} target="_blank" rel="noreferrer" class="inline-block mt-4 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-lg transition-colors cursor-pointer shadow-xs">
+            <a href={activities[0].url} target="_blank" rel="noreferrer" class="inline-block mt-3 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 px-4 py-2 rounded-lg transition-colors cursor-pointer shadow-xs">
               LinkedIn Gönderisini Görüntüle
             </a>
           )}
@@ -132,23 +134,24 @@ const socialLinks = {
     </div>
 
     <!-- Sertifikalar & Diller -->
-    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-6">
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div class="p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 items-center">
-          <span class="text-3xl select-none">📜</span>
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div class="p-4 sm:p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 items-center">
+          <span class="text-2xl sm:text-3xl select-none flex-shrink-0">📜</span>
           <div>
-            <h4 class="font-bold text-slate-950 dark:text-white">Sertifikalar</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-450 mt-0.5">Muhasebe Dalı Kalfalık ve Ustalık Belgesi</p>
+            <h3 class="font-bold text-slate-950 dark:text-white text-sm sm:text-base">Sertifikalar</h3>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-450 mt-0.5">Muhasebe Dalı Kalfalık ve Ustalık Belgesi</p>
           </div>
         </div>
-        <div class="p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 items-center">
-          <span class="text-3xl select-none">🌐</span>
+        <div class="p-4 sm:p-5 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-xl flex gap-4 items-center">
+          <span class="text-2xl sm:text-3xl select-none flex-shrink-0">🌐</span>
           <div>
-            <h4 class="font-bold text-slate-950 dark:text-white">Diller</h4>
-            <p class="text-sm text-slate-600 dark:text-slate-450 mt-0.5">Türkçe (Anadil), Kürtçe (Anadil)</p>
+            <h3 class="font-bold text-slate-950 dark:text-white text-sm sm:text-base">Diller</h3>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-450 mt-0.5">Türkçe (Anadil), Kürtçe (Anadil)</p>
           </div>
         </div>
       </div>
     </div>
+
   </section>
 </Layout>
