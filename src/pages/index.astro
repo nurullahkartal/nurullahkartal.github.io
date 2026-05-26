@@ -29,14 +29,14 @@ const socialLinks = {
         <div class="h-9 flex items-center justify-center md:justify-start">
           <span
             id="rotating-badge"
-            class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-900/30 rounded-lg text-sm sm:text-base font-bold tracking-wide uppercase transition-all duration-200"
+            class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950/30 text-indigo-600 dark:text-indigo-400 border border-indigo-100/50 dark:border-indigo-900/30 rounded-lg text-sm sm:text-base font-bold tracking-wide transition-all duration-200"
           >
-            Muhasebe Uzmanı
+            Gaziantep Muhasebe & Lojistik Personeli
           </span>
         </div>
 
         <p class="text-base sm:text-lg text-slate-600 dark:text-slate-350 max-w-xl leading-relaxed mt-2">
-          Muhasebe, lojistik ve banka süreçleri üzerine yaklaşık 4 yıllık saha ve ofis deneyimine sahibim. Mikro, Logo ve Nes Portal programlarını aktif kullanarak e-fatura/e-arşiv süreçlerini ve resmi evrak takibini yürüttüm.
+          Gaziantep merkezli olmak üzere, muhasebe, lojistik ve banka süreçleri üzerine yaklaşık 4 yıllık saha ve ofis deneyimine sahibim. Altunkaynak Grup (Altuntur), Tekkelioğlu Yumurta ve Solviss Yazılım gibi firmalarda; Mikro, Logo ve Nes Portal programlarını aktif kullanarak e-fatura/e-arşiv süreçlerini, irsaliye yönetimini ve resmi evrak takibini yürüttüm. Şirketlerin banka işlemleri, araç giriş-çıkış takipleri ve ihracat operasyonlarındaki (DAB takibi, gelir-gider kayıtları) saha ve ofis deneyimimle işletmelerin operasyonel süreçlerine destek sağlıyorum.
         </p>
 
         <!-- Sosyal Linkler -->
@@ -165,6 +165,36 @@ const socialLinks = {
       </div>
     </section>
 
+    <!-- Eğitim ve Belgeler -->
+    <section class="space-y-5 sm:space-y-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+        <span class="w-1.5 h-6 bg-indigo-500 rounded-full flex-shrink-0"></span>
+        Eğitim & Belgeler
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <div class="p-5 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl select-none">🎓</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Akademik Eğitim</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-350 font-medium">
+            <li>• <strong class="text-slate-800 dark:text-slate-200">Anadolu Üniversitesi:</strong> Uluslararası Ticaret ve Lojistik</li>
+            <li>• <strong class="text-slate-800 dark:text-slate-200">Atatürk Üniversitesi:</strong> Muhasebe ve Vergi Uygulamaları</li>
+          </ul>
+        </div>
+        <div class="p-5 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-xs hover:shadow-md transition-all duration-300">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl select-none">📜</span>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Sertifika & Belgeler</h3>
+          </div>
+          <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-350 font-medium">
+            <li>• <strong class="text-slate-800 dark:text-slate-200">Ustalık Belgesi:</strong> Muhasebe ve Finansman Alanı</li>
+            <li>• <strong class="text-slate-800 dark:text-slate-200">Kalfalık Belgesi:</strong> Muhasebe ve Finansman Alanı</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- İş Deneyimi -->
     <section class="space-y-5 sm:space-y-6">
       <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -203,7 +233,12 @@ const socialLinks = {
 
 <!-- Rotating badge script -->
 <script>
-  const rotations = ["Muhasebe Uzmanı", "Lojistik Operasyon", "Banka Operasyonları", "e-Fatura / e-Arşiv"];
+  const rotations = [
+    "Gaziantep Muhasebe & Lojistik Personeli",
+    "Gaziantep Ön Muhasebe Elemanı",
+    "Gaziantep Lojistik Veri Giriş Elemanı",
+    "Gaziantep Banka & Operasyon Destek Elemanı"
+  ];
   let index = 0;
   const badge = document.getElementById('rotating-badge');
   if (badge) {
